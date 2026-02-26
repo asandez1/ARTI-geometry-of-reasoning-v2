@@ -1,0 +1,315 @@
+{
+  "phase": 2,
+  "encoder": "intfloat/e5-small-v2",
+  "runs": {
+    "constant_lf0.0": {
+      "gsm8k": 0.4943138741470811,
+      "arc_challenge": 0.3046075085324232,
+      "strategyqa": 0.5152838427947598,
+      "folio": 0.35467980295566504
+    },
+    "constant_lf0.1": {
+      "gsm8k": 0.5011372251705838,
+      "arc_challenge": 0.3225255972696246,
+      "strategyqa": 0.5152838427947598,
+      "folio": 0.35467980295566504
+    },
+    "disabled_lf0.0": {
+      "gsm8k": 0.5018953752843063,
+      "arc_challenge": 0.3250853242320819,
+      "strategyqa": 0.5152838427947598,
+      "folio": 0.35467980295566504
+    },
+    "disabled_lf0.1": {
+      "gsm8k": 0.47763457164518575,
+      "arc_challenge": 0.3122866894197952,
+      "strategyqa": 0.5443959243085881,
+      "folio": 0.35467980295566504
+    },
+    "anneal_lf0.0": {
+      "gsm8k": 0.4981046247156937,
+      "arc_challenge": 0.32081911262798635,
+      "strategyqa": 0.5152838427947598,
+      "folio": 0.35467980295566504
+    },
+    "anneal_lf0.1": {
+      "gsm8k": 0.489764973464746,
+      "arc_challenge": 0.3165529010238908,
+      "strategyqa": 0.5152838427947598,
+      "folio": 0.35467980295566504
+    }
+  },
+  "diagnostics": {
+    "constant_lf0.0": {
+      "gsm8k": {
+        "accuracy": 0.4943138741470811,
+        "anchor_entropy": 2.772585391998291,
+        "normalized_entropy": 0.9999987988692793,
+        "participation_ratio": 15.999893188476562,
+        "max_weight": 0.06276464462280273,
+        "min_weight": 0.06208472698926926
+      },
+      "arc_challenge": {
+        "accuracy": 0.3046075085324232,
+        "anchor_entropy": 2.772588014602661,
+        "normalized_entropy": 0.999999744773859,
+        "participation_ratio": 15.999982833862305,
+        "max_weight": 0.06262994557619095,
+        "min_weight": 0.06238793581724167
+      },
+      "strategyqa": {
+        "accuracy": 0.5152838427947598,
+        "anchor_entropy": 2.7725682258605957,
+        "normalized_entropy": 0.9999926074938482,
+        "participation_ratio": 15.999345779418945,
+        "max_weight": 0.06340964883565903,
+        "min_weight": 0.06170016527175903
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.7725818157196045,
+        "normalized_entropy": 0.9999975089993979,
+        "participation_ratio": 15.999776840209961,
+        "max_weight": 0.06287796795368195,
+        "min_weight": 0.062092240899801254
+      },
+      "rho": 1.2737318882718682
+    },
+    "constant_lf0.1": {
+      "gsm8k": {
+        "accuracy": 0.5011372251705838,
+        "anchor_entropy": 2.772587776184082,
+        "normalized_entropy": 0.9999996587825336,
+        "participation_ratio": 15.999971389770508,
+        "max_weight": 0.06265377253293991,
+        "min_weight": 0.06236686557531357
+      },
+      "arc_challenge": {
+        "accuracy": 0.3225255972696246,
+        "anchor_entropy": 2.7725796699523926,
+        "normalized_entropy": 0.999996735077469,
+        "participation_ratio": 15.999711990356445,
+        "max_weight": 0.06315199285745621,
+        "min_weight": 0.06205398961901665
+      },
+      "strategyqa": {
+        "accuracy": 0.5152838427947598,
+        "anchor_entropy": 2.7725725173950195,
+        "normalized_entropy": 0.999994155337706,
+        "participation_ratio": 15.999488830566406,
+        "max_weight": 0.06319340318441391,
+        "min_weight": 0.06184525415301323
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.7725794315338135,
+        "normalized_entropy": 0.9999966490861435,
+        "participation_ratio": 15.999702453613281,
+        "max_weight": 0.06290718913078308,
+        "min_weight": 0.061996664851903915
+      },
+      "rho": 1.28116645788153
+    },
+    "disabled_lf0.0": {
+      "gsm8k": {
+        "accuracy": 0.5018953752843063,
+        "anchor_entropy": 2.7723822593688965,
+        "normalized_entropy": 0.9999255342600117,
+        "participation_ratio": 15.993359565734863,
+        "max_weight": 0.06585560739040375,
+        "min_weight": 0.060622211545705795
+      },
+      "arc_challenge": {
+        "accuracy": 0.3250853242320819,
+        "anchor_entropy": 2.771458387374878,
+        "normalized_entropy": 0.9995923178739651,
+        "participation_ratio": 15.963886260986328,
+        "max_weight": 0.06929316371679306,
+        "min_weight": 0.05627737566828728
+      },
+      "strategyqa": {
+        "accuracy": 0.5152838427947598,
+        "anchor_entropy": 2.772575616836548,
+        "normalized_entropy": 0.9999952732249366,
+        "participation_ratio": 15.999576568603516,
+        "max_weight": 0.06310243904590607,
+        "min_weight": 0.061807241290807724
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.7725560665130615,
+        "normalized_entropy": 0.9999882219362513,
+        "participation_ratio": 15.998958587646484,
+        "max_weight": 0.06356027722358704,
+        "min_weight": 0.061701223254203796
+      },
+      "rho": 1.2798995058983564
+    },
+    "disabled_lf0.1": {
+      "gsm8k": {
+        "accuracy": 0.47763457164518575,
+        "anchor_entropy": 2.772533655166626,
+        "normalized_entropy": 0.9999801387516607,
+        "participation_ratio": 15.998235702514648,
+        "max_weight": 0.0638163611292839,
+        "min_weight": 0.06132185831665993
+      },
+      "arc_challenge": {
+        "accuracy": 0.3122866894197952,
+        "anchor_entropy": 2.772491931915283,
+        "normalized_entropy": 0.9999650902697101,
+        "participation_ratio": 15.996899604797363,
+        "max_weight": 0.06429721415042877,
+        "min_weight": 0.06099523976445198
+      },
+      "strategyqa": {
+        "accuracy": 0.5443959243085881,
+        "anchor_entropy": 2.7717537879943848,
+        "normalized_entropy": 0.9996988611261746,
+        "participation_ratio": 15.973284721374512,
+        "max_weight": 0.06619733572006226,
+        "min_weight": 0.05875290557742119
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.7725796699523926,
+        "normalized_entropy": 0.999996735077469,
+        "participation_ratio": 15.999706268310547,
+        "max_weight": 0.06313102692365646,
+        "min_weight": 0.06204965338110924
+      },
+      "rho": 1.2870673810442288
+    },
+    "anneal_lf0.0": {
+      "gsm8k": {
+        "accuracy": 0.4981046247156937,
+        "anchor_entropy": 2.772587776184082,
+        "normalized_entropy": 0.9999996587825336,
+        "participation_ratio": 15.999963760375977,
+        "max_weight": 0.0626746416091919,
+        "min_weight": 0.06235751882195473
+      },
+      "arc_challenge": {
+        "accuracy": 0.32081911262798635,
+        "anchor_entropy": 2.7725367546081543,
+        "normalized_entropy": 0.9999812566388913,
+        "participation_ratio": 15.998344421386719,
+        "max_weight": 0.06325197964906693,
+        "min_weight": 0.060673121362924576
+      },
+      "strategyqa": {
+        "accuracy": 0.5152838427947598,
+        "anchor_entropy": 2.772566795349121,
+        "normalized_entropy": 0.9999920915458956,
+        "participation_ratio": 15.999298095703125,
+        "max_weight": 0.06362809240818024,
+        "min_weight": 0.06191253289580345
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.772587299346924,
+        "normalized_entropy": 0.9999994867998827,
+        "participation_ratio": 15.999944686889648,
+        "max_weight": 0.06269733607769012,
+        "min_weight": 0.06233598664402962
+      },
+      "rho": 1.2599989573160808
+    },
+    "anneal_lf0.1": {
+      "gsm8k": {
+        "accuracy": 0.489764973464746,
+        "anchor_entropy": 2.7725882530212402,
+        "normalized_entropy": 0.9999998307651845,
+        "participation_ratio": 15.999975204467773,
+        "max_weight": 0.06261353939771652,
+        "min_weight": 0.062348995357751846
+      },
+      "arc_challenge": {
+        "accuracy": 0.3165529010238908,
+        "anchor_entropy": 2.7725682258605957,
+        "normalized_entropy": 0.9999926074938482,
+        "participation_ratio": 15.999338150024414,
+        "max_weight": 0.06311552971601486,
+        "min_weight": 0.06174930930137634
+      },
+      "strategyqa": {
+        "accuracy": 0.5152838427947598,
+        "anchor_entropy": 2.772578239440918,
+        "normalized_entropy": 0.9999962191295164,
+        "participation_ratio": 15.99966049194336,
+        "max_weight": 0.06318855285644531,
+        "min_weight": 0.06210101768374443
+      },
+      "folio": {
+        "accuracy": 0.35467980295566504,
+        "anchor_entropy": 2.772578477859497,
+        "normalized_entropy": 0.9999963051208418,
+        "participation_ratio": 15.999670028686523,
+        "max_weight": 0.06303542107343674,
+        "min_weight": 0.06200922653079033
+      },
+      "rho": 1.2888999053587515
+    }
+  },
+  "gate": {
+    "passed": false,
+    "best_config": "anneal_lf0.1",
+    "details": {
+      "constant_lf0.0": {
+        "mean_pr": 15.999749660491943,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 2,
+        "acc_ok": false,
+        "rho": 1.2737318882718682,
+        "rho_ok": true,
+        "score": 1
+      },
+      "constant_lf0.1": {
+        "mean_pr": 15.99971866607666,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 3,
+        "acc_ok": true,
+        "rho": 1.28116645788153,
+        "rho_ok": true,
+        "score": 2
+      },
+      "disabled_lf0.0": {
+        "mean_pr": 15.988945245742798,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 3,
+        "acc_ok": true,
+        "rho": 1.2798995058983564,
+        "rho_ok": true,
+        "score": 2
+      },
+      "disabled_lf0.1": {
+        "mean_pr": 15.992031574249268,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 3,
+        "acc_ok": true,
+        "rho": 1.2870673810442288,
+        "rho_ok": true,
+        "score": 2
+      },
+      "anneal_lf0.0": {
+        "mean_pr": 15.999387741088867,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 3,
+        "acc_ok": true,
+        "rho": 1.2599989573160808,
+        "rho_ok": true,
+        "score": 2
+      },
+      "anneal_lf0.1": {
+        "mean_pr": 15.999660968780518,
+        "pr_ok": false,
+        "n_benchmarks_at_phase1": 3,
+        "acc_ok": true,
+        "rho": 1.2888999053587515,
+        "rho_ok": true,
+        "score": 2
+      }
+    }
+  },
+  "best_config": "anneal_lf0.1"
+}

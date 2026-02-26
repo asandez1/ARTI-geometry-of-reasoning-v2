@@ -1,0 +1,607 @@
+{
+  "benchmark_results": [
+    {
+      "benchmark": "gsm8k",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.49,
+      "cofrn_baseline_acc": 0.49,
+      "anchor_entropy": 2.7725820541381836,
+      "condition": "no_rules"
+    },
+    {
+      "benchmark": "gsm8k",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.49,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.772578239440918,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "MATH-011",
+            "name": "Combinatorics",
+            "domain": "math",
+            "similarity": 0.21749143302440643
+          },
+          {
+            "rule_id": "PHYS-004",
+            "name": "Newton's Third Law",
+            "domain": "physics",
+            "similarity": 0.14145445823669434
+          },
+          {
+            "rule_id": "LOGIC-011",
+            "name": "Transitivity",
+            "domain": "logic",
+            "similarity": 0.13717560470104218
+          }
+        ],
+        [
+          {
+            "rule_id": "MATH-005",
+            "name": "Rate Times Time Equals Quantity",
+            "domain": "math",
+            "similarity": 0.22812975943088531
+          },
+          {
+            "rule_id": "PHYS-010",
+            "name": "First Law of Thermodynamics",
+            "domain": "physics",
+            "similarity": 0.1738225370645523
+          },
+          {
+            "rule_id": "MATH-007",
+            "name": "Area Formulas",
+            "domain": "math",
+            "similarity": 0.16406351327896118
+          }
+        ],
+        [
+          {
+            "rule_id": "ECON-001",
+            "name": "Supply and Demand",
+            "domain": "economics",
+            "similarity": 0.3003523647785187
+          },
+          {
+            "rule_id": "PHYS-009",
+            "name": "Coulomb's Law",
+            "domain": "physics",
+            "similarity": 0.2773634195327759
+          },
+          {
+            "rule_id": "ECON-002",
+            "name": "Opportunity Cost",
+            "domain": "economics",
+            "similarity": 0.2627253532409668
+          }
+        ]
+      ],
+      "condition": "rules_topk3"
+    },
+    {
+      "benchmark": "gsm8k",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.49,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.772578239440918,
+      "condition": "random_rules"
+    },
+    {
+      "benchmark": "arc_challenge",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.31,
+      "cofrn_baseline_acc": 0.31,
+      "anchor_entropy": 2.7724623680114746,
+      "condition": "no_rules"
+    },
+    {
+      "benchmark": "arc_challenge",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.31,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7724575996398926,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "PHYS-011",
+            "name": "Second Law of Thermodynamics",
+            "domain": "physics",
+            "similarity": 0.2584635317325592
+          },
+          {
+            "rule_id": "BIO-002",
+            "name": "Homeostasis",
+            "domain": "biology",
+            "similarity": 0.24096763134002686
+          },
+          {
+            "rule_id": "BIO-001",
+            "name": "Natural Selection",
+            "domain": "biology",
+            "similarity": 0.22114618122577667
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-003",
+            "name": "Object Permanence",
+            "domain": "commonsense",
+            "similarity": 0.2569226920604706
+          },
+          {
+            "rule_id": "PHYS-001",
+            "name": "Newton's Second Law",
+            "domain": "physics",
+            "similarity": 0.2408527284860611
+          },
+          {
+            "rule_id": "PHYS-007",
+            "name": "Archimedes' Principle",
+            "domain": "physics",
+            "similarity": 0.23860105872154236
+          }
+        ],
+        [
+          {
+            "rule_id": "PHYS-007",
+            "name": "Archimedes' Principle",
+            "domain": "physics",
+            "similarity": 0.24314814805984497
+          },
+          {
+            "rule_id": "CS-004",
+            "name": "Functional Affordance",
+            "domain": "commonsense",
+            "similarity": 0.1905408799648285
+          },
+          {
+            "rule_id": "PHYS-002",
+            "name": "Conservation of Energy",
+            "domain": "physics",
+            "similarity": 0.165733203291893
+          }
+        ]
+      ],
+      "condition": "rules_topk3"
+    },
+    {
+      "benchmark": "arc_challenge",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "accuracy": 0.31,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7724575996398926,
+      "condition": "random_rules"
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": 0.58,
+      "anchor_entropy": 2.7725014686584473,
+      "condition": "no_rules"
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7725095748901367,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.12302698194980621
+          },
+          {
+            "rule_id": "CAUSAL-001",
+            "name": "Bayes' Rule",
+            "domain": "causal",
+            "similarity": 0.0768759548664093
+          },
+          {
+            "rule_id": "PHYS-007",
+            "name": "Archimedes' Principle",
+            "domain": "physics",
+            "similarity": 0.06716117262840271
+          }
+        ],
+        [
+          {
+            "rule_id": "LOGIC-010",
+            "name": "Contraposition",
+            "domain": "logic",
+            "similarity": 0.11656183749437332
+          },
+          {
+            "rule_id": "CS-004",
+            "name": "Functional Affordance",
+            "domain": "commonsense",
+            "similarity": 0.08047684282064438
+          },
+          {
+            "rule_id": "CAUSAL-008",
+            "name": "Correlation Does Not Imply Causation",
+            "domain": "causal",
+            "similarity": 0.07516969740390778
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-001",
+            "name": "Temporal Ordering",
+            "domain": "commonsense",
+            "similarity": 0.08218422532081604
+          },
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.0778370350599289
+          },
+          {
+            "rule_id": "LOGIC-012",
+            "name": "Law of Excluded Middle",
+            "domain": "logic",
+            "similarity": 0.07300562411546707
+          }
+        ]
+      ],
+      "condition": "rules_topk3"
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7725095748901367,
+      "condition": "random_rules"
+    },
+    {
+      "benchmark": "folio",
+      "split": "validation",
+      "n_examples": 100,
+      "n_choices": 3,
+      "random_baseline": 0.3333333333333333,
+      "accuracy": 0.32,
+      "cofrn_baseline_acc": 0.32,
+      "anchor_entropy": 2.7724876403808594,
+      "condition": "no_rules"
+    },
+    {
+      "benchmark": "folio",
+      "split": "validation",
+      "n_examples": 100,
+      "n_choices": 3,
+      "random_baseline": 0.3333333333333333,
+      "accuracy": 0.32,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7724881172180176,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "MATH-008",
+            "name": "Pythagorean Theorem",
+            "domain": "math",
+            "similarity": 0.4141848385334015
+          },
+          {
+            "rule_id": "LOGIC-003",
+            "name": "Hypothetical Syllogism",
+            "domain": "logic",
+            "similarity": 0.3388734757900238
+          },
+          {
+            "rule_id": "LOGIC-012",
+            "name": "Law of Excluded Middle",
+            "domain": "logic",
+            "similarity": 0.32082399725914
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.20489218831062317
+          },
+          {
+            "rule_id": "BIO-004",
+            "name": "Mendelian Inheritance",
+            "domain": "biology",
+            "similarity": 0.17816480994224548
+          },
+          {
+            "rule_id": "BIO-005",
+            "name": "Differential Diagnosis",
+            "domain": "biology",
+            "similarity": 0.13638019561767578
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.27794885635375977
+          },
+          {
+            "rule_id": "LOGIC-005",
+            "name": "Constructive Dilemma",
+            "domain": "logic",
+            "similarity": 0.27185940742492676
+          },
+          {
+            "rule_id": "CS-007",
+            "name": "Counterfactual Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.2564150393009186
+          }
+        ]
+      ],
+      "condition": "rules_topk3"
+    },
+    {
+      "benchmark": "folio",
+      "split": "validation",
+      "n_examples": 100,
+      "n_choices": 3,
+      "random_baseline": 0.3333333333333333,
+      "accuracy": 0.32,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7724883556365967,
+      "condition": "random_rules"
+    }
+  ],
+  "topk_ablation": [
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7725095748901367,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.12302698194980621
+          }
+        ],
+        [
+          {
+            "rule_id": "LOGIC-010",
+            "name": "Contraposition",
+            "domain": "logic",
+            "similarity": 0.11656183749437332
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-001",
+            "name": "Temporal Ordering",
+            "domain": "commonsense",
+            "similarity": 0.08218422532081604
+          }
+        ]
+      ],
+      "top_k": 1
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7725095748901367,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.12302698194980621
+          },
+          {
+            "rule_id": "CAUSAL-001",
+            "name": "Bayes' Rule",
+            "domain": "causal",
+            "similarity": 0.0768759548664093
+          },
+          {
+            "rule_id": "PHYS-007",
+            "name": "Archimedes' Principle",
+            "domain": "physics",
+            "similarity": 0.06716117262840271
+          }
+        ],
+        [
+          {
+            "rule_id": "LOGIC-010",
+            "name": "Contraposition",
+            "domain": "logic",
+            "similarity": 0.11656183749437332
+          },
+          {
+            "rule_id": "CS-004",
+            "name": "Functional Affordance",
+            "domain": "commonsense",
+            "similarity": 0.08047684282064438
+          },
+          {
+            "rule_id": "CAUSAL-008",
+            "name": "Correlation Does Not Imply Causation",
+            "domain": "causal",
+            "similarity": 0.07516969740390778
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-001",
+            "name": "Temporal Ordering",
+            "domain": "commonsense",
+            "similarity": 0.08218422532081604
+          },
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.0778370350599289
+          },
+          {
+            "rule_id": "LOGIC-012",
+            "name": "Law of Excluded Middle",
+            "domain": "logic",
+            "similarity": 0.07300562411546707
+          }
+        ]
+      ],
+      "top_k": 3
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "accuracy": 0.58,
+      "cofrn_baseline_acc": null,
+      "anchor_entropy": 2.7725090980529785,
+      "sample_retrievals": [
+        [
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.12302698194980621
+          },
+          {
+            "rule_id": "CAUSAL-001",
+            "name": "Bayes' Rule",
+            "domain": "causal",
+            "similarity": 0.0768759548664093
+          },
+          {
+            "rule_id": "PHYS-007",
+            "name": "Archimedes' Principle",
+            "domain": "physics",
+            "similarity": 0.06716117262840271
+          },
+          {
+            "rule_id": "LOGIC-012",
+            "name": "Law of Excluded Middle",
+            "domain": "logic",
+            "similarity": 0.06519609689712524
+          },
+          {
+            "rule_id": "ECON-002",
+            "name": "Opportunity Cost",
+            "domain": "economics",
+            "similarity": 0.05989418923854828
+          }
+        ],
+        [
+          {
+            "rule_id": "LOGIC-010",
+            "name": "Contraposition",
+            "domain": "logic",
+            "similarity": 0.11656183749437332
+          },
+          {
+            "rule_id": "CS-004",
+            "name": "Functional Affordance",
+            "domain": "commonsense",
+            "similarity": 0.08047684282064438
+          },
+          {
+            "rule_id": "CAUSAL-008",
+            "name": "Correlation Does Not Imply Causation",
+            "domain": "causal",
+            "similarity": 0.07516969740390778
+          },
+          {
+            "rule_id": "LOGIC-002",
+            "name": "Modus Tollens",
+            "domain": "logic",
+            "similarity": 0.07354647666215897
+          },
+          {
+            "rule_id": "LOGIC-014",
+            "name": "Material Implication",
+            "domain": "logic",
+            "similarity": 0.07175775617361069
+          }
+        ],
+        [
+          {
+            "rule_id": "CS-001",
+            "name": "Temporal Ordering",
+            "domain": "commonsense",
+            "similarity": 0.08218422532081604
+          },
+          {
+            "rule_id": "CS-008",
+            "name": "Default Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.0778370350599289
+          },
+          {
+            "rule_id": "LOGIC-012",
+            "name": "Law of Excluded Middle",
+            "domain": "logic",
+            "similarity": 0.07300562411546707
+          },
+          {
+            "rule_id": "CS-007",
+            "name": "Counterfactual Reasoning",
+            "domain": "commonsense",
+            "similarity": 0.07196058332920074
+          },
+          {
+            "rule_id": "CAUSAL-009",
+            "name": "Sampling Bias",
+            "domain": "causal",
+            "similarity": 0.06655208021402359
+          }
+        ]
+      ],
+      "top_k": 5
+    }
+  ],
+  "timestamp": "2026-02-24 16:41:04",
+  "device": "cuda"
+}

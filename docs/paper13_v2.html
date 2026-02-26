@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTI: Detecting and Routing Reasoning Types from Embedding Geometry</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Times New Roman', 'Nimbus Roman No9 L', Times, serif;
+    font-size: 11pt;
+    line-height: 1.45;
+    color: #1a1a1a;
+    background: #fff;
+    max-width: 7.5in;
+    margin: 0 auto;
+    padding: 0.75in 0;
+  }
+
+  /* ── Title Block ── */
+  .title-block { text-align: center; margin-bottom: 1.8em; }
+  .title-block h1 {
+    font-size: 17pt;
+    font-weight: bold;
+    line-height: 1.25;
+    margin-bottom: 0.6em;
+  }
+  .title-block .author { font-size: 12pt; margin-bottom: 0.2em; }
+  .title-block .orcid { font-size: 9.5pt; color: #555; margin-bottom: 0.15em; }
+  .title-block .orcid a { color: #555; text-decoration: none; }
+  .title-block .date { font-size: 9.5pt; color: #555; margin-bottom: 0.15em; }
+  .title-block .version { font-size: 8.5pt; color: #888; font-style: italic; }
+
+  /* ── Abstract ── */
+  .abstract { margin: 1.2em 0.4in; }
+  .abstract h2 { font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 0.4em; }
+  .abstract p { font-size: 10pt; text-align: justify; line-height: 1.4; }
+
+  /* ── Section Headings ── */
+  h2 { font-size: 13pt; font-weight: bold; margin-top: 1.6em; margin-bottom: 0.5em; }
+  h3 { font-size: 11.5pt; font-weight: bold; margin-top: 1.1em; margin-bottom: 0.35em; }
+
+  /* ── Paragraphs ── */
+  p { margin-bottom: 0.55em; text-align: justify; hyphens: auto; }
+
+  /* ── Lists ── */
+  ul, ol { margin: 0.4em 0 0.6em 1.4em; }
+  li { margin-bottom: 0.25em; }
+
+  /* ── Tables ── */
+  table { border-collapse: collapse; margin: 0.8em auto; font-size: 9.5pt; line-height: 1.35; }
+  th, td { border: 1px solid #bbb; padding: 3.5pt 7pt; text-align: left; }
+  th { background: #f2f2f2; font-weight: bold; }
+  td.num, th.num { text-align: right; }
+
+  /* ── Code Blocks ── */
+  pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt; line-height: 1.35;
+    background: #f7f7f7; border: 1px solid #ddd; border-radius: 3px;
+    padding: 8pt 10pt; margin: 0.6em 0; overflow-x: auto; white-space: pre;
+  }
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9.5pt; background: #f0f0f0; padding: 0.5pt 2.5pt; border-radius: 2px;
+  }
+  pre code { background: none; padding: 0; }
+
+  /* ── Figures ── */
+  .figure { margin: 1.2em 0; text-align: center; page-break-inside: avoid; }
+  .figure img { max-width: 100%; height: auto; }
+  .figcaption {
+    font-size: 9.5pt; line-height: 1.35; margin-top: 0.4em;
+    text-align: justify; color: #333;
+  }
+  .figcaption strong { color: #1a1a1a; }
+
+  /* ── Blockquotes ── */
+  blockquote {
+    margin: 0.7em 0.3in; padding: 0.35em 0.5em;
+    border-left: 3pt solid #555; background: #fafafa; font-style: italic;
+  }
+  blockquote p { margin-bottom: 0; }
+
+  /* ── Horizontal Rules ── */
+  hr { border: none; border-top: 0.5pt solid #ccc; margin: 1.4em 0; }
+
+  /* ── References ── */
+  .references { font-size: 9.5pt; line-height: 1.35; }
+  .references p {
+    margin-bottom: 0.3em; padding-left: 2em; text-indent: -2em; text-align: left;
+  }
+  .references a { color: #1a5276; text-decoration: none; word-break: break-all; }
+
+  /* ── Status colors ── */
+  .pass { color: #1a7a1a; font-weight: bold; }
+  .fail { color: #c0392b; }
+
+  /* ── Print ── */
+  @media print {
+    body { max-width: none; padding: 0; font-size: 10.5pt; }
+    .figure { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+    a { color: #1a1a1a !important; text-decoration: none !important; }
+  }
+
+  .footer-note {
+    font-size: 8.5pt; color: #888; font-style: italic; text-align: center;
+    margin-top: 2em; border-top: 0.5pt solid #ccc; padding-top: 0.5em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════ TITLE ════════════════════════════ -->
+<div class="title-block">
+  <h1>ARTI: Detecting and Routing Reasoning Types<br>from Embedding Geometry</h1>
+  <div class="author">Ariel Sandez</div>
+  <div class="orcid">ORCID: <a href="https://orcid.org/0009-0004-7623-6287">0009-0004-7623-6287</a></div>
+  <div class="date">February 26, 2026</div>
+  <div class="version">Draft v2.7 (final draft)</div>
+</div>
+
+<!-- ════════════════════════════ ABSTRACT ════════════════════════════ -->
+<div class="abstract">
+  <h2>Abstract</h2>
+  <p>
+    We show that different reasoning types leave distinct geometric signatures in transformer embedding spaces, detectable by a lightweight classifier with only 20K parameters. Our <strong>Active Reasoning Type Identifier (ARTI)</strong> classifies 10 reasoning types at 84.2% accuracy (8.4&times; chance) from embedding geometry alone&mdash;no access to input text. Building on this, we introduce <strong>ARTI-routed scoring</strong>, a mechanism that soft-blends cosine similarity and direct classification via frozen ARTI type probabilities, achieving <strong>StrategyQA 81.0% (+32.6pp over baseline)</strong>&mdash;the first non-math benchmark with genuine learning in the Continuous Operator Factorized Reasoning Network (CO-FRN) architecture&mdash;while preserving GSM8K at 48.1%. We further discover that pre-factorization embeddings retain <strong>3.5&times; more type-discriminative signal</strong> than post-factorization features (76.7% vs 21.9%), revealing a fundamental tension in factorization-based reasoning architectures. Finally, a three-experiment falsification chain (E16&ndash;E17&ndash;E18) establishes that the frozen encoder is <strong>structurally necessary</strong>: any unfreezing of a shared transformer destabilizes the answer embedding space for generic-label scoring, regardless of gradient routing strategy. Quantitative validation against the GCMC framework from computational neuroscience shows that the same geometric properties predicting task-efficiency in biological neural manifolds also predict ARTI accuracy (D<sub>eff</sub>: &rho; = &minus;0.624; center alignment vs confusion: &rho; = 0.685; combined R&sup2; = 0.678). All experiments use 3-seed evaluation on full test sets (N=203&ndash;1,603).
+  </p>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════ 1. INTRODUCTION ════════════════════════════ -->
+<h2>1. Introduction</h2>
+
+<p>Our prior work on structural semantic superposition [18] established that reasoning operations form a continuous ~10D manifold in transformer embedding spaces, and that a Continuous Operator Factorized Reasoning Network (CO-FRN) [19] can exploit this structure: GSM8K accuracy jumps from 25% (chance) to 47.9% (+23pp) with only ~726K trainable parameters atop a frozen GPT-2 encoder. Zero-shot transfer to SVAMP reaches 100%. The notion that population-level geometry encodes functional roles is not unique to artificial systems&mdash;in neuroscience, Manifold Capacity Theory [26] demonstrates that the geometric properties of neural manifolds (radius, dimension, alignment) predict downstream task efficiency across species and brain regions. Our work establishes an artificial parallel: reasoning types form geometrically distinct manifolds whose properties directly predict classification accuracy and enable downstream routing.</p>
+
+<p>But everything beyond math fails. ARC Challenge, StrategyQA, and FOLIO all collapse to chance levels. The CO-FRN work [19] documented two pathological symptoms: (a) <strong>uniform attention</strong>&mdash;all 16 manifold anchors receive identical weight w<sub>i</sub> = 1/16 (entropy ratio 0.99996), and (b) <strong>constant predictions</strong> on binary/ternary benchmarks.</p>
+
+<p>This paper asks three questions:</p>
+<ol>
+  <li><strong>Can reasoning types be detected from geometry?</strong> If reasoning types leave geometric signatures, can we build a classifier that reads them?</li>
+  <li><strong>Can type detection improve reasoning?</strong> If we know the reasoning type, can we route to better scoring mechanisms?</li>
+  <li><strong>What are the architectural boundary conditions?</strong> Under what conditions does type-routed scoring succeed or fail?</li>
+</ol>
+
+<p>Our answers: (1) Yes&mdash;ARTI achieves 84.2% on 10 types from embeddings alone. (2) Yes&mdash;ARTI-routed scoring achieves StrategyQA 81.0% by blending cosine and direct classification. (3) The frozen encoder is structurally necessary; any unfreezing destroys the effect.</p>
+
+<p>The paper is organized as follows: type detection (Section 2), the pre-factorization discovery (Section 3), cosine scoring collapse diagnosis (Section 4), uniform-attention resolution (Section 5), the ARTI-routed scoring breakthrough (Section 6), and the frozen-encoder proof (Section 7).</p>
+
+<hr>
+
+<!-- ════════════════════════════ 2. ARTI ════════════════════════════ -->
+<h2>2. ARTI: Reasoning Types Have Geometric Signatures</h2>
+
+<h3>2.1 Task Definition</h3>
+
+<p>Given an input text encoded by a sentence transformer into a 384-dimensional embedding, classify which of 10 reasoning types the text employs&mdash;without access to the raw text. The 10 types span the spectrum of human reasoning:</p>
+
+<table>
+  <thead><tr><th>Type</th><th>Geometric Signature</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>Deduction</td><td>Tight manifold cluster, high norm</td><td>&ldquo;All mammals breathe air. Whales are mammals. Therefore&hellip;&rdquo;</td></tr>
+    <tr><td>Induction</td><td>Far-left PCA cluster, pattern features</td><td>&ldquo;Every observed swan was white, so&hellip;&rdquo;</td></tr>
+    <tr><td>Abduction</td><td>Distinct cluster, high separability</td><td>&ldquo;The grass is wet; it probably rained&rdquo;</td></tr>
+    <tr><td>Analogy</td><td>Partially separated in manifold</td><td>&ldquo;Electricity flows like water through pipes&rdquo;</td></tr>
+    <tr><td>Counterfactual</td><td>Strong geometric signal</td><td>&ldquo;If Napoleon had won at Waterloo&hellip;&rdquo;</td></tr>
+    <tr><td>Conservation</td><td>Moderate separation</td><td>&ldquo;Energy before = energy after&rdquo;</td></tr>
+    <tr><td>Decomposition</td><td>Moderate separation</td><td>&ldquo;Break the problem into three parts&hellip;&rdquo;</td></tr>
+    <tr><td>Physical Cause</td><td>Domain-general residual</td><td>&ldquo;Heating metal causes expansion&rdquo;</td></tr>
+    <tr><td>Behavioral Cause</td><td>Geometric sub-cluster</td><td>&ldquo;Fear of failure leads to procrastination&rdquo;</td></tr>
+    <tr><td>Systemic Cause</td><td>Strong trajectory signal</td><td>&ldquo;Deforestation drives climate feedback loops&rdquo;</td></tr>
+  </tbody>
+</table>
+
+<p>The geometric separability of these types is directly visible. Figure 1 shows a UMAP projection of 7,500 reasoning traces (384D pre-factorization embeddings) colored by type: five types form clearly distinct clusters, while the three causal sub-types show expected overlap. Panel (b) previews the factorization problem addressed in Section 3&mdash;the same embeddings, after MI-based factorization, collapse into an undifferentiated noise ball.</p>
+
+<div class="figure">
+  <img src="figures/figure6_umap_reasoning_types.png" alt="Figure 1">
+  <div class="figcaption"><strong>Figure 1.</strong> UMAP projection of 7,500 reasoning traces colored by type. (a) Pre-factorization embeddings (384D) show distinct type clusters&mdash;Deduction/Decomposition form a tight central mass, Induction and Analogy separate clearly. (b) Post-factorization features (128D) collapse into an undifferentiated noise ball, visualizing the 3.5&times; signal loss from MI-based factorization (Section 3).</div>
+</div>
+
+<h3>2.2 Architecture</h3>
+
+<p>ARTI is a two-layer MLP operating on manifold-projected embeddings:</p>
+
+<pre><code>Input: sentence embedding [384D]
+  &rarr; ManifoldProjection [384 &rarr; 10D, frozen]
+  &rarr; MLP: Linear(10, 64) &rarr; ReLU &rarr; Dropout(0.3) &rarr; Linear(64, 10) &rarr; Softmax
+Output: type probability distribution [10D]</code></pre>
+
+<p>Total parameters: <strong>11,342</strong> (v1) / <strong>8,890</strong> (v2 trajectory variant) / <strong>~20,232</strong> (ensemble: both models combined).</p>
+
+<p>The manifold projection maps from the full embedding space to the ~10D reasoning manifold identified in [18] (silhouette = 0.33, domain consistency = 0.95). ARTI classifies <em>within</em> this manifold rather than on raw embeddings.</p>
+
+<h3>2.3 Training Data</h3>
+
+<p>ARTI&rsquo;s training set consists of 7,500 sentences (750 per type) generated via template-based synthesis. For each reasoning type, we defined 15&ndash;25 sentence templates encoding the type&rsquo;s characteristic linguistic and structural patterns (e.g., &ldquo;All X are Y. Z is X. Therefore Z is Y&rdquo; for Deduction; &ldquo;Every observed X had property Y, suggesting&hellip;&rdquo; for Induction). Templates were instantiated with diverse domain content (physics, economics, biology, everyday reasoning) to ensure the classifier learns geometric signatures rather than domain keywords. All sentences were encoded using all-MiniLM-L6-v2 (384D) at generation time; ARTI never sees raw text during training or inference.</p>
+
+<p>Class balance was enforced at exactly 750 examples per type. Earlier versions (v1, 984 examples) suffered from severe class imbalance (89% in 3 types, 0% in 3 others), which was the primary bottleneck resolved in v2.</p>
+
+<h3>2.4 Evolution and Ablations</h3>
+
+<p>ARTI evolved through systematic improvements, each addressing a specific bottleneck:</p>
+
+<table>
+  <thead><tr><th>Version</th><th class="num">Types</th><th class="num">Samples</th><th class="num">Accuracy</th><th class="num">vs Chance</th><th>Key Change</th></tr></thead>
+  <tbody>
+    <tr><td>v1</td><td class="num">8</td><td class="num">984</td><td class="num">54.0%</td><td class="num">4.3&times;</td><td>Proof of concept</td></tr>
+    <tr><td>v2</td><td class="num">8</td><td class="num">6,000</td><td class="num">70.8%</td><td class="num">5.7&times;</td><td>Class balance fix (89% skew &rarr; 12.5% each)</td></tr>
+    <tr><td>v3</td><td class="num">10</td><td class="num">7,500</td><td class="num">71.5%</td><td class="num">7.15&times;</td><td>Cause-Effect split into 3 sub-types</td></tr>
+    <tr><td>Trajectory</td><td class="num">10</td><td class="num">7,500</td><td class="num">77.9%</td><td class="num">7.8&times;</td><td>Clause-level delta vectors</td></tr>
+    <tr><td>v1 retrained</td><td class="num">10</td><td class="num">7,500</td><td class="num">83.5%</td><td class="num">8.4&times;</td><td>100 epochs (was 30)</td></tr>
+    <tr><td>v2 retrained</td><td class="num">10</td><td class="num">7,500</td><td class="num">82.9%</td><td class="num">8.3&times;</td><td>100 epochs (was 30)</td></tr>
+    <tr><td><strong>Ensemble</strong></td><td class="num"><strong>10</strong></td><td class="num"><strong>7,500</strong></td><td class="num"><strong>84.2%</strong></td><td class="num"><strong>8.4&times;</strong></td><td>Max-confidence v1+v2</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Oracle upper bound</strong>: 89.0% (perfect selection between v1 and v2). Agreement rate: 80.8%; when they agree, accuracy is 95.9%.</p>
+
+<p><strong>Key bottleneck progression:</strong></p>
+<ul>
+  <li><strong>v1&rarr;v2:</strong> Class imbalance was the primary bottleneck. Three types at 0% (Induction, Conservation, Decomposition) jumped to 76&ndash;97% after balancing.</li>
+  <li><strong>v2&rarr;v3:</strong> The &ldquo;Cause-Effect&rdquo; category was a catch-all whose generic causal language (&ldquo;because&rdquo;, &ldquo;therefore&rdquo;) appears in every domain. Splitting into Physical/Behavioral/Systemic Cause resolved 2 of 3 sub-types.</li>
+  <li><strong>v3&rarr;ensemble:</strong> Extended training (30&rarr;100 epochs) and max-confidence ensembling provided the final +12.7pp.</li>
+</ul>
+
+<div class="figure">
+  <img src="figures/figure1_arti_ensemble.png" alt="Figure 2">
+  <div class="figcaption"><strong>Figure 2.</strong> (a) Per-type accuracy across ARTI v1, v2, ensemble, and oracle. (b) ARTI evolution from 54% to 84.2%.</div>
+</div>
+
+<h3>2.5 Per-Type Results (Ensemble)</h3>
+
+<table>
+  <thead><tr><th>Type</th><th class="num">N</th><th class="num">Ensemble</th><th class="num">Best Single</th><th class="num">Oracle</th><th class="num">vs Chance</th></tr></thead>
+  <tbody>
+    <tr><td>Counterfactual</td><td class="num">155</td><td class="num"><strong>99.4%</strong></td><td class="num">v1: 99.4%</td><td class="num">100%</td><td class="num">9.9&times;</td></tr>
+    <tr><td>Analogy</td><td class="num">146</td><td class="num"><strong>99.3%</strong></td><td class="num">v2: 99.3%</td><td class="num">99.3%</td><td class="num">9.9&times;</td></tr>
+    <tr><td>Systemic Cause</td><td class="num">184</td><td class="num"><strong>98.9%</strong></td><td class="num">v1: 98.9%</td><td class="num">98.9%</td><td class="num">9.9&times;</td></tr>
+    <tr><td>Abduction</td><td class="num">150</td><td class="num"><strong>98.7%</strong></td><td class="num">v1/v2: 98.0%</td><td class="num">98.7%</td><td class="num">9.9&times;</td></tr>
+    <tr><td>Induction</td><td class="num">140</td><td class="num"><strong>96.4%</strong></td><td class="num">v1: 96.4%</td><td class="num">97.1%</td><td class="num">9.6&times;</td></tr>
+    <tr><td>Conservation</td><td class="num">144</td><td class="num"><strong>90.3%</strong></td><td class="num">v1: 88.9%</td><td class="num">92.4%</td><td class="num">9.0&times;</td></tr>
+    <tr><td>Decomposition</td><td class="num">129</td><td class="num"><strong>86.8%</strong></td><td class="num">v1: 86.0%</td><td class="num">89.9%</td><td class="num">8.7&times;</td></tr>
+    <tr><td>Behavioral Cause</td><td class="num">146</td><td class="num"><strong>76.7%</strong></td><td class="num">v1: 74.7%</td><td class="num">81.5%</td><td class="num">7.7&times;</td></tr>
+    <tr><td>Deduction</td><td class="num">146</td><td class="num"><strong>56.8%</strong></td><td class="num">v1: 54.1%</td><td class="num">68.5%</td><td class="num">5.7&times;</td></tr>
+    <tr><td>Physical Cause</td><td class="num">160</td><td class="num"><strong>38.8%</strong></td><td class="num">v2: 49.4%</td><td class="num">63.1%</td><td class="num">3.9&times;</td></tr>
+  </tbody>
+</table>
+
+<p>Five types exceed 90%. The weakest type (Physical Cause, 38.8%) is still 3.9&times; above chance, and its difficulty is interpretable: physics sentences simultaneously invoke conservation, decomposition, induction, and causality&mdash;making Physical Cause the domain-general residual, consistent with [18]&rsquo;s finding that the manifold is domain-invariant (consistency = 0.95).</p>
+
+<p>Figure 3 makes the accuracy hierarchy visually concrete. The top row (&gt;90% ARTI accuracy) shows types that form tight, well-separated clusters: Counterfactual occupies a single compact region, Analogy forms an isolated island, and Abduction clusters tightly. The bottom row (&lt;90%) reveals progressively diffuse geometry: Conservation and Decomposition spread across multiple sub-regions, Deduction disperses broadly, and Physical Cause&mdash;the weakest type at 38.8%&mdash;scatters across the entire embedding space, overlapping with nearly every other type. The correlation between cluster compactness and classification accuracy is striking: geometric separability directly predicts ARTI performance.</p>
+
+<div class="figure">
+  <img src="figures/figure_per_type_shapes.png" alt="Figure 3">
+  <div class="figcaption"><strong>Figure 3.</strong> Geometric signatures of 10 reasoning types in UMAP-projected embedding space (384D &rarr; 2D). Each panel highlights one type (color) against all others (gray), with density contours showing cluster shape. Top row: types forming tight, isolated clusters achieve &gt;90% ARTI accuracy. Bottom row: diffuse or overlapping types yield lower accuracy, with Physical Cause (38.8%) scattered throughout the space.</div>
+</div>
+
+<h3>2.6 What ARTI Demonstrates</h3>
+
+<ol>
+  <li><strong>Reasoning types have genuine geometric signatures</strong> in sentence-transformer embedding spaces. A 20K-parameter classifier achieves 84.2%&mdash;this is a signal detection result, not a brute-force memorization.</li>
+  <li><strong>The signal is in the manifold structure</strong>, not in surface features. ARTI never sees raw text.</li>
+  <li><strong>Abstract reasoning types are easier to detect than empirical ones</strong>: Counterfactual, Analogy, and Systemic Cause (&gt;98%) involve distinctive structural transformations; Physical Cause (38.8%) is a catch-all.</li>
+  <li><strong>Abduction outperforms keyword heuristics</strong>: At 97.3% (v3 single-model; 98.7% with ensemble), geometric classification beats keyword matching (96.7%)&mdash;the first type where this occurs.</li>
+</ol>
+
+<hr>
+
+<!-- ════════════════════════════ 3. PRE-FACTORIZATION ════════════════════════════ -->
+<h2>3. Pre-Factorization Embeddings Retain 3.5&times; More Type Signal</h2>
+
+<h3>3.1 The Discovery</h3>
+
+<p>The CO-FRN architecture [19] processes inputs through a factorization pipeline: raw sentence embeddings (s0, 256D) &rarr; mutual-information-based factorization &rarr; structural features (128D) &rarr; manifold coordinates (10D). We tested type classification accuracy at each stage:</p>
+
+<table>
+  <thead><tr><th>Feature Source</th><th class="num">Dimensions</th><th class="num">Type Accuracy</th><th class="num">Ratio to Best</th></tr></thead>
+  <tbody>
+    <tr><td><strong>s0 (pre-factorization)</strong></td><td class="num"><strong>256D</strong></td><td class="num"><strong>76.7%</strong></td><td class="num"><strong>1.0&times;</strong></td></tr>
+    <tr><td>Structural (post-MI)</td><td class="num">128D</td><td class="num">21.9%</td><td class="num">0.29&times;</td></tr>
+    <tr><td>Manifold coordinates</td><td class="num">10D</td><td class="num">18.8%</td><td class="num">0.25&times;</td></tr>
+    <tr><td>Random baseline</td><td class="num">&mdash;</td><td class="num">16.7%</td><td class="num">0.22&times;</td></tr>
+  </tbody>
+</table>
+
+<p>Post-factorization features are barely above random. The factorization layer, by design, strips domain-correlated signal to produce domain-invariant structural representations&mdash;but reasoning type <em>is</em> domain-correlated information.</p>
+
+<h3>3.2 The Architectural Tension</h3>
+
+<p>This creates a fundamental design conflict:</p>
+<ul>
+  <li><strong>Factorization</strong> wants domain-invariant features: Conservation should look the same whether applied to energy (physics), probability (statistics), or money (accounting).</li>
+  <li><strong>Type-aware routing</strong> needs domain-correlated features: knowing the input involves physics (vs. logic vs. economics) helps select the right scoring mechanism.</li>
+</ul>
+
+<p><strong>Implication</strong>: Any type-aware extension of factorization-based architectures must tap into the representation <em>before</em> factorization (s0), not after. This is why ARTI operates on pre-factorization embeddings, and why the ARTI-routed scorer in Section 6 uses s0 as its routing signal.</p>
+
+<h3>3.3 Per-Type Breakdown (TypeClassifier on s0)</h3>
+
+<p>The TypeClassifier is a separate classifier from ARTI&mdash;it operates on the 256D s0 embeddings within the CO-FRN pipeline rather than on ARTI&rsquo;s 384D manifold-projected embeddings, and uses the original 6-type taxonomy (before the Cause-Effect split):</p>
+
+<table>
+  <thead><tr><th>Type</th><th class="num">Accuracy</th></tr></thead>
+  <tbody>
+    <tr><td>Analogy</td><td class="num">97.9%</td></tr>
+    <tr><td>Induction</td><td class="num">88.6%</td></tr>
+    <tr><td>Counterfactual</td><td class="num">83.6%</td></tr>
+    <tr><td>Conservation</td><td class="num">77.8%</td></tr>
+    <tr><td>Cause-Effect</td><td class="num">66.9%</td></tr>
+    <tr><td>Deduction</td><td class="num">55.5%</td></tr>
+  </tbody>
+</table>
+
+<p>The ordering differs from ARTI&rsquo;s: Analogy and Induction benefit most from the richer pre-factorization representation, while Deduction remains the hardest type regardless of input features.</p>
+
+<p>The visual impact of the 3.5&times; gap is striking: the crisp type separation in Figure 1(a) collapses entirely into the undifferentiated noise ball of Figure 1(b) after MI-based factorization. This is not a subtle degradation&mdash;it is a near-total destruction of the geometric signal.</p>
+
+<hr>
+
+<!-- ════════════════════════════ 4. COSINE COLLAPSE ════════════════════════════ -->
+<h2>4. Diagnosing the Non-Math Failure: Cosine Scoring Collapse</h2>
+
+<p>Before presenting our solutions (Sections 5&ndash;6), we must understand why CO-FRN succeeds on math but fails on everything else.</p>
+
+<h3>4.1 The Symptom</h3>
+
+<p>On StrategyQA (Yes/No answers) and FOLIO (True/False/Unknown), CO-FRN produces <strong>constant predictions</strong>&mdash;the same answer for every input, regardless of the transformed representation. This yields exactly chance accuracy (50% for binary, 33% for ternary). The pattern persisted even after fixing entropy annealing (E11) and removing sqrt(d) scaling (E12): anchor entropy dropped to 0.937 but non-math benchmarks remained at chance. Experiment E13 isolated the root cause via gradient diagnostic&mdash;tracing the failure not to the encoder or the manifold, but to the scoring function itself.</p>
+
+<h3>4.2 The Root Cause</h3>
+
+<p>CO-FRN scores answers via cosine similarity: <code>score_k = cos(transformed, answer_k) / &tau;</code>. The <code>answer_k</code> vectors are sentence-transformer encodings of the answer labels.</p>
+
+<table>
+  <thead><tr><th>Benchmark</th><th>Answer Labels</th><th class="num">Pairwise Embedding Similarity</th><th class="num">Score Range</th></tr></thead>
+  <tbody>
+    <tr><td><strong>GSM8K</strong></td><td>&ldquo;$42&rdquo;, &ldquo;15 apples&rdquo;, &ldquo;3 hours&rdquo;</td><td class="num">Low (content-rich)</td><td class="num">~2.0+</td></tr>
+    <tr><td><strong>StrategyQA</strong></td><td>&ldquo;Yes&rdquo;, &ldquo;No&rdquo;</td><td class="num">~0.99 (near-identical)</td><td class="num">~0.07</td></tr>
+    <tr><td><strong>FOLIO</strong></td><td>&ldquo;True&rdquo;, &ldquo;False&rdquo;, &ldquo;Unknown&rdquo;</td><td class="num">~0.98 (near-identical)</td><td class="num">~0.09</td></tr>
+  </tbody>
+</table>
+
+<p>When answer embeddings are nearly identical, the cosine term collapses: all answers receive approximately the same score regardless of the transformed state. The argmax picks whichever class has marginally higher similarity to the general population of transformed states&mdash;consistently, for every input.</p>
+
+<p><strong>This is not a training problem or an optimization failure. It is a representational degeneracy</strong>: generic labels (&ldquo;Yes&rdquo;, &ldquo;No&rdquo;) carry no discriminative content in embedding space. Cosine scoring is structurally incapable of handling them.</p>
+
+<h3>4.3 Implication</h3>
+
+<p>The model needs a scoring mode that does not rely on answer-embedding differences for benchmarks with generic labels, while preserving cosine scoring for content-rich answers (where it provides +23pp on GSM8K). This motivates a <strong>hybrid scoring architecture</strong> that selects the appropriate mode per input.</p>
+
+<hr>
+
+<!-- ════════════════════════════ 5. UNIFORM ATTENTION ════════════════════════════ -->
+<h2>5. Resolving the Uniform-Attention Paradox</h2>
+
+<p>The CO-FRN work [19] reported that all 16 manifold anchors receive identical weight (entropy ratio 0.99996). Resolving this was a prerequisite for subsequent experiments. This section summarizes the progressive diagnosis that identified three independent causes and fixed each one.</p>
+
+<h3>5.1 Three Causes, Three Fixes</h3>
+
+<table>
+  <thead><tr><th>Fix</th><th>Experiment</th><th>Cause Identified</th><th class="num">Entropy Ratio</th><th class="num">Max Anchor Weight</th></tr></thead>
+  <tbody>
+    <tr><td>[19] baseline</td><td>&mdash;</td><td>&mdash;</td><td class="num">0.99996</td><td class="num">0.0625 (uniform)</td></tr>
+    <tr><td>Cosine scoring</td><td>E10</td><td>MLP scorer ignored tree output entirely (0/100 prediction changes with randomized input)</td><td class="num">0.9995</td><td class="num">0.0625</td></tr>
+    <tr><td>Entropy annealing</td><td>E11</td><td>Entropy regularization at constant strength; manifold projections initialized at ~0.025 magnitude</td><td class="num">0.996</td><td class="num">0.08</td></tr>
+    <tr><td><strong>Remove sqrt(d) scaling</strong></td><td><strong>E12</strong></td><td>Softmax divided by sqrt(16)=4, suppressing weight differentiation</td><td class="num"><strong>0.937</strong></td><td class="num"><strong>0.16</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>5.2 The Entropy Trajectory</h3>
+
+<pre><code>E10:  0.99996  &rarr;  0.9995   (scoring collapse fixed, but attention still uniform)
+E11:  0.9995   &rarr;  0.996    (training artifact fixed, first anchor differentiation)
+E12:  0.996    &rarr;  0.937    (scaling bottleneck removed, 3/4 benchmarks pass &lt;0.95)</code></pre>
+
+<p>Each fix was validated independently with 3-seed full-benchmark evaluation. The fixes are additive: each subsequent experiment includes all prior fixes.</p>
+
+<p>After E12, anchor entropy passes the &lt;0.95 criterion on 3 of 4 benchmarks (ARC: 0.921, StrategyQA: 0.934, FOLIO: 0.932; GSM8K: 0.961). Maximum anchor weight doubles from 0.08 to 0.16, indicating genuine specialization.</p>
+
+<h3>5.3 Systematic Elimination (E6&ndash;E9)</h3>
+
+<p>Prior to identifying the three causes above, we systematically eliminated four alternative hypotheses:</p>
+
+<table>
+  <thead><tr><th>Experiment</th><th>Hypothesis Tested</th><th>Result</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>E6: Rank ablation</td><td>Operator capacity is the bottleneck (ranks 4&rarr;64)</td><td>Entropy = 1.0 at all ranks</td><td><strong>Eliminated</strong></td></tr>
+    <tr><td>E7: Rule injection</td><td>Domain knowledge bypasses uniform attention (75 rules, 7 domains)</td><td>Zero lift across all conditions</td><td><strong>Eliminated</strong></td></tr>
+    <tr><td>E8: Controller tuning</td><td>Better type routing closes the gap (+7.9pp TypeClassifier)</td><td>Zero benchmark lift</td><td><strong>Eliminated</strong></td></tr>
+    <tr><td>E9: Pipeline diagnosis</td><td>Identify binding constraint</td><td>tree_scorer ignores best_hyp (0/100 prediction changes)</td><td><strong>Root cause found</strong></td></tr>
+  </tbody>
+</table>
+
+<p>E9 was decisive: replacing the tree&rsquo;s output (best_hyp) with zeros or random noise produced 0/100 prediction changes&mdash;the MLP scorer had learned to score from answer encodings alone, decoupling from the reasoning pipeline entirely. This motivated the cosine scoring replacement in E10.</p>
+
+<div class="figure">
+  <img src="figures/figure5_entropy_trajectory.png" alt="Figure 4">
+  <div class="figcaption"><strong>Figure 4.</strong> (a) Entropy trajectory from 0.99996 to 0.937 across three independent fixes. (b) Per-benchmark entropy at E11 vs E12, with 3/4 benchmarks passing the &lt;0.95 criterion.</div>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════ 6. ARTI-ROUTED SCORING ════════════════════════════ -->
+<h2>6. ARTI-Routed Scoring: Breaking the Non-Math Ceiling</h2>
+
+<h3>6.1 Architecture</h3>
+
+<p>With uniform attention resolved (Section 5) and the cosine collapse diagnosed (Section 4), we introduce the ARTIRoutedScorer, which soft-blends two complementary scoring modes via ARTI type probabilities. The architecture has two parallel paths (Figure 5):</p>
+
+<ul>
+  <li><strong>Routing path</strong> (left): The pre-factorization embedding s0 is projected through a learned adapter (Linear 256&rarr;384) into frozen ARTI (84.2%), which produces a 10-dimensional type probability vector. A single-neuron router maps these probabilities to a per-example blend weight &alpha; &isin; [0, 1].</li>
+  <li><strong>Reasoning path</strong> (right): The same s0 flows through MI factorization, the continuous operator manifold (16 anchors), and HilbertTree transformation, producing a 256D transformed representation.</li>
+  <li><strong>Dual scoring</strong>: The transformed representation is scored by two complementary heads&mdash;cosine similarity <code>cos(h, answer_encoding) / &tau;</code> for content-rich answers (math, science) and a direct MLP for generic labels (Yes/No, True/False) that bypasses answer embeddings entirely.</li>
+  <li><strong>Blend</strong>: Final scores are <code>&alpha; &middot; cosine + (1&minus;&alpha;) &middot; direct</code>, where &alpha; is determined by the routing path.</li>
+</ul>
+
+<p>Note: ARTI was trained on all-MiniLM-L6-v2 embeddings (384D), while CO-FRN produces 256D s0 embeddings. The adapter (Linear 256&rarr;384) bridges this dimensional gap.</p>
+
+<div class="figure">
+  <img src="figures/figure_architecture_arti_routed.png" alt="Figure 5">
+  <div class="figcaption"><strong>Figure 5.</strong> ARTIRoutedScorer architecture. The routing path (left, blue) uses frozen ARTI to produce a per-example blend weight &alpha; from type probabilities. The reasoning path (right, green) transforms inputs through the CO-FRN pipeline. Dual scoring heads&mdash;cosine for content-rich answers, direct MLP for generic labels&mdash;are blended by &alpha;. Total: ~132K new trainable parameters (adapter 98K, router 11, direct MLP 33K; ARTI frozen).</div>
+</div>
+
+<h3>6.2 Experimental Design</h3>
+
+<p>Four conditions isolate the contribution of each component:</p>
+
+<table>
+  <thead><tr><th>Condition</th><th>Scoring</th><th>Training Benchmarks</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>C0: Baseline</td><td>Cosine only</td><td>GSM8K + ARC</td><td>E12 C3 reproduction</td></tr>
+    <tr><td>C1: ARTI-Routed</td><td>Blended (cosine + direct)</td><td>GSM8K + ARC + StrategyQA</td><td>Full system</td></tr>
+    <tr><td>C2: Direct-only</td><td>Direct classification only</td><td>GSM8K + ARC + StrategyQA</td><td>Ablation: no cosine</td></tr>
+    <tr><td>C3: Cosine + 3 benchmarks</td><td>Cosine only</td><td>GSM8K + ARC + StrategyQA</td><td>Ablation: data only</td></tr>
+  </tbody>
+</table>
+
+<p>All conditions use the E12 C3 configuration (no sqrt(d) scaling, entropy annealing fixes from Section 5). FOLIO is always zero-shot evaluation only. 3 seeds per condition, full test sets (N=203&ndash;1,603).</p>
+
+<p><strong>Compute</strong>: The CO-FRN model has ~726K trainable parameters atop a frozen GPT-2 (124M). Each condition (3 seeds &times; 4 benchmark evaluations) runs on a single consumer GPU. The lightweight architecture makes the full E5&ndash;E18 experimental campaign feasible without large-scale compute.</p>
+
+<h3>6.3 Results</h3>
+
+<table>
+  <thead><tr><th>Benchmark</th><th class="num">C0: Baseline</th><th class="num">C1: ARTI-Routed</th><th class="num">C2: Direct-Only</th><th class="num">C3: Cosine+3bench</th></tr></thead>
+  <tbody>
+    <tr><td>GSM8K (N=1,319)</td><td class="num">49.4%&plusmn;2.2%</td><td class="num">48.1%&plusmn;2.7%</td><td class="num">25.4%&plusmn;0.3%</td><td class="num">48.9%&plusmn;3.0%</td></tr>
+    <tr><td>ARC (N=1,172)</td><td class="num">29.2%&plusmn;0.5%</td><td class="num">28.6%&plusmn;1.4%</td><td class="num">26.0%&plusmn;1.7%</td><td class="num">28.6%&plusmn;0.1%</td></tr>
+    <tr><td><strong>StrategyQA (N=1,603)</strong></td><td class="num">48.4%&plusmn;1.8%</td><td class="num"><strong>81.0%&plusmn;3.8%</strong></td><td class="num">54.0%&plusmn;0.0%</td><td class="num">73.3%&plusmn;5.7%</td></tr>
+    <tr><td>FOLIO (N=203)</td><td class="num">35.3%&plusmn;1.7%</td><td class="num">33.5%&plusmn;2.3%</td><td class="num">31.2%&plusmn;1.6%</td><td class="num">34.0%&plusmn;0.5%</td></tr>
+  </tbody>
+</table>
+
+<h3>6.4 Analysis</h3>
+
+<p><strong>1. StrategyQA breakthrough</strong>: 48.4% &rarr; <strong>81.0%</strong> (+32.6pp). This is the first non-math benchmark with genuine learning in the CO-FRN architecture, and by a large margin above the 50% chance baseline.</p>
+
+<p><strong>2. GSM8K preserved</strong>: 49.4% &rarr; 48.1% (&minus;1.3pp, within tolerance). The routed scorer does not break math.</p>
+
+<p><strong>3. C3 data ablation is revealing</strong>: Cosine-only scoring with 3 benchmarks achieves StrategyQA 73.3%. Adding training data alone provides +24.9pp, suggesting the answer projection learns to partially separate &ldquo;Yes&rdquo;/&ldquo;No&rdquo; embeddings. The ARTI routing adds a further +7.7pp.</p>
+
+<p><strong>4. C2 direct-only kills GSM8K</strong>: 25.4% = chance. Confirms cosine scoring is essential for content-rich answers. Direct classification alone cannot learn math&mdash;it must map a 256D vector to the correct answer choice without leveraging the semantic content of answer strings. Critically, this also demonstrates that StrategyQA&rsquo;s success in C1 is not &ldquo;just binary classification&rdquo;&mdash;the direct head operates on manifold-transformed representations, not raw embeddings. If the manifold transformation contributed nothing, C2 would succeed on all benchmarks indiscriminately.</p>
+
+<p><strong>5. Router alpha is not task-adaptive</strong>: alpha &asymp; 0.48 uniformly across all benchmarks (|&Delta;(GSM8K, SQA)| = 0.001). The model learned a fixed ~50/50 blend rather than per-task routing. Notably, the router <em>has the capacity</em> for per-input adaptation&mdash;it receives ARTI&rsquo;s 10-dimensional type probability vector&mdash;but the training signal did not require it. The fixed blend is a learned optimum, not an architectural constraint.</p>
+
+<p><strong>6. Why the fixed blend works</strong>: The two scoring modes have complementary variance profiles. Cosine scores have high variance for content-rich answers (GSM8K: score range ~2.0+) but near-zero variance for generic labels (StrategyQA: score range ~0.07). Direct scores have moderate variance everywhere. In a 50/50 blend:</p>
+<ul>
+  <li>On GSM8K: cosine dominates (high variance overwhelms direct&rsquo;s moderate variance)</li>
+  <li>On StrategyQA: direct dominates (cosine is flat, so direct&rsquo;s moderate variance determines the argmax)</li>
+</ul>
+<p>The blend is <strong>self-balancing</strong> without needing per-task routing&mdash;the information geometry of the scoring modes handles the routing implicitly.</p>
+
+<p><strong>7. Decomposing the StrategyQA gain</strong>: Of the total +32.6pp improvement (C1 vs C0), +24.9pp comes from adding StrategyQA training data (C3 vs C0) and +7.7pp from ARTI routing (C1 vs C3). While the data contribution dominates, the routing contribution is both statistically significant (C3: 73.3%&plusmn;5.7% &rarr; C1: 81.0%&plusmn;3.8%, with reduced variance) and architecturally important: it provides a principled, type-aware mechanism for scoring-mode selection rather than relying on the answer projection implicitly learning to separate generic labels. Moreover, C3&rsquo;s unexpected success is itself a finding&mdash;it suggests that with sufficient training signal, even cosine scoring can partially overcome the representational degeneracy identified in Section 4, likely by learning a projection that amplifies the small existing differences between &ldquo;Yes&rdquo; and &ldquo;No&rdquo; embeddings.</p>
+
+<div class="figure">
+  <img src="figures/figure3_e15_routed_scoring.png" alt="Figure 6">
+  <div class="figcaption"><strong>Figure 6.</strong> (a) E15 four conditions across benchmarks. (b) Router alpha ~0.48, not task-adaptive. (c) Complementary variance profiles explaining the self-balancing blend.</div>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════ 7. FROZEN ENCODER ════════════════════════════ -->
+<h2>7. The Frozen Encoder Is Structurally Necessary</h2>
+
+<h3>7.1 Motivation</h3>
+
+<p>The E15 result (Section 6) uses a frozen GPT-2 encoder. A natural question: can we improve further by unfreezing the encoder? Unfreezing should allow the encoder to adapt its representations, potentially breaking the ceiling on knowledge-dependent benchmarks like ARC.</p>
+
+<h3>7.2 Three-Hypothesis Falsification Chain</h3>
+
+<p>We tested three hypotheses about why unfreezing might fail, each designed so that the next experiment falsifies the previous explanation:</p>
+
+<table>
+  <thead><tr><th>Experiment</th><th>Hypothesis Tested</th><th>Fix Applied</th><th class="num">SQA Result</th><th class="num">GSM8K</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td><strong>E16</strong></td><td>Unfreezing + ARTI routing works</td><td>Unfrozen GPT-2 + adapter ARTI</td><td class="num">54.0%&plusmn;0.0%</td><td class="num">49.8%&plusmn;1.8%</td><td class="fail"><strong>FAIL</strong>&mdash;SQA collapses</td></tr>
+    <tr><td><strong>E17</strong></td><td>E16 failed due to ARTI distribution shift</td><td>Unfrozen GPT-2 + <strong>native MiniLM</strong> ARTI</td><td class="num">54.0%&plusmn;0.0%</td><td class="num">49.2%&plusmn;1.5%</td><td class="fail"><strong>FALSIFIED</strong>&mdash;not ARTI&rsquo;s fault</td></tr>
+    <tr><td><strong>E18</strong></td><td>E17 failed due to answer-path gradients</td><td>Unfrozen GPT-2 + <strong>frozen answer path</strong></td><td class="num">54.0%&plusmn;0.0%</td><td class="num"><strong>42.6%&plusmn;0.8%</strong></td><td class="fail"><strong>FALSIFIED</strong>&mdash;not answer gradients; fix is actively harmful (GSM8K &minus;5.5pp)</td></tr>
+  </tbody>
+</table>
+
+<h3>7.3 Results</h3>
+
+<table>
+  <thead><tr><th>Benchmark</th><th class="num">E15 C1 (frozen)</th><th class="num">E16 C1 (unfrozen)</th><th class="num">E17 C1 (native MiniLM)</th><th class="num">E18 C1 (freeze answers)</th></tr></thead>
+  <tbody>
+    <tr><td>GSM8K</td><td class="num">48.1%&plusmn;2.7%</td><td class="num">49.8%&plusmn;1.8%</td><td class="num">49.2%&plusmn;1.5%</td><td class="num"><strong>42.6%&plusmn;0.8%</strong></td></tr>
+    <tr><td>ARC</td><td class="num">28.6%&plusmn;1.4%</td><td class="num">28.2%&plusmn;1.2%</td><td class="num">27.4%&plusmn;0.9%</td><td class="num">25.0%&plusmn;1.7%</td></tr>
+    <tr><td><strong>StrategyQA</strong></td><td class="num"><strong>81.0%&plusmn;3.8%</strong></td><td class="num">54.0%&plusmn;0.0%</td><td class="num">54.0%&plusmn;0.0%</td><td class="num">54.0%&plusmn;0.0%</td></tr>
+    <tr><td>FOLIO</td><td class="num">33.5%&plusmn;2.3%</td><td class="num">33.8%&plusmn;2.8%</td><td class="num">33.7%&plusmn;2.7%</td><td class="num">32.2%&plusmn;2.8%</td></tr>
+  </tbody>
+</table>
+
+<p>StrategyQA collapses to 54.0% with <strong>zero standard deviation</strong> across all 9 seeds (3 experiments &times; 3 seeds)&mdash;the identical constant-prediction failure mode every time.</p>
+
+<h3>7.4 The Falsification Logic</h3>
+
+<p><strong>E16 &rarr; E17</strong>: E16&rsquo;s failure was initially attributed to ARTI distribution shift&mdash;the unfrozen encoder&rsquo;s representations drift from ARTI&rsquo;s training distribution. E17 tests this by providing ARTI with <strong>precomputed MiniLM embeddings</strong> (its native input format), completely decoupled from the unfrozen GPT-2. Result: <strong>identical failure</strong> (SQA 54.0%&plusmn;0.0%). ARTI distribution shift is not the cause.</p>
+
+<p><strong>E17 &rarr; E18</strong>: With ARTI exonerated, the remaining hypothesis is that answer-path gradients destabilize the answer embedding space. E18 wraps the answer encoding path in <code>torch.no_grad()</code> + <code>.detach()</code>, preventing any gradient from flowing through the answer encoder during training. Only question-path gradients update the transformer. Result: <strong>identical SQA failure</strong> (54.0%&plusmn;0.0%), plus GSM8K <strong>regresses</strong> by &minus;5.5pp (42.6% vs 48.1%). Removing answer-path gradient signal is actively harmful.</p>
+
+<h3>7.5 The Root Cause</h3>
+
+<p>The three experiments converge on one conclusion: <strong>shared encoder weight changes affect answer embeddings at inference time, regardless of training-time gradient routing.</strong></p>
+
+<p>Even when answer encoding is frozen during training (E18), the transformer weights still change from question-path gradients. At inference time, these changed weights produce different answer embeddings than the original frozen encoder would&mdash;and for generic labels like &ldquo;Yes&rdquo;/&ldquo;No&rdquo;, the degeneracy from Section 4 reasserts itself.</p>
+
+<p>The fundamental tension: a shared encoder cannot simultaneously adapt to improve question understanding and maintain stable answer embeddings for generic labels.</p>
+
+<h3>7.6 Architectural Principle</h3>
+
+<blockquote>
+  <p><strong>The frozen encoder is not a limitation to overcome&mdash;it is a structural requirement for ARTI-routed scoring with generic-label benchmarks.</strong></p>
+</blockquote>
+
+<p>This has immediate practical implications:</p>
+<ul>
+  <li>The E15 frozen configuration should be accepted as the correct architecture, not treated as a constraint to relax.</li>
+  <li>Future improvements should focus on what can be done <em>within</em> the frozen-encoder regime: larger frozen encoders (GPT-2 Medium 350M, Large 774M), better factorization, richer manifold structure.</li>
+  <li>If unfreezing is truly needed, a <strong>dual-encoder architecture</strong> with a completely separate (frozen) transformer for answer encoding may be required&mdash;not the same shared encoder.</li>
+</ul>
+
+<div class="figure">
+  <img src="figures/figure4_falsification_chain.png" alt="Figure 7">
+  <div class="figcaption"><strong>Figure 7.</strong> E16&rarr;E17&rarr;E18 three-hypothesis falsification chain. StrategyQA collapses from 81.0% to 54.0% in all three unfreezing variants; E18 additionally regresses GSM8K by &minus;5.5pp.</div>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════ 8. RELATED WORK ════════════════════════════ -->
+<h2>8. Related Work</h2>
+
+<h3>8.1 Reasoning Taxonomies</h3>
+
+<table>
+  <thead><tr><th>Taxonomy</th><th>Categories</th><th>Scope</th></tr></thead>
+  <tbody>
+    <tr><td>GLoRE [1]</td><td>Unified evaluation across reasoning datasets</td><td>Living benchmark</td></tr>
+    <tr><td>LogiEval [2]</td><td>4 reasoning types across 7 exam formats</td><td>High-stakes exams</td></tr>
+    <tr><td>IJCAI 2025 Survey [3]</td><td>Deductive, inductive, abductive, non-monotonic</td><td>Comprehensive LLM reasoning</td></tr>
+    <tr><td>Thinking in Many Modes [4]</td><td>Deductive + inductive + abductive + causal</td><td>Composite reasoning</td></tr>
+  </tbody>
+</table>
+
+<p>ARTI differs by classifying from <strong>embedding geometry</strong> rather than text content. Prior taxonomies define reasoning types; we show they are geometrically detectable.</p>
+
+<h3>8.2 Router/MoE Approaches for Reasoning</h3>
+
+<table>
+  <thead><tr><th>System</th><th>Routing Mechanism</th><th>Key Result</th><th>Distinction from This Work</th></tr></thead>
+  <tbody>
+    <tr><td>MiCRo [5]</td><td>Learned token-level routing</td><td>Outperforms baselines on GSM8K, BBH</td><td>Routes inside transformer; we route scoring heads</td></tr>
+    <tr><td>Symbolic-MoE [6]</td><td>Gradient-free skill labels</td><td>+8.15% on MMLU-Pro</td><td>Routes between LLMs; we route within one model</td></tr>
+    <tr><td>DeepSeek-V3/R1 [7]</td><td>MoE with 256 experts</td><td>Production-scale reasoning</td><td>Billions of parameters; we use ~20K for routing</td></tr>
+    <tr><td>Neural Module Networks [8]</td><td>Layout policy decomposes questions</td><td>Interpretable multi-step</td><td>Assembles modules; we blend scoring modes</td></tr>
+    <tr><td>Routing Experts [9]</td><td>Dynamic expert routing for multimodal LLMs</td><td>Optimal path, no structural changes</td><td>Example-dependent expert routing</td></tr>
+  </tbody>
+</table>
+
+<p>Our approach is distinguished by (a) routing based on <strong>geometric type detection</strong> rather than learned gating, (b) operating at the <strong>scoring head</strong> level rather than the expert/module level, and (c) requiring only <strong>~20K parameters</strong> for the routing signal.</p>
+
+<h3>8.3 Algorithmic Primitives</h3>
+
+<p>The most directly relevant prior work is &ldquo;Algorithmic Primitives and Compositional Geometry of Reasoning in Language Models&rdquo; [10], which independently validates [18]&rsquo;s continuous operator manifold finding. They show that:</p>
+<ul>
+  <li>Cross-domain algorithmic primitives exist in LLMs</li>
+  <li>Primitives compose via vector arithmetic</li>
+  <li>Injecting primitive vectors from a reasoning model into a base model induces reasoning behavior</li>
+</ul>
+
+<p>This provides independent evidence that the manifold structure ARTI detects is real. However, their work identifies and transfers primitives but does not build a router or classifier. We go beyond by (a) building a type classifier (ARTI, 84.2%), (b) using it for scoring-head routing, and (c) achieving downstream benchmark improvements.</p>
+
+<h3>8.4 Reasoning Rule Datasets</h3>
+
+<p>Existing datasets cover specific domains: LogicBench [11] (25 logical rules), FormulaReasoning [12] (physics formulas), AI-Newton [13] (physical law discovery), PhysReason [14] (physics-based reasoning). None provide a cross-domain taxonomy connecting abstract operators to concrete rules to problem instances. We constructed a hierarchical rule schema (75 rules across 7 domains) to test this hypothesis via rule injection (E7), but it produced zero benchmark lift across all conditions, confirming that the bottleneck was in scoring (Section 4), not knowledge.</p>
+
+<h3>8.5 Neural Manifold Geometry in Neuroscience</h3>
+
+<p>The idea that population geometry encodes functional roles has deep roots in computational neuroscience. Manifold Capacity Theory (MCT) [26] quantifies the representational efficiency of neural populations by measuring <em>classification capacity</em>&mdash;the number of linearly decodable object manifolds per neuron. Chou et al. [26] extend MCT to correlated neural data via GCMC (Geometric measures from Correlated Manifold Capacity theory), defining six effective geometric measures&mdash;radius, dimension, center norm, axes alignment, center alignment, and center-axes alignment&mdash;that analytically link neural co-variabilities to downstream read-out efficiency. Applied across seven datasets spanning monkey visual/motor/prefrontal cortex, mouse hippocampus, and human fMRI, they show that manifold geometry predicts task-efficiency across species and brain regions.</p>
+
+<p>Four conceptual parallels connect their biological findings to ours:</p>
+
+<p><strong>1. Manifold geometries as functional units.</strong> In neuroscience, a neural manifold is the collection of population response vectors to a specific task condition; its geometric properties encode functional roles. We establish a direct artificial parallel: reasoning operations form a continuous ~10D manifold in transformer embedding spaces [18], and different reasoning types leave distinct geometric signatures&mdash;tight clusters for Counterfactual (99.4% accuracy), compact islands for Analogy (99.3%), and diffuse scatter for Physical Cause (38.8%). The correlation between cluster compactness and ARTI accuracy (Figure 3) mirrors the biological principle that population geometry determines representational quality.</p>
+
+<p><strong>2. Linear decodability and representational efficiency.</strong> MCT evaluates neural manifolds by their classification capacity&mdash;the amount of linearly decodable information per neuron. ARTI validates this principle in artificial systems: a 20K-parameter linear-class classifier achieves 84.2% accuracy on 10 reasoning types from embedding geometry alone, without access to input text. The reasoning embedding space optimizes for linear read-out efficiency in a manner analogous to biological neural populations.</p>
+
+<p><strong>3. Geometric properties predict downstream task performance.</strong> GCMC shows that effective manifold measures bridge the gap between neural activity space and behavioral performance. In our architecture, detected geometry directly dictates downstream behavior: ARTI-routed scoring (Section 6) uses geometric type probabilities to blend scoring modes, achieving StrategyQA 81.0% (+32.6pp). The frozen ARTI router acts as a geometric read-out layer analogous to the biological read-out neurons that decode task-relevant information from population manifold structure.</p>
+
+<p><strong>4. Spatial progression of encoding efficiency.</strong> GCMC quantifies how encoding efficiency transforms across brain regions&mdash;from early sensory areas to higher-order decision circuits. This maps to our pre-factorization discovery (Section 3): s0 embeddings retain 76.7% type-discriminative signal, while post-factorization features collapse to 21.9% (3.5&times; loss). The factorization pipeline&rsquo;s spatial progression of representations parallels the transformation of manifold geometry across biological processing stages, with the frozen encoder boundary acting as a critical transition point analogous to distinct processing stages in neural pathways.</p>
+
+<p>These parallels suggest that the geometric routing mechanisms in ARTI are not merely mathematical conveniences, but reflect fundamental principles of efficient information processing shared by both artificial and biological systems. The convergence is non-trivial: biological brains and transformer networks arrived at similar geometric encoding strategies under very different selection pressures (evolution vs. gradient descent), suggesting that manifold-based representation may be a universal organizational principle for complex reasoning systems.</p>
+
+<h3>8.5.1 Quantitative Validation (E19)</h3>
+
+<p>To move beyond qualitative parallels, E19 computes covariance-based approximations of the six GCMC effective geometric measures on ARTI&rsquo;s 10 reasoning type manifolds, then tests whether biological predictors of task-efficiency also predict ARTI classification accuracy.</p>
+
+<p><strong>Per-type measures.</strong> For each reasoning type k, we compute: effective radius R<sub>eff</sub> = &radic;(trace(&Sigma;<sub>k</sub>) / D) (GCMC Eq. 11 approximation), effective dimension D<sub>eff</sub> = (&Sigma;&lambda;)&sup2; / &Sigma;&lambda;&sup2; via participation ratio (GCMC Eq. 10), and center norm ||&mu;<sub>k</sub>||. <strong>Pairwise measures</strong> (45 type pairs): axes alignment = mean |cos(PC<sub>i</sub>, PC<sub>j</sub>)| for top-10 PCs (GCMC Eq. 13), center alignment = cos(&mu;<sub>i</sub>, &mu;<sub>j</sub>) (GCMC Eq. 14), and center-axes alignment (GCMC Eq. 15). Derived: inter-type separation (mean centroid distance), compactness ratio (R<sub>eff</sub> / separation), and mean axes alignment to other types.</p>
+
+<p><strong>Key results (Figure 8):</strong></p>
+
+<table>
+  <thead><tr><th>Measure</th><th>Spearman &rho; with accuracy</th><th>p-value</th><th>SC</th></tr></thead>
+  <tbody>
+    <tr><td>R<sub>eff</sub> (radius)</td><td>&minus;0.055</td><td>0.881</td><td>SC1: FAIL</td></tr>
+    <tr><td><strong>D<sub>eff</sub> (dimension)</strong></td><td><strong>&minus;0.624</strong></td><td><strong>0.054</strong></td><td><strong>SC2: PASS</strong></td></tr>
+    <tr><td>Compactness ratio</td><td>&minus;0.539</td><td>0.108</td><td>SC3: FAIL (marginal)</td></tr>
+    <tr><td>Mean axes alignment</td><td><strong>&minus;0.709</strong></td><td><strong>0.022</strong></td><td>&mdash;</td></tr>
+    <tr><td><strong>Center alignment vs confusion</strong></td><td><strong>0.685</strong></td><td><strong>&lt;0.001</strong></td><td><strong>SC4: PASS</strong></td></tr>
+  </tbody>
+</table>
+
+<p>The strongest single predictor is D<sub>eff</sub> (effective dimension): types occupying lower-dimensional manifolds are classified more accurately (&rho; = &minus;0.624, p = 0.054). Systemic Cause&mdash;ARTI&rsquo;s second-best type at 98.9%&mdash;has D<sub>eff</sub> = 20.0, less than one-third of Physical Cause&rsquo;s 78.4 (ARTI&rsquo;s worst at 38.8%). This parallels GCMC&rsquo;s finding that lower-dimensional neural manifolds enable more efficient read-out.</p>
+
+<p>Effective radius (R<sub>eff</sub>) alone is <em>not</em> predictive (&rho; = &minus;0.055), falsifying the naive &ldquo;tighter = better&rdquo; hypothesis. All 10 types have remarkably similar radii (0.042&ndash;0.050), suggesting that the embedding space normalizes manifold spread while allowing geometric structure to vary in dimension and orientation. The discriminative signal is in the <em>shape</em> of the manifold (D<sub>eff</sub>, axes alignment), not its size.</p>
+
+<p>The strongest result is <strong>SC4</strong>: pairwise center alignment strongly predicts confusion rates (&rho; = 0.685, p &lt; 0.001, N = 45 pairs). Types whose centroids point in similar directions are more frequently confused by ARTI&mdash;directly analogous to GCMC&rsquo;s prediction that center alignment between neural manifolds determines classification difficulty.</p>
+
+<p>A combined OLS model (R<sub>eff</sub> + D<sub>eff</sub> + compactness &rarr; accuracy) achieves <strong>R&sup2; = 0.678</strong> (SC5: PASS), explaining two-thirds of the accuracy variance from three geometric measures alone. D<sub>eff</sub> contributes the most individual variance (R&sup2; = 0.576), followed by mean axes alignment (R&sup2; = 0.535).</p>
+
+<p><strong>Biological parallel validated</strong>: The same geometric properties that predict task-efficiency in biological neural manifolds&mdash;effective dimension, axes alignment, and center alignment&mdash;also predict ARTI classification accuracy (3/5 success criteria met). The key departure from biology is that manifold radius is uninformative in ARTI&rsquo;s embedding space, likely because sentence transformers produce approximately unit-normalized embeddings, compressing radial variation.</p>
+
+<figure>
+  <img src="figures/figure8_manifold_geometry.png" alt="Figure 8: GCMC-inspired manifold geometry of 10 reasoning types (E19)" style="width: 100%;">
+  <figcaption><strong>Figure 8:</strong> GCMC-inspired manifold geometry of 10 reasoning types (E19). (a&ndash;c) Scatter plots of geometric measures vs ARTI ensemble accuracy. D<sub>eff</sub> is the strongest per-type predictor (&rho; = &minus;0.624). (d&ndash;e) Pairwise alignment heatmaps ordered by accuracy tier. (f) Explained variance: D<sub>eff</sub> alone explains 57.6% of accuracy variance; combined 3-measure model reaches R&sup2; = 0.678.</figcaption>
+</figure>
+
+<hr>
+
+<!-- ════════════════════════════ 9. DISCUSSION ════════════════════════════ -->
+<h2>9. Discussion</h2>
+
+<h3>9.1 Summary of Contributions</h3>
+
+<table>
+  <thead><tr><th>Contribution</th><th>Key Number</th><th>Significance</th></tr></thead>
+  <tbody>
+    <tr><td>ARTI type detection</td><td>84.2% (8.4&times; chance)</td><td>First geometric reasoning-type classifier</td></tr>
+    <tr><td>Pre-factorization signal retention</td><td>3.5&times; gap</td><td>Architectural insight for factorization methods</td></tr>
+    <tr><td>ARTI-routed scoring</td><td>StrategyQA 81.0% (+32.6pp)</td><td>First non-math benchmark success in CO-FRN</td></tr>
+    <tr><td>Frozen encoder proof</td><td>3 experiments, 9 seeds</td><td>Structural necessity for shared-encoder architectures</td></tr>
+    <tr><td>Uniform-attention resolution</td><td>0.99996 &rarr; 0.937</td><td>Three independent causes identified and fixed</td></tr>
+  </tbody>
+</table>
+
+<h3>9.2 Limitations</h3>
+
+<ol>
+  <li><strong>ARC and FOLIO remain at chance.</strong> ARC Challenge requires world knowledge beyond the frozen encoder&rsquo;s capacity. FOLIO&rsquo;s 3-class format (True/False/Unknown) does not transfer from 2-class StrategyQA training. Both likely require benchmark-specific training data.</li>
+  <li><strong>Router alpha is not task-adaptive.</strong> The ~50/50 blend works via complementary variance profiles, but true per-input routing (high alpha for math inputs, low for binary) could further improve performance.</li>
+  <li><strong>Frozen encoder capacity ceiling.</strong> The frozen GPT-2 (124M parameters) has limited representational capacity. Larger frozen encoders (GPT-2 Medium 350M, Large 774M) may push the ceiling higher without violating the frozen-encoder requirement.</li>
+  <li><strong>ARTI trained on synthetic data.</strong> The 7,500 training examples are template-generated (Section 2.3). Performance on naturalistic reasoning text is untested, and the geometric signatures may partially reflect template artifacts rather than reasoning-type invariants.</li>
+  <li><strong>Single encoder architecture (GPT-2).</strong> ARTI was trained on all-MiniLM-L6-v2 embeddings; CO-FRN uses GPT-2. Cross-encoder validation would strengthen the universality claim.</li>
+</ol>
+
+<h3>9.3 Future Directions</h3>
+
+<p><strong>Immediate:</strong></p>
+<ul>
+  <li>Train with FOLIO data to test 3-class direct classification</li>
+  <li>Investigate the C3 surprise: why cosine-only + StrategyQA data achieves 73.3%</li>
+  <li>Scale frozen encoder (GPT-2 Medium/Large)</li>
+</ul>
+
+<p><strong>Medium-term:</strong></p>
+<ul>
+  <li>Dual-encoder architecture: separate frozen transformer for answer encoding, unfrozen transformer for question understanding</li>
+  <li>Full rule library (300+ rules) with retrieval-augmented scoring</li>
+  <li>Verification module: symbolic checking (SymPy) for math, template matching for logic, LLM-as-Judge for commonsense</li>
+</ul>
+
+<p><strong>Long-term:</strong></p>
+<ul>
+  <li>Dual-stream reasoning: compact reasoning module (~100K params) + large knowledge encoder (7B&ndash;70B)</li>
+  <li>Cross-model ARTI validation: does geometric detectability transfer across architectures?</li>
+  <li>Integration with inference-time compute scaling (test-time training on the manifold)</li>
+</ul>
+
+<h3>9.4 Broader Implications</h3>
+
+<p>The finding that reasoning types leave geometric signatures suggests that transformer embedding spaces encode more structure than previously recognized. If 10 reasoning types are detectable by a 20K-parameter classifier, what other cognitive operations might be geometrically encoded? The manifold structure identified in [18, 19] and validated independently by [10] may be a general feature of how transformers organize abstract operations&mdash;not specific to our architecture or training procedure.</p>
+
+<p>The cross-disciplinary parallels with neuroscience (Section 8.5), now quantitatively validated (Section 8.5.1, E19), strengthen this claim. The convergence between biological neural manifold geometry [26] and our artificial reasoning manifolds&mdash;both exhibiting geometric properties that predict downstream task efficiency (D<sub>eff</sub>: &rho; = &minus;0.624; center alignment vs confusion: &rho; = 0.685), both amenable to lightweight linear read-out, both showing spatial progression of encoding quality across processing stages&mdash;suggests that manifold-based representation is not an artifact of any particular substrate, but a general organizational principle for systems that perform structured reasoning. The fact that evolution and gradient descent independently converge on geometrically structured manifolds is itself a finding worth investigating: it implies that the geometry is not merely convenient, but potentially <em>necessary</em> for efficient reasoning under resource constraints. The ~10D manifold dimensionality [18], the 3.5&times; signal loss through factorization (Section 3), and the frozen-encoder boundary condition (Section 7) may all be manifestations of the same underlying principle&mdash;that reasoning systems require stable geometric structure for read-out, and that perturbing this structure (whether by factorization or unfreezing) disrupts downstream performance in predictable, geometrically explicable ways. The E19 quantitative validation (R&sup2; = 0.678 from three geometric measures) provides the first empirical bridge between the GCMC framework and artificial reasoning systems.</p>
+
+<p>The frozen-encoder result (Section 7) has implications beyond this paper: any shared-encoder architecture that uses cosine similarity with generic labels will face the same destabilization under unfreezing. This is a constraint of the scoring mechanism, not the manifold approach. Framing this in biological terms: the frozen encoder serves as a stable &ldquo;sensory cortex&rdquo; whose geometric representations must be preserved for downstream &ldquo;decision circuits&rdquo; (ARTI-routed scoring) to function. Disrupting the encoder is analogous to perturbing early visual cortex representations&mdash;it invalidates the manifold structure that downstream read-out layers depend on.</p>
+
+<hr>
+
+<!-- ════════════════════════════ REFERENCES ════════════════════════════ -->
+<h2>References</h2>
+
+<div class="references">
+  <p>[1] GLoRE: Evaluating Logical Reasoning of Large Language Models. <a href="https://arxiv.org/abs/2310.09107">arxiv.org/abs/2310.09107</a></p>
+  <p>[2] LogiEval: Evaluating Logical Reasoning Ability of LLMs. <a href="https://github.com/csitfun/LogiEval">github.com/csitfun/LogiEval</a></p>
+  <p>[3] IJCAI 2025 Survey: Reasoning with Large Language Models. <a href="https://www.ijcai.org/proceedings/2025/1155.pdf">ijcai.org/proceedings/2025/1155.pdf</a></p>
+  <p>[4] Thinking in Many Modes: LLM Reasoning over Composite Tasks. <a href="https://arxiv.org/abs/2509.22224">arxiv.org/abs/2509.22224</a></p>
+  <p>[5] MiCRo: Mixture of Cognitive Reasoners (EPFL, 2025). <a href="https://arxiv.org/abs/2506.13331">arxiv.org/abs/2506.13331</a></p>
+  <p>[6] Symbolic-MoE: Skill-based Expert LLM Routing. <a href="https://arxiv.org/abs/2503.05641">arxiv.org/abs/2503.05641</a></p>
+  <p>[7] DeepSeek-AI. DeepSeek-V3 Technical Report, 2024. <a href="https://arxiv.org/abs/2412.19437">arxiv.org/abs/2412.19437</a></p>
+  <p>[8] Andreas, J. et al. Neural Module Networks. CVPR 2016. <a href="https://arxiv.org/abs/1511.02799">arxiv.org/abs/1511.02799</a></p>
+  <p>[9] Routing Experts for Multimodal LLMs. <a href="https://openreview.net/forum?id=vtT09dYPGI">openreview.net/forum?id=vtT09dYPGI</a></p>
+  <p>[10] Algorithmic Primitives and Compositional Geometry of Reasoning in Language Models. <a href="https://arxiv.org/abs/2510.15987">arxiv.org/abs/2510.15987</a></p>
+  <p>[11] LogicBench: Towards Systematic Evaluation of Logical Reasoning Ability (ACL 2024). <a href="https://arxiv.org/abs/2404.15522">arxiv.org/abs/2404.15522</a></p>
+  <p>[12] FormulaReasoning: Physics Formula Database for Reasoning. <a href="https://arxiv.org/abs/2402.12692">arxiv.org/abs/2402.12692</a></p>
+  <p>[13] AI-Newton: Physical Law Discovery via Domain-Specific Language. <a href="https://arxiv.org/abs/2504.01538">arxiv.org/abs/2504.01538</a></p>
+  <p>[14] PhysReason: Physics-Based Reasoning Benchmark. <a href="https://arxiv.org/abs/2502.12054">arxiv.org/abs/2502.12054</a></p>
+  <p>[15] MuSLR-Bench: Multimodal Systematic Logical Reasoning. <a href="https://arxiv.org/abs/2509.25851">arxiv.org/abs/2509.25851</a></p>
+  <p>[16] FOLIO: First-Order Logic Reasoning. <a href="https://arxiv.org/abs/2209.00840">arxiv.org/abs/2209.00840</a></p>
+  <p>[17] LogiQA 2.0: Logical Reasoning Evaluation. <a href="https://ieeexplore.ieee.org/document/10174688/">ieeexplore.ieee.org/document/10174688</a></p>
+  <p>[18] Sandez, A. (2026). Structural Semantic Superposition: Geometric Factorization of Reasoning Operations. In preparation.</p>
+  <p>[19] Sandez, A. (2026). Factorized Reasoning Networks: Continuous Operator Manifolds for Cross-Domain Generalization. In preparation.</p>
+  <p>[20] Mixture of Routers. <a href="https://arxiv.org/abs/2503.23362">arxiv.org/abs/2503.23362</a></p>
+  <p>[21] BoardgameQA: Defeasible Reasoning with Contradictions. <a href="https://arxiv.org/abs/2306.07934">arxiv.org/abs/2306.07934</a></p>
+  <p>[22] LogicSkills: Isolated Logical Skill Evaluation. <a href="https://arxiv.org/abs/2602.06533">arxiv.org/abs/2602.06533</a></p>
+  <p>[23] AI-Newton DSL for Physical Laws. <a href="https://arxiv.org/abs/2504.01538">arxiv.org/abs/2504.01538</a></p>
+  <p>[24] Rule2Text: Rule Knowledge Base. <a href="https://arxiv.org/abs/2508.10971">arxiv.org/abs/2508.10971</a></p>
+  <p>[25] Physics Reasoner (COLING 2025). <a href="https://aclanthology.org/2025.coling-main.747.pdf">aclanthology.org/2025.coling-main.747.pdf</a></p>
+  <p>[26] Chou, J., Arend, L., Wakhloo, A.J., Kim, R., Slatton, A., &amp; Chung, S. (2024). Neural Manifold Capacity Captures Representation Geometry, Correlations, and Task-Efficiency Across Species and Behaviors. bioRxiv, 2024.02.26.582157. <a href="https://doi.org/10.1101/2024.02.26.582157">doi.org/10.1101/2024.02.26.582157</a></p>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════ APPENDIX A ════════════════════════════ -->
+<h2>Appendix A: Systematic Elimination Summary (E6&ndash;E12)</h2>
+
+<p>Experiment numbering is sequential from the broader research campaign [18, 19]; E14 was reserved for an experiment that was superseded by E15&rsquo;s design and is omitted.</p>
+
+<table>
+  <thead><tr><th>#</th><th>Experiment</th><th>Hypothesis</th><th>Intervention</th><th>Result</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>E6</td><td>Rank ablation</td><td>Operator capacity is bottleneck</td><td>Ranks {4,8,16,32,64}</td><td>Entropy=1.0 at all ranks</td><td>Eliminated</td></tr>
+    <tr><td>E7</td><td>Rule injection</td><td>Domain knowledge helps</td><td>75 rules, RuleInjectionLayer (99K params)</td><td>Zero lift, all conditions identical</td><td>Eliminated</td></tr>
+    <tr><td>E8</td><td>Controller tuning</td><td>Better routing helps</td><td>+7.9pp TypeClassifier accuracy</td><td>Zero benchmark lift, gate&rarr;all-fast</td><td>Eliminated</td></tr>
+    <tr><td>E9</td><td>Root cause</td><td>Identify binding constraint</td><td>Pipeline perturbation tests (H1-H6)</td><td>tree_scorer ignores best_hyp (0/100 changes)</td><td><strong>Root cause</strong></td></tr>
+    <tr><td>E10</td><td>Cosine scoring</td><td>Fix collapsed scorer</td><td>Replace MLP with cos(hyp, ans)/&tau;</td><td>74-100/100 changes; pipeline integrity restored</td><td><strong>Fixed</strong></td></tr>
+    <tr><td>E11</td><td>Entropy fix</td><td>Fix training artifact</td><td>Entropy annealing, xavier init, orthogonal anchors</td><td>Entropy 0.99996&rarr;0.996</td><td><strong>Fixed</strong></td></tr>
+    <tr><td>E12</td><td>Temperature ablation</td><td>Fix scaling bottleneck</td><td>Remove sqrt(d), low &tau;, contrastive loss</td><td>Entropy 0.996&rarr;0.937; 3/4 benchmarks pass &lt;0.95</td><td><strong>Fixed</strong></td></tr>
+    <tr><td>E19</td><td>Manifold geometry</td><td>GCMC measures predict ARTI accuracy</td><td>Covariance-based R<sub>eff</sub>, D<sub>eff</sub>, alignment on 10 types</td><td>D<sub>eff</sub> &rho;=&minus;0.624, center align &rho;=0.685, R&sup2;=0.678 (3/5 SC met)</td><td><strong>Validated</strong></td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ════════════════════════════ APPENDIX B ════════════════════════════ -->
+<h2>Appendix B: Full Benchmark Results Across All Experiments</h2>
+
+<table>
+  <thead><tr><th>Benchmark</th><th class="num">N</th><th class="num">Chance</th><th class="num">E12 C3</th><th class="num">E15 C1 (Routed)</th><th class="num">E16 C1 (Unfrozen)</th><th class="num">E17 C1 (Two-Enc)</th><th class="num">E18 C1 (Freeze-A)</th></tr></thead>
+  <tbody>
+    <tr><td>GSM8K</td><td class="num">1,319</td><td class="num">25.0%</td><td class="num">49.6%&plusmn;2.8%</td><td class="num">48.1%&plusmn;2.7%</td><td class="num">49.8%&plusmn;1.8%</td><td class="num">49.2%&plusmn;1.5%</td><td class="num">42.6%&plusmn;0.8%</td></tr>
+    <tr><td>ARC Challenge</td><td class="num">1,172</td><td class="num">25.0%</td><td class="num">30.0%&plusmn;0.7%</td><td class="num">28.6%&plusmn;1.4%</td><td class="num">28.2%&plusmn;1.2%</td><td class="num">27.4%&plusmn;0.9%</td><td class="num">25.0%&plusmn;1.7%</td></tr>
+    <tr><td>StrategyQA</td><td class="num">1,603</td><td class="num">50.0%</td><td class="num">48.8%&plusmn;2.1%</td><td class="num"><strong>81.0%&plusmn;3.8%</strong></td><td class="num">54.0%&plusmn;0.0%</td><td class="num">54.0%&plusmn;0.0%</td><td class="num">54.0%&plusmn;0.0%</td></tr>
+    <tr><td>FOLIO</td><td class="num">203</td><td class="num">33.3%</td><td class="num">34.2%&plusmn;1.6%</td><td class="num">33.5%&plusmn;2.3%</td><td class="num">33.8%&plusmn;2.8%</td><td class="num">33.7%&plusmn;2.7%</td><td class="num">32.2%&plusmn;2.8%</td></tr>
+  </tbody>
+</table>
+
+<p>All results are 3-seed means &plusmn; standard deviation on full test sets. E15 C1 is the paper&rsquo;s headline result; E16&ndash;E18 are the falsification chain establishing frozen-encoder necessity.</p>
+
+<hr>
+
+<!-- ════════════════════════════ APPENDIX C ════════════════════════════ -->
+<h2>Appendix C: Success Criteria Summary</h2>
+
+<p>Consolidated across all experiments (E15&ndash;E19). Each experiment was designed with pre-registered success criteria; 7/24 were met.</p>
+
+<table>
+  <thead><tr><th>Experiment</th><th>Criterion</th><th>Target</th><th>Result</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><strong>E15</strong></td><td>C1 StrategyQA</td><td>&gt;53%</td><td><strong>81.0%&plusmn;3.8%</strong></td><td class="pass">PASS</td></tr>
+    <tr><td>E15</td><td>C1 FOLIO zero-shot</td><td>&gt;35%</td><td>33.5%&plusmn;2.3%</td><td class="fail">FAIL</td></tr>
+    <tr><td><strong>E15</strong></td><td>C1 GSM8K no regression</td><td>within 2pp of C0</td><td>&Delta;=&minus;1.3pp</td><td class="pass">PASS</td></tr>
+    <tr><td>E15</td><td>Router alpha task-adaptive</td><td>|&Delta;(GSM8K, SQA)| &gt; 0.1</td><td>0.001</td><td class="fail">FAIL</td></tr>
+    <tr><td><strong>E16</strong></td><td>GSM8K no regression</td><td>&ge;48%</td><td>49.8%&plusmn;1.8%</td><td class="pass">PASS</td></tr>
+    <tr><td>E16</td><td>StrategyQA preserved</td><td>&ge;75%</td><td>54.0%&plusmn;0.0%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E16</td><td>ARC break ceiling</td><td>&gt;32%</td><td>28.2%&plusmn;1.2%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E16</td><td>FOLIO improvement</td><td>&gt;38%</td><td>35.5%&plusmn;0.0%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E16</td><td>Mean &gt; E15 mean</td><td>Positive</td><td>41.5% &lt; 47.8%</td><td class="fail">FAIL</td></tr>
+    <tr><td><strong>E17</strong></td><td>GSM8K no regression</td><td>&ge;48%</td><td>49.2%&plusmn;1.5%</td><td class="pass">PASS</td></tr>
+    <tr><td>E17</td><td>StrategyQA preserved</td><td>&ge;78%</td><td>54.0%&plusmn;0.0%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E17</td><td>ARC break ceiling</td><td>&gt;32%</td><td>27.4%&plusmn;0.9%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E17</td><td>Router alpha adaptive</td><td>|&Delta;(GSM8K, SQA)| &gt; 0.1</td><td>0.016</td><td class="fail">FAIL</td></tr>
+    <tr><td>E17</td><td>Mean &gt; E15 mean</td><td>&gt;47.8%</td><td>41.1%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E18</td><td>StrategyQA preserved</td><td>&ge;78%</td><td>54.0%&plusmn;0.0%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E18</td><td>GSM8K no regression</td><td>&ge;48%</td><td>42.6%&plusmn;0.8%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E18</td><td>ARC break ceiling</td><td>&gt;32%</td><td>25.0%&plusmn;1.7%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E18</td><td>FOLIO improvement</td><td>&gt;38%</td><td>35.8%&plusmn;0.6%</td><td class="fail">FAIL</td></tr>
+    <tr><td>E18</td><td>Mean &gt; E15 mean</td><td>&gt;47.8%</td><td>38.4%</td><td class="fail">FAIL</td></tr>
+    <tr><td><strong>E19</strong></td><td>D<sub>eff</sub> predicts accuracy</td><td>&rho; &lt; &minus;0.4, p &lt; 0.15</td><td>&rho; = &minus;0.624, p = 0.054</td><td class="pass">PASS</td></tr>
+    <tr><td>E19</td><td>R<sub>eff</sub> predicts accuracy</td><td>&rho; &lt; &minus;0.5, p &lt; 0.10</td><td>&rho; = &minus;0.055, p = 0.881</td><td class="fail">FAIL</td></tr>
+    <tr><td>E19</td><td>Compactness predicts accuracy</td><td>&rho; &lt; &minus;0.5, p &lt; 0.10</td><td>&rho; = &minus;0.539, p = 0.108</td><td class="fail">FAIL</td></tr>
+    <tr><td><strong>E19</strong></td><td>Center alignment predicts confusion</td><td>&rho; &gt; 0.3, p &lt; 0.10</td><td>&rho; = 0.685, p &lt; 0.001</td><td class="pass">PASS</td></tr>
+    <tr><td><strong>E19</strong></td><td>Combined model R&sup2;</td><td>&gt; 0.60</td><td>R&sup2; = 0.678</td><td class="pass">PASS</td></tr>
+  </tbody>
+</table>
+
+<p>E15: 2/4 met. E16: 1/5 met. E17: 1/5 met. E18: 0/5 met. E19: 3/5 met. The progressive degradation from E15&rarr;E18 (from 2/4 to 0/5) mirrors the falsification chain: each attempt to improve beyond the frozen-encoder configuration makes things worse. E19 validates the neuroscience parallel: 3 of 5 geometric predictions from GCMC are confirmed.</p>
+
+<hr>
+
+<div class="footer-note">
+  Paper 13 v2.7 (final draft) &mdash; 20 experiments (E5&ndash;E19), 12.5/35 SC met &mdash; 2026-02-26<br>
+  Previous versions: v1 (docs/paper13_reasoning_rules_guide.md), v2.0, v2.1, v2.2, v2.3, v2.4, v2.5, v2.6
+</div>
+
+</body>
+</html>

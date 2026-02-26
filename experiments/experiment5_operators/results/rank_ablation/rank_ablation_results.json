@@ -1,0 +1,402 @@
+[
+  {
+    "rank": 4,
+    "seeds": [
+      {
+        "seed": 42,
+        "total_trainable_params": 824749,
+        "operator_params": 32768,
+        "best_val_acc": 0.494,
+        "epochs_trained": 13,
+        "gsm8k": {
+          "baseline_acc": 0.465,
+          "routed_acc": 0.465,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999969930514453,
+          "anchor_pr": 15.99972915649414
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.275,
+          "routed_acc": 0.305,
+          "lift": 0.02999999999999997,
+          "anchor_entropy": 0.9999380889935248,
+          "anchor_pr": 15.994491577148438
+        }
+      },
+      {
+        "seed": 123,
+        "total_trainable_params": 824749,
+        "operator_params": 32768,
+        "best_val_acc": 0.514,
+        "epochs_trained": 13,
+        "gsm8k": {
+          "baseline_acc": 0.455,
+          "routed_acc": 0.455,
+          "lift": 0.0,
+          "anchor_entropy": 0.999994155337706,
+          "anchor_pr": 15.999496459960938
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.285,
+          "routed_acc": 0.285,
+          "lift": 0.0,
+          "anchor_entropy": 0.9998834845018758,
+          "anchor_pr": 15.989630699157715
+        }
+      },
+      {
+        "seed": 456,
+        "total_trainable_params": 824749,
+        "operator_params": 32768,
+        "best_val_acc": 0.514,
+        "epochs_trained": 19,
+        "gsm8k": {
+          "baseline_acc": 0.47,
+          "routed_acc": 0.47,
+          "lift": 0.0,
+          "anchor_entropy": 0.999999142834581,
+          "anchor_pr": 15.999919891357422
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.265,
+          "routed_acc": 0.27,
+          "lift": 0.0050000000000000044,
+          "anchor_entropy": 0.9998973291052703,
+          "anchor_pr": 15.990860939025879
+        }
+      }
+    ],
+    "aggregate": {
+      "operator_params": 32768,
+      "total_params": 824749,
+      "gsm8k_acc_mean": 0.4633333333333334,
+      "gsm8k_acc_std": 0.006236095644623222,
+      "arc_acc_mean": 0.275,
+      "arc_acc_std": 0.008164965809277244,
+      "gsm8k_lift_mean": 0.0,
+      "gsm8k_lift_std": 0.0,
+      "arc_lift_mean": 0.011666666666666659,
+      "arc_lift_std": 0.013123346456686337
+    }
+  },
+  {
+    "rank": 8,
+    "seeds": [
+      {
+        "seed": 42,
+        "total_trainable_params": 857517,
+        "operator_params": 65536,
+        "best_val_acc": 0.48,
+        "epochs_trained": 14,
+        "gsm8k": {
+          "baseline_acc": 0.46,
+          "routed_acc": 0.455,
+          "lift": -0.0050000000000000044,
+          "anchor_entropy": 0.9999972510254216,
+          "anchor_pr": 15.999740600585938
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.29,
+          "routed_acc": 0.325,
+          "lift": 0.03500000000000003,
+          "anchor_entropy": 0.9999012847062401,
+          "anchor_pr": 15.99124813079834
+        }
+      },
+      {
+        "seed": 123,
+        "total_trainable_params": 857517,
+        "operator_params": 65536,
+        "best_val_acc": 0.5,
+        "epochs_trained": 17,
+        "gsm8k": {
+          "baseline_acc": 0.49,
+          "routed_acc": 0.49,
+          "lift": 0.0,
+          "anchor_entropy": 0.999991747580594,
+          "anchor_pr": 15.999259948730469
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.23,
+          "routed_acc": 0.245,
+          "lift": 0.014999999999999986,
+          "anchor_entropy": 0.9999338754185786,
+          "anchor_pr": 15.994150161743164
+        }
+      },
+      {
+        "seed": 456,
+        "total_trainable_params": 857517,
+        "operator_params": 65536,
+        "best_val_acc": 0.52,
+        "epochs_trained": 15,
+        "gsm8k": {
+          "baseline_acc": 0.475,
+          "routed_acc": 0.475,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999975089993979,
+          "anchor_pr": 15.99976921081543
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.27,
+          "routed_acc": 0.26,
+          "lift": -0.010000000000000009,
+          "anchor_entropy": 0.9999381749848502,
+          "anchor_pr": 15.994497299194336
+        }
+      }
+    ],
+    "aggregate": {
+      "operator_params": 65536,
+      "total_params": 857517,
+      "gsm8k_acc_mean": 0.4749999999999999,
+      "gsm8k_acc_std": 0.012247448713915879,
+      "arc_acc_mean": 0.26333333333333336,
+      "arc_acc_std": 0.02494438257849293,
+      "gsm8k_lift_mean": -0.001666666666666668,
+      "gsm8k_lift_std": 0.0023570226039551605,
+      "arc_lift_mean": 0.013333333333333336,
+      "arc_lift_std": 0.01840893502864545
+    }
+  },
+  {
+    "rank": 16,
+    "seeds": [
+      {
+        "seed": 42,
+        "total_trainable_params": 923053,
+        "operator_params": 131072,
+        "best_val_acc": 0.492,
+        "epochs_trained": 14,
+        "gsm8k": {
+          "baseline_acc": 0.455,
+          "routed_acc": 0.455,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999987988692793,
+          "anchor_pr": 15.999902725219727
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.31,
+          "routed_acc": 0.31,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999374010629213,
+          "anchor_pr": 15.994449615478516
+        }
+      },
+      {
+        "seed": 123,
+        "total_trainable_params": 923053,
+        "operator_params": 131072,
+        "best_val_acc": 0.484,
+        "epochs_trained": 15,
+        "gsm8k": {
+          "baseline_acc": 0.485,
+          "routed_acc": 0.485,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999825465087727,
+          "anchor_pr": 15.998453140258789
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.215,
+          "routed_acc": 0.24,
+          "lift": 0.024999999999999994,
+          "anchor_entropy": 0.9995758935308077,
+          "anchor_pr": 15.962528228759766
+        }
+      },
+      {
+        "seed": 456,
+        "total_trainable_params": 923053,
+        "operator_params": 131072,
+        "best_val_acc": 0.506,
+        "epochs_trained": 16,
+        "gsm8k": {
+          "baseline_acc": 0.465,
+          "routed_acc": 0.465,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999990568432556,
+          "anchor_pr": 15.999910354614258
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.26,
+          "routed_acc": 0.265,
+          "lift": 0.0050000000000000044,
+          "anchor_entropy": 0.9999838363786543,
+          "anchor_pr": 15.998565673828125
+        }
+      }
+    ],
+    "aggregate": {
+      "operator_params": 131072,
+      "total_params": 923053,
+      "gsm8k_acc_mean": 0.4683333333333333,
+      "gsm8k_acc_std": 0.012472191289246457,
+      "arc_acc_mean": 0.26166666666666666,
+      "arc_acc_std": 0.038801489089409384,
+      "gsm8k_lift_mean": 0.0,
+      "gsm8k_lift_std": 0.0,
+      "arc_lift_mean": 0.01,
+      "arc_lift_std": 0.010801234497346431
+    }
+  },
+  {
+    "rank": 32,
+    "seeds": [
+      {
+        "seed": 42,
+        "total_trainable_params": 1054125,
+        "operator_params": 262144,
+        "best_val_acc": 0.488,
+        "epochs_trained": 14,
+        "gsm8k": {
+          "baseline_acc": 0.46,
+          "routed_acc": 0.46,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999994867998827,
+          "anchor_pr": 15.999950408935547
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.325,
+          "routed_acc": 0.32,
+          "lift": -0.0050000000000000044,
+          "anchor_entropy": 0.9999893398234818,
+          "anchor_pr": 15.99905776977539
+        }
+      },
+      {
+        "seed": 123,
+        "total_trainable_params": 1054125,
+        "operator_params": 262144,
+        "best_val_acc": 0.502,
+        "epochs_trained": 16,
+        "gsm8k": {
+          "baseline_acc": 0.48,
+          "routed_acc": 0.48,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999993148172319,
+          "anchor_pr": 15.999935150146484
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.285,
+          "routed_acc": 0.285,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999574370417468,
+          "anchor_pr": 15.996222496032715
+        }
+      },
+      {
+        "seed": 456,
+        "total_trainable_params": 1054125,
+        "operator_params": 262144,
+        "best_val_acc": 0.508,
+        "epochs_trained": 16,
+        "gsm8k": {
+          "baseline_acc": 0.475,
+          "routed_acc": 0.475,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999996587825336,
+          "anchor_pr": 15.999956130981445
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.275,
+          "routed_acc": 0.275,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999581249723503,
+          "anchor_pr": 15.9962739944458
+        }
+      }
+    ],
+    "aggregate": {
+      "operator_params": 262144,
+      "total_params": 1054125,
+      "gsm8k_acc_mean": 0.4716666666666667,
+      "gsm8k_acc_std": 0.008498365855987957,
+      "arc_acc_mean": 0.295,
+      "arc_acc_std": 0.02160246899469287,
+      "gsm8k_lift_mean": 0.0,
+      "gsm8k_lift_std": 0.0,
+      "arc_lift_mean": -0.001666666666666668,
+      "arc_lift_std": 0.0023570226039551605
+    }
+  },
+  {
+    "rank": 64,
+    "seeds": [
+      {
+        "seed": 42,
+        "total_trainable_params": 1316269,
+        "operator_params": 524288,
+        "best_val_acc": 0.498,
+        "epochs_trained": 18,
+        "gsm8k": {
+          "baseline_acc": 0.455,
+          "routed_acc": 0.455,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999995727912082,
+          "anchor_pr": 15.999967575073242
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.285,
+          "routed_acc": 0.285,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999816865955184,
+          "anchor_pr": 15.998371124267578
+        }
+      },
+      {
+        "seed": 123,
+        "total_trainable_params": 1316269,
+        "operator_params": 524288,
+        "best_val_acc": 0.506,
+        "epochs_trained": 16,
+        "gsm8k": {
+          "baseline_acc": 0.49,
+          "routed_acc": 0.49,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999996587825336,
+          "anchor_pr": 15.999979019165039
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.26,
+          "routed_acc": 0.255,
+          "lift": -0.0050000000000000044,
+          "anchor_entropy": 0.9999961331381909,
+          "anchor_pr": 15.99966049194336
+        }
+      },
+      {
+        "seed": 456,
+        "total_trainable_params": 1316269,
+        "operator_params": 524288,
+        "best_val_acc": 0.502,
+        "epochs_trained": 14,
+        "gsm8k": {
+          "baseline_acc": 0.48,
+          "routed_acc": 0.48,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999996587825336,
+          "anchor_pr": 15.99998664855957
+        },
+        "arc_challenge": {
+          "baseline_acc": 0.275,
+          "routed_acc": 0.275,
+          "lift": 0.0,
+          "anchor_entropy": 0.9999976809820487,
+          "anchor_pr": 15.999794006347656
+        }
+      }
+    ],
+    "aggregate": {
+      "operator_params": 524288,
+      "total_params": 1316269,
+      "gsm8k_acc_mean": 0.47500000000000003,
+      "gsm8k_acc_std": 0.014719601443879734,
+      "arc_acc_mean": 0.2733333333333333,
+      "arc_acc_std": 0.010274023338281615,
+      "gsm8k_lift_mean": 0.0,
+      "gsm8k_lift_std": 0.0,
+      "arc_lift_mean": -0.001666666666666668,
+      "arc_lift_std": 0.0023570226039551605
+    }
+  }
+]

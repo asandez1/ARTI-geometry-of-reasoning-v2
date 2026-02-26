@@ -1,0 +1,137 @@
+{
+  "config": {
+    "encoder": "all-MiniLM-L6-v2",
+    "encoder_dim": 384,
+    "manifold_dim": 10,
+    "traj_feature_dim": 60,
+    "traj_hidden": 48,
+    "classifier_hidden": 96,
+    "n_trainable_params": 8890
+  },
+  "dataset": {
+    "total": 7500,
+    "train": 6000,
+    "val": 1500
+  },
+  "training": {
+    "epochs": 91,
+    "best_val_acc": 0.7793333333333333
+  },
+  "v2_results": {
+    "accuracy": 0.7793333333333333,
+    "per_type_accuracy": {
+      "PhysCause": 0.37333333333333335,
+      "BehvCause": 0.6933333333333334,
+      "SysCause": 0.9866666666666667,
+      "Deduc": 0.44666666666666666,
+      "Induc": 0.8866666666666667,
+      "Analog": 0.96,
+      "Conserv": 0.7133333333333334,
+      "Counter": 1.0,
+      "Abduc": 0.9733333333333334,
+      "Decomp": 0.76
+    }
+  },
+  "v1_results": {
+    "accuracy": 0.7146666666666667,
+    "per_type_accuracy": {
+      "PhysCause": 0.09333333333333334,
+      "BehvCause": 0.56,
+      "SysCause": 0.74,
+      "Deduc": 0.6133333333333333,
+      "Induc": 0.66,
+      "Analog": 0.9666666666666667,
+      "Conserv": 0.8133333333333334,
+      "Counter": 0.9266666666666666,
+      "Abduc": 0.9733333333333334,
+      "Decomp": 0.8
+    }
+  },
+  "comparison": {
+    "delta_overall": 0.06466666666666665,
+    "v2_type_wins": 5,
+    "v1_type_wins": 3
+  },
+  "phrase_tests": [
+    {
+      "text": "The temperature dropped below freezing, so the pipes burst f",
+      "expected": "PhysCause",
+      "predicted": "PhysCause",
+      "confidence": 0.7629240155220032,
+      "correct": true,
+      "n_clauses": 2
+    },
+    {
+      "text": "She studied every day for a month and scored 98% on the exam",
+      "expected": "BehvCause",
+      "predicted": "PhysCause",
+      "confidence": 0.528081476688385,
+      "correct": false,
+      "n_clauses": 5
+    },
+    {
+      "text": "The drought killed crops, causing food shortages that trigge",
+      "expected": "SysCause",
+      "predicted": "SysCause",
+      "confidence": 0.6645824909210205,
+      "correct": true,
+      "n_clauses": 3
+    },
+    {
+      "text": "All mammals are warm-blooded. A whale is a mammal. Therefore",
+      "expected": "Deduc",
+      "predicted": "Induc",
+      "confidence": 0.4620633125305176,
+      "correct": false,
+      "n_clauses": 3
+    },
+    {
+      "text": "Every patient given drug X improved. The evidence suggests d",
+      "expected": "Induc",
+      "predicted": "Induc",
+      "confidence": 0.5682594776153564,
+      "correct": true,
+      "n_clauses": 2
+    },
+    {
+      "text": "A firewall protects a network just as a moat protects a cast",
+      "expected": "Analog",
+      "predicted": "Analog",
+      "confidence": 0.4356694221496582,
+      "correct": true,
+      "n_clauses": 2
+    },
+    {
+      "text": "$500 was transferred from checking to savings. The total sta",
+      "expected": "Conserv",
+      "predicted": "Conserv",
+      "confidence": 0.7833728790283203,
+      "correct": true,
+      "n_clauses": 2
+    },
+    {
+      "text": "What if the bridge had been inspected? The failure would hav",
+      "expected": "Counter",
+      "predicted": "Counter",
+      "confidence": 0.978602409362793,
+      "correct": true,
+      "n_clauses": 2
+    },
+    {
+      "text": "The lawn is wet but it hasn't rained. The best explanation i",
+      "expected": "Abduc",
+      "predicted": "Deduc",
+      "confidence": 0.5402947068214417,
+      "correct": false,
+      "n_clauses": 3
+    },
+    {
+      "text": "First, calculate distance. Second, find fuel cost. Third, ad",
+      "expected": "Decomp",
+      "predicted": "Analog",
+      "confidence": 0.36235111951828003,
+      "correct": false,
+      "n_clauses": 2
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "phase": 1,
+  "accuracies": {
+    "gpt2": {
+      "gsm8k": {
+        "cofrn": 0.5072024260803639,
+        "mlp": 0.24109173616376042
+      },
+      "arc_challenge": {
+        "cofrn": 0.30119453924914674,
+        "mlp": 0.26109215017064846
+      },
+      "strategyqa": {
+        "cofrn": 0.5152838427947598,
+        "mlp": 0.5152838427947598
+      },
+      "folio": {
+        "cofrn": 0.35467980295566504,
+        "mlp": 0.35467980295566504
+      }
+    },
+    "all-MiniLM-L6-v2": {
+      "gsm8k": {
+        "cofrn": 0.4829416224412434,
+        "mlp": 0.24184988627748294
+      },
+      "arc_challenge": {
+        "cofrn": 0.2832764505119454,
+        "mlp": 0.24658703071672355
+      },
+      "strategyqa": {
+        "cofrn": 0.5152838427947598,
+        "mlp": 0.5531295487627366
+      },
+      "folio": {
+        "cofrn": 0.35467980295566504,
+        "mlp": 0.35467980295566504
+      }
+    },
+    "all-mpnet-base-v2": {
+      "gsm8k": {
+        "cofrn": 0.5034116755117514,
+        "mlp": 0.25094768764215314
+      },
+      "arc_challenge": {
+        "cofrn": 0.2354948805460751,
+        "mlp": 0.2593856655290102
+      },
+      "strategyqa": {
+        "cofrn": 0.5691411935953421,
+        "mlp": 0.5676855895196506
+      },
+      "folio": {
+        "cofrn": 0.35467980295566504,
+        "mlp": 0.3645320197044335
+      }
+    },
+    "intfloat/e5-small-v2": {
+      "gsm8k": {
+        "cofrn": 0.4874905231235785,
+        "mlp": 0.25094768764215314
+      },
+      "arc_challenge": {
+        "cofrn": 0.3216723549488055,
+        "mlp": 0.2593856655290102
+      },
+      "strategyqa": {
+        "cofrn": 0.5152838427947598,
+        "mlp": 0.5604075691411936
+      },
+      "folio": {
+        "cofrn": 0.35467980295566504,
+        "mlp": 0.3399014778325123
+      }
+    }
+  },
+  "param_counts": {
+    "gpt2": {
+      "cofrn": 1119661,
+      "mlp": 263939
+    },
+    "all-MiniLM-L6-v2": {
+      "cofrn": 923053,
+      "mlp": 165635
+    },
+    "all-mpnet-base-v2": {
+      "cofrn": 1119661,
+      "mlp": 263939
+    },
+    "intfloat/e5-small-v2": {
+      "cofrn": 923053,
+      "mlp": 165635
+    }
+  },
+  "timing": {},
+  "gate": {
+    "passed": true,
+    "best_encoder": "intfloat/e5-small-v2",
+    "best_score": 2,
+    "details": {
+      "all-MiniLM-L6-v2": {
+        "arc_challenge": {
+          "best_acc": 0.2832764505119454,
+          "chance": 0.25,
+          "threshold": 0.3,
+          "passed": false
+        },
+        "strategyqa": {
+          "best_acc": 0.5531295487627366,
+          "chance": 0.5,
+          "threshold": 0.55,
+          "passed": true
+        },
+        "folio": {
+          "best_acc": 0.35467980295566504,
+          "chance": 0.333,
+          "threshold": 0.383,
+          "passed": false
+        }
+      },
+      "all-mpnet-base-v2": {
+        "arc_challenge": {
+          "best_acc": 0.2593856655290102,
+          "chance": 0.25,
+          "threshold": 0.3,
+          "passed": false
+        },
+        "strategyqa": {
+          "best_acc": 0.5691411935953421,
+          "chance": 0.5,
+          "threshold": 0.55,
+          "passed": true
+        },
+        "folio": {
+          "best_acc": 0.3645320197044335,
+          "chance": 0.333,
+          "threshold": 0.383,
+          "passed": false
+        }
+      },
+      "intfloat/e5-small-v2": {
+        "arc_challenge": {
+          "best_acc": 0.3216723549488055,
+          "chance": 0.25,
+          "threshold": 0.3,
+          "passed": true
+        },
+        "strategyqa": {
+          "best_acc": 0.5604075691411936,
+          "chance": 0.5,
+          "threshold": 0.55,
+          "passed": true
+        },
+        "folio": {
+          "best_acc": 0.35467980295566504,
+          "chance": 0.333,
+          "threshold": 0.383,
+          "passed": false
+        }
+      }
+    }
+  },
+  "best_encoder": "intfloat/e5-small-v2"
+}

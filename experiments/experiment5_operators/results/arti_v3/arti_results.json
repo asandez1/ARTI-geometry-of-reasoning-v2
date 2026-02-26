@@ -1,0 +1,50 @@
+{
+  "config": {
+    "encoder": "all-MiniLM-L6-v2",
+    "classifier": "mlp",
+    "encoder_dim": 384,
+    "manifold_dim": 10,
+    "n_params": 11472
+  },
+  "dataset": {
+    "total": 7500,
+    "train": 6000,
+    "val": 1500
+  },
+  "heuristic_baseline": {
+    "accuracy": 0.974,
+    "per_type_accuracy": {
+      "PhysCause": 0.9733333333333334,
+      "BehvCause": 0.94,
+      "SysCause": 0.98,
+      "Deduc": 0.9866666666666667,
+      "Induc": 0.9866666666666667,
+      "Analog": 0.98,
+      "Conserv": 0.9866666666666667,
+      "Counter": 0.9733333333333334,
+      "Abduc": 0.9666666666666667,
+      "Decomp": 0.9666666666666667
+    }
+  },
+  "arti_results": {
+    "accuracy": 0.7146666666666667,
+    "per_type_accuracy": {
+      "PhysCause": 0.09333333333333334,
+      "BehvCause": 0.56,
+      "SysCause": 0.74,
+      "Deduc": 0.6133333333333333,
+      "Induc": 0.66,
+      "Analog": 0.9666666666666667,
+      "Conserv": 0.8133333333333334,
+      "Counter": 0.9266666666666666,
+      "Abduc": 0.9733333333333334,
+      "Decomp": 0.8
+    }
+  },
+  "improvement_over_heuristic": -0.2593333333333333,
+  "improvement_over_chance": 0.6146666666666667,
+  "training": {
+    "epochs": 68,
+    "best_val_acc": 0.7146666666666667
+  }
+}

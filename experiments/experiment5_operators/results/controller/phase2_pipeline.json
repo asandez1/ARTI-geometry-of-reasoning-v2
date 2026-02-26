@@ -1,0 +1,221 @@
+{
+  "phase2_results": [
+    {
+      "text": "The temperature dropped below freezing, causing the pipes to burst.",
+      "expected_type": "CauseEffect",
+      "detected_type": "CauseEffect",
+      "confidence": 0.9375866055488586,
+      "route": "fast",
+      "depth": 1,
+      "delta": 0.8,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        11,
+        9
+      ],
+      "anchor_entropy": 2.772454261779785,
+      "match": true
+    },
+    {
+      "text": "She raised prices by 30%, which halved sales volume.",
+      "expected_type": "CauseEffect",
+      "detected_type": "CauseEffect",
+      "confidence": 0.8615750074386597,
+      "route": "fast",
+      "depth": 1,
+      "delta": 0.8,
+      "top_anchors": [
+        3,
+        13,
+        6,
+        12,
+        15
+      ],
+      "anchor_entropy": 2.772552490234375,
+      "match": true
+    },
+    {
+      "text": "All mammals are warm-blooded. Whales are mammals. Therefore, whales are warm-blooded.",
+      "expected_type": "Deduction",
+      "detected_type": "Deduction",
+      "confidence": 0.9294101595878601,
+      "route": "fast",
+      "depth": 1,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        10,
+        2,
+        9,
+        11
+      ],
+      "anchor_entropy": 2.7724955081939697,
+      "match": true
+    },
+    {
+      "text": "If it rains, the ground gets wet. It is raining. Therefore, the ground is wet.",
+      "expected_type": "Deduction",
+      "detected_type": "Deduction",
+      "confidence": 0.9700950384140015,
+      "route": "fast",
+      "depth": 1,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        9,
+        14
+      ],
+      "anchor_entropy": 2.772449493408203,
+      "match": true
+    },
+    {
+      "text": "Every patient given drug X improved within 3 days. Evidence suggests drug X is effective.",
+      "expected_type": "Induction",
+      "detected_type": "Deduction",
+      "confidence": 0.4475548267364502,
+      "route": "struct",
+      "depth": 1,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        14,
+        9
+      ],
+      "anchor_entropy": 2.7724533081054688,
+      "match": false
+    },
+    {
+      "text": "Sales increased in Q1, Q2, and Q3 after the campaign. The campaign consistently drives growth.",
+      "expected_type": "Induction",
+      "detected_type": "CauseEffect",
+      "confidence": 0.5281790494918823,
+      "route": "struct",
+      "depth": 1,
+      "delta": 0.8,
+      "top_anchors": [
+        7,
+        10,
+        2,
+        9,
+        14
+      ],
+      "anchor_entropy": 2.7724945545196533,
+      "match": false
+    },
+    {
+      "text": "A firewall protects a network just as a moat protects a castle.",
+      "expected_type": "Analogy",
+      "detected_type": "Deduction",
+      "confidence": 0.5204484462738037,
+      "route": "struct",
+      "depth": 1,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        14,
+        9
+      ],
+      "anchor_entropy": 2.7724554538726807,
+      "match": false
+    },
+    {
+      "text": "The atom has electrons orbiting a nucleus, just as planets orbit the sun.",
+      "expected_type": "Analogy",
+      "detected_type": "Analogy",
+      "confidence": 0.8498444557189941,
+      "route": "struct",
+      "depth": 2,
+      "delta": 0.6,
+      "top_anchors": [
+        7,
+        10,
+        2,
+        9,
+        14
+      ],
+      "anchor_entropy": 2.7724578380584717,
+      "match": true
+    },
+    {
+      "text": "$500 transferred from checking to savings. The total remains the same.",
+      "expected_type": "Conservation",
+      "detected_type": "Conservation",
+      "confidence": 0.8547208905220032,
+      "route": "fast",
+      "depth": 2,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        10,
+        2,
+        11,
+        9
+      ],
+      "anchor_entropy": 2.7725563049316406,
+      "match": true
+    },
+    {
+      "text": "Mass is conserved: atoms in equals atoms out.",
+      "expected_type": "Conservation",
+      "detected_type": "Conservation",
+      "confidence": 0.9910255074501038,
+      "route": "fast",
+      "depth": 2,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        10,
+        2,
+        14,
+        9
+      ],
+      "anchor_entropy": 2.772453784942627,
+      "match": true
+    },
+    {
+      "text": "What if the bridge had been inspected? The failure would have been prevented.",
+      "expected_type": "Counterfactual",
+      "detected_type": "Counterfactual",
+      "confidence": 0.9746368527412415,
+      "route": "struct",
+      "depth": 3,
+      "delta": 0.7,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        14,
+        9
+      ],
+      "anchor_entropy": 2.772456169128418,
+      "match": true
+    },
+    {
+      "text": "The best explanation for the wet lawn is overnight dew.",
+      "expected_type": "Counterfactual",
+      "detected_type": "Conservation",
+      "confidence": 0.769474446773529,
+      "route": "fast",
+      "depth": 2,
+      "delta": 0.9,
+      "top_anchors": [
+        7,
+        2,
+        10,
+        14,
+        11
+      ],
+      "anchor_entropy": 2.7724547386169434,
+      "match": false
+    }
+  ],
+  "accuracy": 0.6666666666666666
+}

@@ -1,0 +1,522 @@
+{
+  "experiment": "E18_freeze_answers",
+  "description": "E18: Freeze answer encoder path (torch.no_grad+detach) while unfreezing question encoder (last 2 GPT-2 blocks). Tests whether answer embedding destabilization is caused by answer-path gradients vs encoder weight changes from question-path gradients.",
+  "hypothesis": "Freezing the answer encoding path preserves E15 StrategyQA 81% by preventing answer embedding destabilization, while unfrozen question path allows potential ARC/FOLIO improvements.",
+  "conditions": {
+    "C1_freeze_ans_3bench": "Unfreeze Q + freeze A + ARTI-routed + 3 benchmarks (GSM8K+ARC+SQA)",
+    "C2_freeze_ans_4bench": "Unfreeze Q + freeze A + ARTI-routed + 4 benchmarks (add FOLIO)"
+  },
+  "seeds": [
+    42,
+    123,
+    7
+  ],
+  "device": "cuda",
+  "arti_checkpoint": "/home/qstar/AI/Research_papers/paper13_The_geometry_of_Machine_Reasoning/experiments/experiment5_operators/results/arti_ensemble/arti_v1.pt",
+  "baselines": {
+    "e15_c1": {
+      "gsm8k": {
+        "mean": 0.481,
+        "std": 0.027
+      },
+      "arc_challenge": {
+        "mean": 0.286,
+        "std": 0.014
+      },
+      "strategyqa": {
+        "mean": 0.81,
+        "std": 0.038
+      },
+      "folio": {
+        "mean": 0.335,
+        "std": 0.023
+      }
+    },
+    "e16_c1": {
+      "gsm8k": {
+        "mean": 0.498,
+        "std": 0.018
+      },
+      "arc_challenge": {
+        "mean": 0.282,
+        "std": 0.012
+      },
+      "strategyqa": {
+        "mean": 0.54,
+        "std": 0.0
+      },
+      "folio": {
+        "mean": 0.338,
+        "std": 0.028
+      }
+    },
+    "e17_c1": {
+      "gsm8k": {
+        "mean": 0.492,
+        "std": 0.015
+      },
+      "arc_challenge": {
+        "mean": 0.274,
+        "std": 0.009
+      },
+      "strategyqa": {
+        "mean": 0.54,
+        "std": 0.0
+      },
+      "folio": {
+        "mean": 0.337,
+        "std": 0.027
+      }
+    }
+  },
+  "per_condition_per_seed": {
+    "C1_freeze_ans_3bench": {
+      "42": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.43290371493555724,
+          "lift_over_random": 0.18290371493555724,
+          "anchor_entropy_mean": 2.7336983680725098,
+          "anchor_entropy_ratio": 0.9859732697261155,
+          "max_anchor_weight_mean": 0.09694879502058029,
+          "max_anchor_weight_std": 0.00830157846212387,
+          "router_alpha_mean": 0.47031909227371216,
+          "router_alpha_std": 0.008394051343202591
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.2696245733788396,
+          "lift_over_random": 0.019624573378839605,
+          "anchor_entropy_mean": 2.743516206741333,
+          "anchor_entropy_ratio": 0.9895143065160553,
+          "max_anchor_weight_mean": 0.08524486422538757,
+          "max_anchor_weight_std": 0.0022517936304211617,
+          "router_alpha_mean": 0.476421058177948,
+          "router_alpha_std": 0.0012425186578184366
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5396132252027449,
+          "lift_over_random": 0.039613225202744906,
+          "anchor_entropy_mean": 2.7438037395477295,
+          "anchor_entropy_ratio": 0.9896180120545256,
+          "max_anchor_weight_mean": 0.08500196039676666,
+          "max_anchor_weight_std": 0.0010368148796260357,
+          "router_alpha_mean": 0.4765218496322632,
+          "router_alpha_std": 0.00010696982644731179
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.3054187192118227,
+          "lift_over_random": -0.02791461412151064,
+          "anchor_entropy_mean": 2.7459073066711426,
+          "anchor_entropy_ratio": 0.9903767135188069,
+          "max_anchor_weight_mean": 0.08626721799373627,
+          "max_anchor_weight_std": 0.007466667331755161,
+          "router_alpha_mean": 0.4739682078361511,
+          "router_alpha_std": 0.006257046479731798
+        }
+      },
+      "123": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.4177407126611069,
+          "lift_over_random": 0.1677407126611069,
+          "anchor_entropy_mean": 2.7283687591552734,
+          "anchor_entropy_ratio": 0.9840510196374219,
+          "max_anchor_weight_mean": 0.09804824739694595,
+          "max_anchor_weight_std": 0.008004450239241123,
+          "router_alpha_mean": 0.5355833768844604,
+          "router_alpha_std": 0.006800991948693991
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.23976109215017063,
+          "lift_over_random": -0.010238907849829365,
+          "anchor_entropy_mean": 2.7269773483276367,
+          "anchor_entropy_ratio": 0.9835491742622042,
+          "max_anchor_weight_mean": 0.11608172953128815,
+          "max_anchor_weight_std": 0.0058946204371750355,
+          "router_alpha_mean": 0.5362314581871033,
+          "router_alpha_std": 1.192601786215164e-07
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5396132252027449,
+          "lift_over_random": 0.039613225202744906,
+          "anchor_entropy_mean": 2.724287509918213,
+          "anchor_entropy_ratio": 0.9825790201286871,
+          "max_anchor_weight_mean": 0.1201283410191536,
+          "max_anchor_weight_std": 0.0014931454788893461,
+          "router_alpha_mean": 0.5362313985824585,
+          "router_alpha_std": 5.962324678421282e-08
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.35467980295566504,
+          "lift_over_random": 0.02134646962233172,
+          "anchor_entropy_mean": 2.7312495708465576,
+          "anchor_entropy_ratio": 0.9850900528226095,
+          "max_anchor_weight_mean": 0.10569668561220169,
+          "max_anchor_weight_std": 0.011608979664742947,
+          "router_alpha_mean": 0.5362313389778137,
+          "router_alpha_std": 0.0
+        }
+      },
+      "7": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.42835481425322214,
+          "lift_over_random": 0.17835481425322214,
+          "anchor_entropy_mean": 2.7403900623321533,
+          "anchor_entropy_ratio": 0.9883867882569988,
+          "max_anchor_weight_mean": 0.08686800301074982,
+          "max_anchor_weight_std": 0.005904382560402155,
+          "router_alpha_mean": 0.49855682253837585,
+          "router_alpha_std": 0.00805460475385189
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.24061433447098976,
+          "lift_over_random": -0.00938566552901024,
+          "anchor_entropy_mean": 2.7204337120056152,
+          "anchor_entropy_ratio": 0.9811890563444139,
+          "max_anchor_weight_mean": 0.09817458689212799,
+          "max_anchor_weight_std": 0.00582707766443491,
+          "router_alpha_mean": 0.47681236267089844,
+          "router_alpha_std": 0.0366954542696476
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5396132252027449,
+          "lift_over_random": 0.039613225202744906,
+          "anchor_entropy_mean": 2.721334934234619,
+          "anchor_entropy_ratio": 0.9815141035545446,
+          "max_anchor_weight_mean": 0.09868979454040527,
+          "max_anchor_weight_std": 0.003449360141530633,
+          "router_alpha_mean": 0.4306127727031708,
+          "router_alpha_std": 0.03773682191967964
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.3054187192118227,
+          "lift_over_random": -0.02791461412151064,
+          "anchor_entropy_mean": 2.7419960498809814,
+          "anchor_entropy_ratio": 0.9889660258251047,
+          "max_anchor_weight_mean": 0.08705306053161621,
+          "max_anchor_weight_std": 0.00998932309448719,
+          "router_alpha_mean": 0.4988321363925934,
+          "router_alpha_std": 0.00468699773773551
+        }
+      }
+    },
+    "C2_freeze_ans_4bench": {
+      "42": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.4200151630022744,
+          "lift_over_random": 0.17001516300227443,
+          "anchor_entropy_mean": 2.7455942630767822,
+          "anchor_entropy_ratio": 0.9902638069085155,
+          "max_anchor_weight_mean": 0.09010425955057144,
+          "max_anchor_weight_std": 0.007308436091989279,
+          "router_alpha_mean": 0.48047542572021484,
+          "router_alpha_std": 0.006448518484830856
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.26535836177474403,
+          "lift_over_random": 0.015358361774744034,
+          "anchor_entropy_mean": 2.6774790287017822,
+          "anchor_entropy_ratio": 0.965696429198065,
+          "max_anchor_weight_mean": 0.14938843250274658,
+          "max_anchor_weight_std": 0.03157193213701248,
+          "router_alpha_mean": 0.4817686676979065,
+          "router_alpha_std": 0.0034761899150907993
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5396132252027449,
+          "lift_over_random": 0.039613225202744906,
+          "anchor_entropy_mean": 2.6543540954589844,
+          "anchor_entropy_ratio": 0.9573558725704968,
+          "max_anchor_weight_mean": 0.16925092041492462,
+          "max_anchor_weight_std": 0.003659080248326063,
+          "router_alpha_mean": 0.4769347012042999,
+          "router_alpha_std": 0.010048658587038517
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.35467980295566504,
+          "lift_over_random": 0.02134646962233172,
+          "anchor_entropy_mean": 2.7379884719848633,
+          "anchor_entropy_ratio": 0.9875205976359283,
+          "max_anchor_weight_mean": 0.09971705824136734,
+          "max_anchor_weight_std": 0.02315223217010498,
+          "router_alpha_mean": 0.47968873381614685,
+          "router_alpha_std": 0.007149815559387207
+        }
+      },
+      "123": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.43442001516300227,
+          "lift_over_random": 0.18442001516300227,
+          "anchor_entropy_mean": 2.664264678955078,
+          "anchor_entropy_ratio": 0.9609303599860294,
+          "max_anchor_weight_mean": 0.1296261101961136,
+          "max_anchor_weight_std": 0.03073410876095295,
+          "router_alpha_mean": 0.5009139180183411,
+          "router_alpha_std": 0.03274662792682648
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.25341296928327645,
+          "lift_over_random": 0.0034129692832764458,
+          "anchor_entropy_mean": 2.649473190307617,
+          "anchor_entropy_ratio": 0.955595458156265,
+          "max_anchor_weight_mean": 0.11651301383972168,
+          "max_anchor_weight_std": 0.020614096894860268,
+          "router_alpha_mean": 0.540457546710968,
+          "router_alpha_std": 0.0041104573756456375
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5396132252027449,
+          "lift_over_random": 0.039613225202744906,
+          "anchor_entropy_mean": 2.65201473236084,
+          "anchor_entropy_ratio": 0.9565121256853638,
+          "max_anchor_weight_mean": 0.11557244509458542,
+          "max_anchor_weight_std": 0.01583927869796753,
+          "router_alpha_mean": 0.540627121925354,
+          "router_alpha_std": 0.002859025727957487
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.35467980295566504,
+          "lift_over_random": 0.02134646962233172,
+          "anchor_entropy_mean": 2.700040578842163,
+          "anchor_entropy_ratio": 0.9738337883236388,
+          "max_anchor_weight_mean": 0.10210441052913666,
+          "max_anchor_weight_std": 0.02314027026295662,
+          "router_alpha_mean": 0.5155483484268188,
+          "router_alpha_std": 0.033484384417533875
+        }
+      },
+      "7": {
+        "gsm8k": {
+          "n_examples": 1319,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.4313874147081122,
+          "lift_over_random": 0.1813874147081122,
+          "anchor_entropy_mean": 2.710232734680176,
+          "anchor_entropy_ratio": 0.9775098314945059,
+          "max_anchor_weight_mean": 0.10271299630403519,
+          "max_anchor_weight_std": 0.017523562535643578,
+          "router_alpha_mean": 0.46640723943710327,
+          "router_alpha_std": 0.042686913162469864
+        },
+        "arc_challenge": {
+          "n_examples": 1172,
+          "n_choices": 4,
+          "random_baseline": 0.25,
+          "accuracy": 0.2909556313993174,
+          "lift_over_random": 0.040955631399317405,
+          "anchor_entropy_mean": 2.540527820587158,
+          "anchor_entropy_ratio": 0.9163017220003848,
+          "max_anchor_weight_mean": 0.19305753707885742,
+          "max_anchor_weight_std": 0.045225657522678375,
+          "router_alpha_mean": 0.45628705620765686,
+          "router_alpha_std": 0.04472571238875389
+        },
+        "strategyqa": {
+          "n_examples": 1603,
+          "n_choices": 2,
+          "random_baseline": 0.5,
+          "accuracy": 0.5421085464753587,
+          "lift_over_random": 0.042108546475358666,
+          "anchor_entropy_mean": 2.670109510421753,
+          "anchor_entropy_ratio": 0.9630384373289803,
+          "max_anchor_weight_mean": 0.1303766667842865,
+          "max_anchor_weight_std": 0.048690345138311386,
+          "router_alpha_mean": 0.42114120721817017,
+          "router_alpha_std": 0.03411383554339409
+        },
+        "folio": {
+          "n_examples": 203,
+          "n_choices": 3,
+          "random_baseline": 0.3333333333333333,
+          "accuracy": 0.3645320197044335,
+          "lift_over_random": 0.03119868637110018,
+          "anchor_entropy_mean": 2.6548428535461426,
+          "anchor_entropy_ratio": 0.9575321547876311,
+          "max_anchor_weight_mean": 0.15241558849811554,
+          "max_anchor_weight_std": 0.03087937831878662,
+          "router_alpha_mean": 0.40978994965553284,
+          "router_alpha_std": 0.04084081947803497
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "C1_freeze_ans_3bench": {
+      "gsm8k": {
+        "mean_acc": 0.4263330806166288,
+        "std_acc": 0.007781048429790571,
+        "mean_entropy_ratio": 0.9861370258735122,
+        "mean_max_weight": 0.09395501514275868,
+        "per_seed_acc": {
+          "42": 0.43290371493555724,
+          "123": 0.4177407126611069,
+          "7": 0.42835481425322214
+        },
+        "mean_router_alpha": 0.5014864305655161,
+        "std_router_alpha": 0.032730622722959346
+      },
+      "arc_challenge": {
+        "mean_acc": 0.25,
+        "std_acc": 0.017000732803047175,
+        "mean_entropy_ratio": 0.9847508457075579,
+        "mean_max_weight": 0.09983372688293457,
+        "per_seed_acc": {
+          "42": 0.2696245733788396,
+          "123": 0.23976109215017063,
+          "7": 0.24061433447098976
+        },
+        "mean_router_alpha": 0.4964882930119832,
+        "std_router_alpha": 0.03441914675590036
+      },
+      "strategyqa": {
+        "mean_acc": 0.5396132252027449,
+        "std_acc": 0.0,
+        "mean_entropy_ratio": 0.9845703785792524,
+        "mean_max_weight": 0.10127336531877518,
+        "per_seed_acc": {
+          "42": 0.5396132252027449,
+          "123": 0.5396132252027449,
+          "7": 0.5396132252027449
+        },
+        "mean_router_alpha": 0.4811220069726308,
+        "std_router_alpha": 0.05295936762107663
+      },
+      "folio": {
+        "mean_acc": 0.32183908045977017,
+        "std_acc": 0.028440899960080087,
+        "mean_entropy_ratio": 0.988144264055507,
+        "mean_max_weight": 0.09300565471251805,
+        "per_seed_acc": {
+          "42": 0.3054187192118227,
+          "123": 0.35467980295566504,
+          "7": 0.3054187192118227
+        },
+        "mean_router_alpha": 0.5030105610688528,
+        "std_router_alpha": 0.031341167806454635
+      }
+    },
+    "C2_freeze_ans_4bench": {
+      "gsm8k": {
+        "mean_acc": 0.4286075309577963,
+        "std_acc": 0.007594126460104494,
+        "mean_entropy_ratio": 0.9762346661296837,
+        "mean_max_weight": 0.10748112201690674,
+        "per_seed_acc": {
+          "42": 0.4200151630022744,
+          "123": 0.43442001516300227,
+          "7": 0.4313874147081122
+        },
+        "mean_router_alpha": 0.48259886105855304,
+        "std_router_alpha": 0.017351064806065693
+      },
+      "arc_challenge": {
+        "mean_acc": 0.26990898748577924,
+        "std_acc": 0.019180563481328062,
+        "mean_entropy_ratio": 0.9458645364515718,
+        "mean_max_weight": 0.15298632780710855,
+        "per_seed_acc": {
+          "42": 0.26535836177474403,
+          "123": 0.25341296928327645,
+          "7": 0.2909556313993174
+        },
+        "mean_router_alpha": 0.4928377568721771,
+        "std_router_alpha": 0.04316319519281404
+      },
+      "strategyqa": {
+        "mean_acc": 0.5404449989602829,
+        "std_acc": 0.0014406744084581537,
+        "mean_entropy_ratio": 0.9589688118616136,
+        "mean_max_weight": 0.13840001076459885,
+        "per_seed_acc": {
+          "42": 0.5396132252027449,
+          "123": 0.5396132252027449,
+          "7": 0.5421085464753587
+        },
+        "mean_router_alpha": 0.47956767678260803,
+        "std_router_alpha": 0.05978645643998378
+      },
+      "folio": {
+        "mean_acc": 0.3579638752052545,
+        "std_acc": 0.00568817999201601,
+        "mean_entropy_ratio": 0.9729621802490661,
+        "mean_max_weight": 0.11807901908953984,
+        "per_seed_acc": {
+          "42": 0.35467980295566504,
+          "123": 0.35467980295566504,
+          "7": 0.3645320197044335
+        },
+        "mean_router_alpha": 0.4683423439661662,
+        "std_router_alpha": 0.05378443222380799
+      }
+    }
+  },
+  "success_criteria": {
+    "SC1_sqa_preserved": false,
+    "SC2_gsm8k_no_regression": false,
+    "SC3_arc_above_32": false,
+    "SC4_folio_above_38": false,
+    "SC5_mean_above_e15": "False",
+    "n_pass": "0"
+  },
+  "timestamp": "2026-02-26 09:07:14",
+  "elapsed_seconds": 4442.822860479355
+}

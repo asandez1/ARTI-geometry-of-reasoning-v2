@@ -1,0 +1,67 @@
+{
+  "diagnostics": {
+    "mean_confidence": 0.6855679154396057,
+    "min_confidence": 0.29914960265159607,
+    "mean_type_entropy": 0.8100330829620361,
+    "pct_structured": 0.6699999570846558,
+    "anchor_participation_ratio": 15.998064041137695,
+    "type_CauseEffect_count": 41,
+    "type_CauseEffect_pct": 0.205,
+    "type_Deduction_count": 56,
+    "type_Deduction_pct": 0.28,
+    "type_Induction_count": 13,
+    "type_Induction_pct": 0.065,
+    "type_Analogy_count": 25,
+    "type_Analogy_pct": 0.125,
+    "type_Conservation_count": 19,
+    "type_Conservation_pct": 0.095,
+    "type_Counterfactual_count": 46,
+    "type_Counterfactual_pct": 0.23
+  },
+  "participation_ratio_before": 15.998064041137695,
+  "participation_ratio_after": 7.211649417877197,
+  "type_routing": {
+    "CauseEffect": {
+      "count": 41,
+      "fast_pct": 0.6585365533828735,
+      "struct_pct": 0.3414633870124817,
+      "expected": "fast",
+      "correct_route": true
+    },
+    "Deduction": {
+      "count": 56,
+      "fast_pct": 0.5535714626312256,
+      "struct_pct": 0.4464285969734192,
+      "expected": "fast",
+      "correct_route": true
+    },
+    "Induction": {
+      "count": 13,
+      "fast_pct": 0.0,
+      "struct_pct": 1.0,
+      "expected": "struct",
+      "correct_route": true
+    },
+    "Analogy": {
+      "count": 25,
+      "fast_pct": 0.0,
+      "struct_pct": 1.0,
+      "expected": "struct",
+      "correct_route": true
+    },
+    "Conservation": {
+      "count": 19,
+      "fast_pct": 0.42105263471603394,
+      "struct_pct": 0.5789473652839661,
+      "expected": "fast",
+      "correct_route": false
+    },
+    "Counterfactual": {
+      "count": 46,
+      "fast_pct": 0.0,
+      "struct_pct": 1.0,
+      "expected": "struct",
+      "correct_route": true
+    }
+  }
+}

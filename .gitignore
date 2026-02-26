@@ -1,0 +1,14 @@
+# Model weights (too large for git)
+*.pt
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Reference papers (not ours)
+docs/2024.02.26.582157v1.full.pdf
+
+# OS files
+.DS_Store
+Thumbs.db

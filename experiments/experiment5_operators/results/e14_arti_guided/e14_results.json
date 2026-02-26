@@ -1,0 +1,1300 @@
+{
+  "experiment": "E14_arti_guided_operator_selection",
+  "description": "Inference-only: ARTI-guided attention override vs learned attention",
+  "conditions": {
+    "C0": "Baseline (E12 C3 learned attention)",
+    "C1": "ARTI-forced (80% on top-2 anchors per type)",
+    "C2": "ARTI-soft (logit bias +2.0 on top-2)",
+    "C3": "Random-forced (80% on random 2 anchors)",
+    "C4": "Oracle-forced (heuristic labeler \u2192 anchors)"
+  },
+  "seeds": [
+    42,
+    123,
+    7
+  ],
+  "device": "cuda",
+  "e12_c3_baselines": {
+    "gsm8k": {
+      "mean": 0.496,
+      "std": 0.028
+    },
+    "arc_challenge": {
+      "mean": 0.3,
+      "std": 0.007
+    },
+    "strategyqa": {
+      "mean": 0.488,
+      "std": 0.021
+    },
+    "folio": {
+      "mean": 0.342,
+      "std": 0.016
+    }
+  },
+  "per_seed": {
+    "42": {
+      "C0": {
+        "gsm8k": {
+          "accuracy": 0.3730098559514784,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.6643733978271484,
+          "anchor_entropy_ratio": 0.9609695720304261,
+          "max_anchor_weight_mean": 0.12931987643241882,
+          "max_anchor_weight_std": 0.026599746197462082,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.1230098559514784
+        },
+        "arc_challenge": {
+          "accuracy": 0.27047781569965873,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 2.5533604621887207,
+          "anchor_entropy_ratio": 0.9209301191004048,
+          "max_anchor_weight_mean": 0.17527830600738525,
+          "max_anchor_weight_std": 0.027549011632800102,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.02047781569965873
+        },
+        "strategyqa": {
+          "accuracy": 0.48845913911416095,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 2.5914981365203857,
+          "anchor_entropy_ratio": 0.9346853775077376,
+          "max_anchor_weight_mean": 0.153891921043396,
+          "max_anchor_weight_std": 0.02191171608865261,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.011540860885839055
+        },
+        "folio": {
+          "accuracy": 0.3448275862068966,
+          "n_examples": 203,
+          "anchor_entropy_mean": 2.5848464965820312,
+          "anchor_entropy_ratio": 0.9322863055195268,
+          "max_anchor_weight_mean": 0.1643948256969452,
+          "max_anchor_weight_std": 0.022548863664269447,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.01149425287356326
+        }
+      },
+      "C1": {
+        "gsm8k": {
+          "accuracy": 0.36997725549658833,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.11997725549658833
+        },
+        "arc_challenge": {
+          "accuracy": 0.26109215017064846,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.011092150170648463
+        },
+        "strategyqa": {
+          "accuracy": 0.47972551466001245,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.020274485339987547
+        },
+        "folio": {
+          "accuracy": 0.33004926108374383,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": -0.003284072249589487
+        }
+      },
+      "C2": {
+        "gsm8k": {
+          "accuracy": 0.36997725549658833,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.1951730251312256,
+          "anchor_entropy_ratio": 0.7917413093125107,
+          "max_anchor_weight_mean": 0.3287616968154907,
+          "max_anchor_weight_std": 0.0871264711022377,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.11997725549658833
+        },
+        "arc_challenge": {
+          "accuracy": 0.2636518771331058,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.679112195968628,
+          "anchor_entropy_ratio": 0.6056117095550292,
+          "max_anchor_weight_mean": 0.43897464871406555,
+          "max_anchor_weight_std": 0.05488364025950432,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.013651877133105783
+        },
+        "strategyqa": {
+          "accuracy": 0.4784778540237056,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.761236310005188,
+          "anchor_entropy_ratio": 0.6352317225695154,
+          "max_anchor_weight_mean": 0.408342570066452,
+          "max_anchor_weight_std": 0.044781770557165146,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.021522145976294427
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.740354299545288,
+          "anchor_entropy_ratio": 0.6277001293359432,
+          "max_anchor_weight_mean": 0.4192592203617096,
+          "max_anchor_weight_std": 0.058684300631284714,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C3": {
+        "gsm8k": {
+          "accuracy": 0.3730098559514784,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.1230098559514784
+        },
+        "arc_challenge": {
+          "accuracy": 0.27474402730375425,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.024744027303754246
+        },
+        "strategyqa": {
+          "accuracy": 0.4878353087960075,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.012164691203992495
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C4": {
+        "gsm8k": {
+          "accuracy": 0.37604245640636846,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 243,
+            "BehvCause": 242,
+            "SysCause": 1,
+            "Deduc": 616,
+            "Induc": 3,
+            "Analog": 5,
+            "Conserv": 95,
+            "Counter": 4,
+            "Decomp": 110
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.12604245640636846
+        },
+        "arc_challenge": {
+          "accuracy": 0.2619453924914676,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 619,
+            "BehvCause": 22,
+            "SysCause": 24,
+            "Deduc": 244,
+            "Induc": 117,
+            "Analog": 15,
+            "Conserv": 29,
+            "Counter": 4,
+            "Abduc": 58,
+            "Decomp": 40
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.011945392491467588
+        },
+        "strategyqa": {
+          "accuracy": 0.4809731752963194,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 1122,
+            "BehvCause": 16,
+            "SysCause": 2,
+            "Deduc": 203,
+            "Induc": 45,
+            "Analog": 50,
+            "Conserv": 49,
+            "Counter": 66,
+            "Abduc": 1,
+            "Decomp": 49
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.01902682470368061
+        },
+        "folio": {
+          "accuracy": 0.3251231527093596,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 4,
+            "BehvCause": 3,
+            "Deduc": 193,
+            "Induc": 3
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": -0.008210180623973717
+        }
+      }
+    },
+    "123": {
+      "C0": {
+        "gsm8k": {
+          "accuracy": 0.4624715693707354,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.6451146602630615,
+          "anchor_entropy_ratio": 0.9540234507360535,
+          "max_anchor_weight_mean": 0.1409294307231903,
+          "max_anchor_weight_std": 0.027084942907094955,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.2124715693707354
+        },
+        "arc_challenge": {
+          "accuracy": 0.2790102389078498,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 2.544015645980835,
+          "anchor_entropy_ratio": 0.9175596891001209,
+          "max_anchor_weight_mean": 0.1947413831949234,
+          "max_anchor_weight_std": 0.015311986207962036,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.029010238907849817
+        },
+        "strategyqa": {
+          "accuracy": 0.47473487211478477,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 2.5696911811828613,
+          "anchor_entropy_ratio": 0.9268201809271542,
+          "max_anchor_weight_mean": 0.18140092492103577,
+          "max_anchor_weight_std": 0.014500224962830544,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.025265127885215233
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 2.565962553024292,
+          "anchor_entropy_ratio": 0.9254753625887325,
+          "max_anchor_weight_mean": 0.18504197895526886,
+          "max_anchor_weight_std": 0.014633114449679852,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C1": {
+        "gsm8k": {
+          "accuracy": 0.4564063684609553,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.20640636846095528
+        },
+        "arc_challenge": {
+          "accuracy": 0.2781569965870307,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.02815699658703069
+        },
+        "strategyqa": {
+          "accuracy": 0.47348721147847783,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.026512788521522168
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C2": {
+        "gsm8k": {
+          "accuracy": 0.46171341925701287,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.1737005710601807,
+          "anchor_entropy_ratio": 0.7839967585615076,
+          "max_anchor_weight_mean": 0.3116040527820587,
+          "max_anchor_weight_std": 0.11956389993429184,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.21171341925701287
+        },
+        "arc_challenge": {
+          "accuracy": 0.28071672354948807,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.6400243043899536,
+          "anchor_entropy_ratio": 0.5915137327201895,
+          "max_anchor_weight_mean": 0.4746679663658142,
+          "max_anchor_weight_std": 0.045592520385980606,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.030716723549488067
+        },
+        "strategyqa": {
+          "accuracy": 0.47348721147847783,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.6857436895370483,
+          "anchor_entropy_ratio": 0.608003515276241,
+          "max_anchor_weight_mean": 0.4580610692501068,
+          "max_anchor_weight_std": 0.04341096058487892,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.026512788521522168
+        },
+        "folio": {
+          "accuracy": 0.3448275862068966,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.6891040802001953,
+          "anchor_entropy_ratio": 0.609215520012534,
+          "max_anchor_weight_mean": 0.4596203863620758,
+          "max_anchor_weight_std": 0.05755680799484253,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.01149425287356326
+        }
+      },
+      "C3": {
+        "gsm8k": {
+          "accuracy": 0.46626231993934797,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.21626231993934797
+        },
+        "arc_challenge": {
+          "accuracy": 0.28754266211604096,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.03754266211604096
+        },
+        "strategyqa": {
+          "accuracy": 0.4697442295695571,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.03025577043044292
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C4": {
+        "gsm8k": {
+          "accuracy": 0.45716451857467777,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 243,
+            "BehvCause": 242,
+            "SysCause": 1,
+            "Deduc": 616,
+            "Induc": 3,
+            "Analog": 5,
+            "Conserv": 95,
+            "Counter": 4,
+            "Decomp": 110
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.20716451857467777
+        },
+        "arc_challenge": {
+          "accuracy": 0.2781569965870307,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 619,
+            "BehvCause": 22,
+            "SysCause": 24,
+            "Deduc": 244,
+            "Induc": 117,
+            "Analog": 15,
+            "Conserv": 29,
+            "Counter": 4,
+            "Abduc": 58,
+            "Decomp": 40
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.02815699658703069
+        },
+        "strategyqa": {
+          "accuracy": 0.4728633811603244,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 1122,
+            "BehvCause": 16,
+            "SysCause": 2,
+            "Deduc": 203,
+            "Induc": 45,
+            "Analog": 50,
+            "Conserv": 49,
+            "Counter": 66,
+            "Abduc": 1,
+            "Decomp": 49
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.027136618839675608
+        },
+        "folio": {
+          "accuracy": 0.3497536945812808,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 4,
+            "BehvCause": 3,
+            "Deduc": 193,
+            "Induc": 3
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.01642036124794749
+        }
+      }
+    },
+    "7": {
+      "C0": {
+        "gsm8k": {
+          "accuracy": 0.4473085670962851,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.680377244949341,
+          "anchor_entropy_ratio": 0.9667417397500091,
+          "max_anchor_weight_mean": 0.12020279467105865,
+          "max_anchor_weight_std": 0.023135632276535034,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.19730856709628508
+        },
+        "arc_challenge": {
+          "accuracy": 0.2593856655290102,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 2.5632119178771973,
+          "anchor_entropy_ratio": 0.9244832806672304,
+          "max_anchor_weight_mean": 0.179037407040596,
+          "max_anchor_weight_std": 0.02330082282423973,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.009385665529010212
+        },
+        "strategyqa": {
+          "accuracy": 0.48346849656893326,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 2.6076574325561523,
+          "anchor_entropy_ratio": 0.9405136115715019,
+          "max_anchor_weight_mean": 0.160176083445549,
+          "max_anchor_weight_std": 0.024160953238606453,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.01653150343106674
+        },
+        "folio": {
+          "accuracy": 0.35960591133004927,
+          "n_examples": 203,
+          "anchor_entropy_mean": 2.60176157951355,
+          "anchor_entropy_ratio": 0.9383871320849088,
+          "max_anchor_weight_mean": 0.16048800945281982,
+          "max_anchor_weight_std": 0.019736915826797485,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.02627257799671595
+        }
+      },
+      "C1": {
+        "gsm8k": {
+          "accuracy": 0.44351781652767247,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.19351781652767247
+        },
+        "arc_challenge": {
+          "accuracy": 0.25426621160409557,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.004266211604095571
+        },
+        "strategyqa": {
+          "accuracy": 0.487211478477854,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.01278852152214599
+        },
+        "folio": {
+          "accuracy": 0.35467980295566504,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.02134646962233172
+        }
+      },
+      "C2": {
+        "gsm8k": {
+          "accuracy": 0.44351781652767247,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 2.2427589893341064,
+          "anchor_entropy_ratio": 0.8089043179553648,
+          "max_anchor_weight_mean": 0.2792414426803589,
+          "max_anchor_weight_std": 0.10252247750759125,
+          "type_distribution": {
+            "PhysCause": 79,
+            "BehvCause": 343,
+            "Deduc": 380,
+            "Induc": 27,
+            "Analog": 6,
+            "Conserv": 263,
+            "Counter": 21,
+            "Abduc": 6,
+            "Decomp": 194
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.19351781652767247
+        },
+        "arc_challenge": {
+          "accuracy": 0.25426621160409557,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.6427216529846191,
+          "anchor_entropy_ratio": 0.5924865955804577,
+          "max_anchor_weight_mean": 0.424227237701416,
+          "max_anchor_weight_std": 0.04313553497195244,
+          "type_distribution": {
+            "PhysCause": 403,
+            "BehvCause": 17,
+            "SysCause": 35,
+            "Deduc": 111,
+            "Induc": 266,
+            "Analog": 43,
+            "Conserv": 75,
+            "Counter": 21,
+            "Abduc": 72,
+            "Decomp": 129
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.004266211604095571
+        },
+        "strategyqa": {
+          "accuracy": 0.487211478477854,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.734127163887024,
+          "anchor_entropy_ratio": 0.625454164902663,
+          "max_anchor_weight_mean": 0.4089854657649994,
+          "max_anchor_weight_std": 0.04111893102526665,
+          "type_distribution": {
+            "PhysCause": 876,
+            "BehvCause": 25,
+            "SysCause": 5,
+            "Deduc": 65,
+            "Induc": 169,
+            "Analog": 109,
+            "Conserv": 83,
+            "Counter": 112,
+            "Abduc": 4,
+            "Decomp": 155
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.01278852152214599
+        },
+        "folio": {
+          "accuracy": 0.3497536945812808,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.7267123460769653,
+          "anchor_entropy_ratio": 0.6227798346817464,
+          "max_anchor_weight_mean": 0.39970213174819946,
+          "max_anchor_weight_std": 0.047887977212667465,
+          "type_distribution": {
+            "PhysCause": 21,
+            "BehvCause": 6,
+            "SysCause": 5,
+            "Deduc": 137,
+            "Analog": 8,
+            "Conserv": 22,
+            "Counter": 2,
+            "Decomp": 2
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.01642036124794749
+        }
+      },
+      "C3": {
+        "gsm8k": {
+          "accuracy": 0.4488248673237301,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.19882486732373011
+        },
+        "arc_challenge": {
+          "accuracy": 0.25426621160409557,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "random_baseline": 0.25,
+          "lift_over_random": 0.004266211604095571
+        },
+        "strategyqa": {
+          "accuracy": 0.4890829694323144,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "random_baseline": 0.5,
+          "lift_over_random": -0.010917030567685615
+        },
+        "folio": {
+          "accuracy": 0.3399014778325123,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.006568144499178974
+        }
+      },
+      "C4": {
+        "gsm8k": {
+          "accuracy": 0.44200151630022744,
+          "n_examples": 1319,
+          "anchor_entropy_mean": 1.5827311277389526,
+          "anchor_entropy_ratio": 0.5708495872623959,
+          "max_anchor_weight_mean": 0.40000003576278687,
+          "max_anchor_weight_std": 2.9813627122621256e-08,
+          "type_distribution": {
+            "PhysCause": 243,
+            "BehvCause": 242,
+            "SysCause": 1,
+            "Deduc": 616,
+            "Induc": 3,
+            "Analog": 5,
+            "Conserv": 95,
+            "Counter": 4,
+            "Decomp": 110
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.19200151630022744
+        },
+        "arc_challenge": {
+          "accuracy": 0.25597269624573377,
+          "n_examples": 1172,
+          "anchor_entropy_mean": 1.5827312469482422,
+          "anchor_entropy_ratio": 0.5708496302580586,
+          "max_anchor_weight_mean": 0.40000009536743164,
+          "max_anchor_weight_std": 8.944513751885097e-08,
+          "type_distribution": {
+            "PhysCause": 619,
+            "BehvCause": 22,
+            "SysCause": 24,
+            "Deduc": 244,
+            "Induc": 117,
+            "Analog": 15,
+            "Conserv": 29,
+            "Counter": 4,
+            "Abduc": 58,
+            "Decomp": 40
+          },
+          "random_baseline": 0.25,
+          "lift_over_random": 0.005972696245733766
+        },
+        "strategyqa": {
+          "accuracy": 0.487211478477854,
+          "n_examples": 1603,
+          "anchor_entropy_mean": 1.5827314853668213,
+          "anchor_entropy_ratio": 0.5708497162493841,
+          "max_anchor_weight_mean": 0.4000000059604645,
+          "max_anchor_weight_std": 0.0,
+          "type_distribution": {
+            "PhysCause": 1122,
+            "BehvCause": 16,
+            "SysCause": 2,
+            "Deduc": 203,
+            "Induc": 45,
+            "Analog": 50,
+            "Conserv": 49,
+            "Counter": 66,
+            "Abduc": 1,
+            "Decomp": 49
+          },
+          "random_baseline": 0.5,
+          "lift_over_random": -0.01278852152214599
+        },
+        "folio": {
+          "accuracy": 0.35467980295566504,
+          "n_examples": 203,
+          "anchor_entropy_mean": 1.58273184299469,
+          "anchor_entropy_ratio": 0.5708498452363722,
+          "max_anchor_weight_mean": 0.3999999761581421,
+          "max_anchor_weight_std": 2.987599856396628e-08,
+          "type_distribution": {
+            "PhysCause": 4,
+            "BehvCause": 3,
+            "Deduc": 193,
+            "Induc": 3
+          },
+          "random_baseline": 0.3333333333333333,
+          "lift_over_random": 0.02134646962233172
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "C0": {
+      "gsm8k": {
+        "mean_acc": 0.42759666413949965,
+        "std_acc": 0.047877644894152985,
+        "mean_entropy_ratio": 0.9605782541721629,
+        "mean_max_weight": 0.13015070060888925,
+        "per_seed_acc": {
+          "42": 0.3730098559514784,
+          "123": 0.4624715693707354,
+          "7": 0.4473085670962851
+        }
+      },
+      "arc_challenge": {
+        "mean_acc": 0.26962457337883955,
+        "std_acc": 0.009840070473268606,
+        "mean_entropy_ratio": 0.9209910296225853,
+        "mean_max_weight": 0.18301903208096823,
+        "per_seed_acc": {
+          "42": 0.27047781569965873,
+          "123": 0.2790102389078498,
+          "7": 0.2593856655290102
+        }
+      },
+      "strategyqa": {
+        "mean_acc": 0.4822208359326263,
+        "std_acc": 0.0069466804277355295,
+        "mean_entropy_ratio": 0.9340063900021313,
+        "mean_max_weight": 0.16515630980332693,
+        "per_seed_acc": {
+          "42": 0.48845913911416095,
+          "123": 0.47473487211478477,
+          "7": 0.48346849656893326
+        }
+      },
+      "folio": {
+        "mean_acc": 0.34811165845648606,
+        "std_acc": 0.010254512312641057,
+        "mean_entropy_ratio": 0.9320496000643894,
+        "mean_max_weight": 0.1699749380350113,
+        "per_seed_acc": {
+          "42": 0.3448275862068966,
+          "123": 0.3399014778325123,
+          "7": 0.35960591133004927
+        }
+      }
+    },
+    "C1": {
+      "gsm8k": {
+        "mean_acc": 0.42330048016173866,
+        "std_acc": 0.046626745642944105,
+        "mean_entropy_ratio": 0.5708495872623959,
+        "mean_max_weight": 0.40000003576278687,
+        "per_seed_acc": {
+          "42": 0.36997725549658833,
+          "123": 0.4564063684609553,
+          "7": 0.44351781652767247
+        }
+      },
+      "arc_challenge": {
+        "mean_acc": 0.2645051194539249,
+        "std_acc": 0.012305635752436806,
+        "mean_entropy_ratio": 0.5708496302580586,
+        "mean_max_weight": 0.40000009536743164,
+        "per_seed_acc": {
+          "42": 0.26109215017064846,
+          "123": 0.2781569965870307,
+          "7": 0.25426621160409557
+        }
+      },
+      "strategyqa": {
+        "mean_acc": 0.48014140153878143,
+        "std_acc": 0.006871578973532259,
+        "mean_entropy_ratio": 0.5708497162493841,
+        "mean_max_weight": 0.4000000059604645,
+        "per_seed_acc": {
+          "42": 0.47972551466001245,
+          "123": 0.47348721147847783,
+          "7": 0.487211478477854
+        }
+      },
+      "folio": {
+        "mean_acc": 0.3415435139573071,
+        "std_acc": 0.012397100878933922,
+        "mean_entropy_ratio": 0.5708498452363722,
+        "mean_max_weight": 0.3999999761581421,
+        "per_seed_acc": {
+          "42": 0.33004926108374383,
+          "123": 0.3399014778325123,
+          "7": 0.35467980295566504
+        }
+      }
+    },
+    "C2": {
+      "gsm8k": {
+        "mean_acc": 0.4250694970937579,
+        "std_acc": 0.04857094092996007,
+        "mean_entropy_ratio": 0.794880795276461,
+        "mean_max_weight": 0.3065357307593028,
+        "per_seed_acc": {
+          "42": 0.36997725549658833,
+          "123": 0.46171341925701287,
+          "7": 0.44351781652767247
+        }
+      },
+      "arc_challenge": {
+        "mean_acc": 0.26621160409556316,
+        "std_acc": 0.013409755670223308,
+        "mean_entropy_ratio": 0.5965373459518921,
+        "mean_max_weight": 0.44595661759376526,
+        "per_seed_acc": {
+          "42": 0.2636518771331058,
+          "123": 0.28071672354948807,
+          "7": 0.25426621160409557
+        }
+      },
+      "strategyqa": {
+        "mean_acc": 0.4797255146600125,
+        "std_acc": 0.006946680427735523,
+        "mean_entropy_ratio": 0.6228964675828065,
+        "mean_max_weight": 0.4251297016938527,
+        "per_seed_acc": {
+          "42": 0.4784778540237056,
+          "123": 0.47348721147847783,
+          "7": 0.487211478477854
+        }
+      },
+      "folio": {
+        "mean_acc": 0.3448275862068965,
+        "std_acc": 0.004926108374384258,
+        "mean_entropy_ratio": 0.6198984946767412,
+        "mean_max_weight": 0.42619391282399494,
+        "per_seed_acc": {
+          "42": 0.3399014778325123,
+          "123": 0.3448275862068966,
+          "7": 0.3497536945812808
+        }
+      }
+    },
+    "C3": {
+      "gsm8k": {
+        "mean_acc": 0.4293656810715188,
+        "std_acc": 0.04957822563536249,
+        "mean_entropy_ratio": 0.5708495872623959,
+        "mean_max_weight": 0.40000003576278687,
+        "per_seed_acc": {
+          "42": 0.3730098559514784,
+          "123": 0.46626231993934797,
+          "7": 0.4488248673237301
+        }
+      },
+      "arc_challenge": {
+        "mean_acc": 0.2721843003412969,
+        "std_acc": 0.016785252195312284,
+        "mean_entropy_ratio": 0.5708496302580586,
+        "mean_max_weight": 0.40000009536743164,
+        "per_seed_acc": {
+          "42": 0.27474402730375425,
+          "123": 0.28754266211604096,
+          "7": 0.25426621160409557
+        }
+      },
+      "strategyqa": {
+        "mean_acc": 0.4822208359326263,
+        "std_acc": 0.010823051511476897,
+        "mean_entropy_ratio": 0.5708497162493841,
+        "mean_max_weight": 0.4000000059604645,
+        "per_seed_acc": {
+          "42": 0.4878353087960075,
+          "123": 0.4697442295695571,
+          "7": 0.4890829694323144
+        }
+      },
+      "folio": {
+        "mean_acc": 0.3399014778325123,
+        "std_acc": 0.0,
+        "mean_entropy_ratio": 0.5708498452363722,
+        "mean_max_weight": 0.3999999761581421,
+        "per_seed_acc": {
+          "42": 0.3399014778325123,
+          "123": 0.3399014778325123,
+          "7": 0.3399014778325123
+        }
+      }
+    },
+    "C4": {
+      "gsm8k": {
+        "mean_acc": 0.42506949709375785,
+        "std_acc": 0.04313023531602802,
+        "mean_entropy_ratio": 0.5708495872623959,
+        "mean_max_weight": 0.40000003576278687,
+        "per_seed_acc": {
+          "42": 0.37604245640636846,
+          "123": 0.45716451857467777,
+          "7": 0.44200151630022744
+        }
+      },
+      "arc_challenge": {
+        "mean_acc": 0.265358361774744,
+        "std_acc": 0.011479201405352989,
+        "mean_entropy_ratio": 0.5708496302580586,
+        "mean_max_weight": 0.40000009536743164,
+        "per_seed_acc": {
+          "42": 0.2619453924914676,
+          "123": 0.2781569965870307,
+          "7": 0.25597269624573377
+        }
+      },
+      "strategyqa": {
+        "mean_acc": 0.48034934497816595,
+        "std_acc": 0.0071943621925581935,
+        "mean_entropy_ratio": 0.5708497162493841,
+        "mean_max_weight": 0.4000000059604645,
+        "per_seed_acc": {
+          "42": 0.4809731752963194,
+          "123": 0.4728633811603244,
+          "7": 0.487211478477854
+        }
+      },
+      "folio": {
+        "mean_acc": 0.3431855500821018,
+        "std_acc": 0.015835222924454783,
+        "mean_entropy_ratio": 0.5708498452363722,
+        "mean_max_weight": 0.3999999761581421,
+        "per_seed_acc": {
+          "42": 0.3251231527093596,
+          "123": 0.3497536945812808,
+          "7": 0.35467980295566504
+        }
+      }
+    }
+  },
+  "timestamp": "2026-02-25 13:19:58",
+  "elapsed_seconds": 271.2719705104828
+}

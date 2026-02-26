@@ -1,0 +1,250 @@
+[
+  {
+    "benchmark": "gsm8k",
+    "split": "test",
+    "n_examples": 100,
+    "n_available": 1319,
+    "n_choices": 4,
+    "random_baseline": 0.25,
+    "cofrn_acc": 0.49,
+    "controller_acc": 0.49,
+    "lift": 0.0,
+    "type_distribution": {
+      "Conservation": 36,
+      "CauseEffect": 36,
+      "Deduction": 18,
+      "Counterfactual": 9,
+      "Induction": 1
+    },
+    "routing": {
+      "fast": 90,
+      "struct": 10
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.3333333333333333,
+      "Deduction": 0.5555555555555556,
+      "Induction": 1.0,
+      "Conservation": 0.5555555555555556,
+      "Counterfactual": 0.6666666666666666
+    },
+    "mode": "full_routing"
+  },
+  {
+    "benchmark": "gsm8k",
+    "split": "test",
+    "n_examples": 100,
+    "n_available": 1319,
+    "n_choices": 4,
+    "random_baseline": 0.25,
+    "cofrn_acc": 0.49,
+    "controller_acc": 0.49,
+    "lift": 0.0,
+    "type_distribution": {
+      "Conservation": 36,
+      "CauseEffect": 36,
+      "Deduction": 18,
+      "Counterfactual": 9,
+      "Induction": 1
+    },
+    "routing": {
+      "uniform": 100
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.3333333333333333,
+      "Deduction": 0.5555555555555556,
+      "Induction": 1.0,
+      "Conservation": 0.5555555555555556,
+      "Counterfactual": 0.6666666666666666
+    },
+    "mode": "fast_only"
+  },
+  {
+    "benchmark": "arc_challenge",
+    "split": "test",
+    "n_examples": 100,
+    "n_available": 1172,
+    "n_choices": 4,
+    "random_baseline": 0.25,
+    "cofrn_acc": 0.31,
+    "controller_acc": 0.31,
+    "lift": 0.0,
+    "type_distribution": {
+      "Counterfactual": 19,
+      "Analogy": 15,
+      "Induction": 39,
+      "CauseEffect": 13,
+      "Conservation": 4,
+      "Deduction": 10
+    },
+    "routing": {
+      "struct": 73,
+      "fast": 27
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.3076923076923077,
+      "Deduction": 0.5,
+      "Induction": 0.3333333333333333,
+      "Analogy": 0.26666666666666666,
+      "Conservation": 0.25,
+      "Counterfactual": 0.21052631578947367
+    },
+    "mode": "full_routing"
+  },
+  {
+    "benchmark": "arc_challenge",
+    "split": "test",
+    "n_examples": 100,
+    "n_available": 1172,
+    "n_choices": 4,
+    "random_baseline": 0.25,
+    "cofrn_acc": 0.31,
+    "controller_acc": 0.31,
+    "lift": 0.0,
+    "type_distribution": {
+      "Counterfactual": 19,
+      "Analogy": 15,
+      "Induction": 39,
+      "CauseEffect": 13,
+      "Conservation": 4,
+      "Deduction": 10
+    },
+    "routing": {
+      "uniform": 100
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.3076923076923077,
+      "Deduction": 0.5,
+      "Induction": 0.3333333333333333,
+      "Analogy": 0.26666666666666666,
+      "Conservation": 0.25,
+      "Counterfactual": 0.21052631578947367
+    },
+    "mode": "fast_only"
+  },
+  {
+    "benchmark": "strategyqa",
+    "split": "train",
+    "n_examples": 100,
+    "n_available": 1603,
+    "n_choices": 2,
+    "random_baseline": 0.5,
+    "cofrn_acc": 0.58,
+    "controller_acc": 0.58,
+    "lift": 0.0,
+    "type_distribution": {
+      "CauseEffect": 41,
+      "Conservation": 10,
+      "Counterfactual": 23,
+      "Deduction": 10,
+      "Analogy": 11,
+      "Induction": 5
+    },
+    "routing": {
+      "fast": 61,
+      "struct": 39
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.6097560975609756,
+      "Deduction": 0.8,
+      "Induction": 0.4,
+      "Analogy": 0.5454545454545454,
+      "Conservation": 0.6,
+      "Counterfactual": 0.4782608695652174
+    },
+    "mode": "full_routing"
+  },
+  {
+    "benchmark": "strategyqa",
+    "split": "train",
+    "n_examples": 100,
+    "n_available": 1603,
+    "n_choices": 2,
+    "random_baseline": 0.5,
+    "cofrn_acc": 0.58,
+    "controller_acc": 0.58,
+    "lift": 0.0,
+    "type_distribution": {
+      "CauseEffect": 41,
+      "Conservation": 10,
+      "Counterfactual": 23,
+      "Deduction": 10,
+      "Analogy": 11,
+      "Induction": 5
+    },
+    "routing": {
+      "uniform": 100
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.6097560975609756,
+      "Deduction": 0.8,
+      "Induction": 0.4,
+      "Analogy": 0.5454545454545454,
+      "Conservation": 0.6,
+      "Counterfactual": 0.4782608695652174
+    },
+    "mode": "fast_only"
+  },
+  {
+    "benchmark": "folio",
+    "split": "validation",
+    "n_examples": 100,
+    "n_available": 203,
+    "n_choices": 3,
+    "random_baseline": 0.3333333333333333,
+    "cofrn_acc": 0.32,
+    "controller_acc": 0.32,
+    "lift": 0.0,
+    "type_distribution": {
+      "Deduction": 86,
+      "CauseEffect": 4,
+      "Analogy": 2,
+      "Conservation": 1,
+      "Induction": 5,
+      "Counterfactual": 2
+    },
+    "routing": {
+      "fast": 91,
+      "struct": 9
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.5,
+      "Deduction": 0.32558139534883723,
+      "Induction": 0.2,
+      "Analogy": 0.0,
+      "Conservation": 0.0,
+      "Counterfactual": 0.5
+    },
+    "mode": "full_routing"
+  },
+  {
+    "benchmark": "folio",
+    "split": "validation",
+    "n_examples": 100,
+    "n_available": 203,
+    "n_choices": 3,
+    "random_baseline": 0.3333333333333333,
+    "cofrn_acc": 0.32,
+    "controller_acc": 0.32,
+    "lift": 0.0,
+    "type_distribution": {
+      "Deduction": 86,
+      "CauseEffect": 4,
+      "Analogy": 2,
+      "Conservation": 1,
+      "Induction": 5,
+      "Counterfactual": 2
+    },
+    "routing": {
+      "uniform": 100
+    },
+    "per_type_accuracy": {
+      "CauseEffect": 0.5,
+      "Deduction": 0.32558139534883723,
+      "Induction": 0.2,
+      "Analogy": 0.0,
+      "Conservation": 0.0,
+      "Counterfactual": 0.5
+    },
+    "mode": "fast_only"
+  }
+]

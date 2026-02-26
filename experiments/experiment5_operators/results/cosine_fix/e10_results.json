@@ -1,0 +1,122 @@
+{
+  "experiment": "E10_cosine_scoring_fix",
+  "verify_fix": {
+    "normal_acc": 0.3999999761581421,
+    "n": 100,
+    "random_acc": 0.23999999463558197,
+    "random_changes": 74,
+    "zeros_acc": 0.1899999976158142,
+    "zeros_changes": 81,
+    "negated_acc": 0.05999999865889549,
+    "negated_changes": 100,
+    "shuffled_acc": 0.3700000047683716,
+    "shuffled_changes": 54,
+    "hyp_cos_to_centroid_mean": 0.37632858753204346,
+    "hyp_cos_to_centroid_min": 0.032679781317710876,
+    "fix_works": true
+  },
+  "depth_sweep": {
+    "accuracies": {
+      "1": 0.42,
+      "2": 0.42,
+      "3": 0.4,
+      "5": 0.4
+    },
+    "depth_diffs": {
+      "d1_vs_d2": 10,
+      "d1_vs_d3": 21,
+      "d1_vs_d5": 26
+    },
+    "all_depths_identical": false
+  },
+  "benchmark_results": [
+    {
+      "benchmark": "gsm8k",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "cosine_acc": 0.4,
+      "lift_over_random": 0.15000000000000002,
+      "anchor_entropy": 2.771132230758667,
+      "anchor_entropy_ratio": 0.9994746817407749,
+      "participation_ratio": 15.996430397033691
+    },
+    {
+      "benchmark": "arc_challenge",
+      "split": "test",
+      "n_examples": 100,
+      "n_choices": 4,
+      "random_baseline": 0.25,
+      "cosine_acc": 0.34,
+      "lift_over_random": 0.09000000000000002,
+      "anchor_entropy": 2.767883062362671,
+      "anchor_entropy_ratio": 0.9983027919577957,
+      "participation_ratio": 15.85058879852295
+    },
+    {
+      "benchmark": "strategyqa",
+      "split": "train",
+      "n_examples": 100,
+      "n_choices": 2,
+      "random_baseline": 0.5,
+      "cosine_acc": 0.5,
+      "lift_over_random": 0.0,
+      "anchor_entropy": 2.768807888031006,
+      "anchor_entropy_ratio": 0.9986363523091442,
+      "participation_ratio": 15.884854316711426
+    },
+    {
+      "benchmark": "folio",
+      "split": "validation",
+      "n_examples": 100,
+      "n_choices": 3,
+      "random_baseline": 0.3333333333333333,
+      "cosine_acc": 0.34,
+      "lift_over_random": 0.00666666666666671,
+      "anchor_entropy": 2.7685680389404297,
+      "anchor_entropy_ratio": 0.9985498450357602,
+      "participation_ratio": 15.875555992126465
+    }
+  ],
+  "comparison": [
+    {
+      "benchmark": "gsm8k",
+      "old_mlp_acc": 0.49,
+      "new_cosine_acc": 0.4,
+      "delta": -0.08999999999999997
+    },
+    {
+      "benchmark": "arc_challenge",
+      "old_mlp_acc": 0.31,
+      "new_cosine_acc": 0.34,
+      "delta": 0.030000000000000027
+    },
+    {
+      "benchmark": "strategyqa",
+      "old_mlp_acc": 0.58,
+      "new_cosine_acc": 0.5,
+      "delta": -0.07999999999999996
+    },
+    {
+      "benchmark": "folio",
+      "old_mlp_acc": 0.32,
+      "new_cosine_acc": 0.34,
+      "delta": 0.020000000000000018
+    }
+  ],
+  "anchor_analysis": {
+    "max_dev_from_uniform": 0.013495869934558868,
+    "mean_entropy": 2.771084785461426,
+    "entropy_ratio": 0.999457569467014,
+    "per_anchor_std_mean": 0.0027595162391662598,
+    "per_anchor_std_max": 0.007022586651146412,
+    "U_rms": 0.016769735142588615,
+    "V_rms": 0.019104359671473503,
+    "tree_cosine_tau": 0.009999999776482582,
+    "direct_cosine_tau": 0.10000000149011612
+  },
+  "timestamp": "2026-02-24 18:36:43",
+  "device": "cuda",
+  "elapsed_seconds": 38.59162974357605
+}

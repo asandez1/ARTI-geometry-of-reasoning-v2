@@ -1,0 +1,618 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "source": "Paper 13 Section 4.2 — Hierarchical Cross-Domain Reasoning Rules",
+    "total_rules": 75,
+    "domains": {
+      "logic": 15,
+      "physics": 12,
+      "math": 12,
+      "economics": 10,
+      "causal": 10,
+      "biology": 7,
+      "commonsense": 9
+    }
+  },
+  "rules": [
+    {
+      "id": "LOGIC-001",
+      "name": "Modus Ponens",
+      "formal_statement": "P, P→Q ⊢ Q",
+      "domain": "logic",
+      "level1_operators": ["causality"],
+      "description": "If P is true and P implies Q, then Q must be true. The fundamental rule of logical deduction."
+    },
+    {
+      "id": "LOGIC-002",
+      "name": "Modus Tollens",
+      "formal_statement": "¬Q, P→Q ⊢ ¬P",
+      "domain": "logic",
+      "level1_operators": ["causality", "negation"],
+      "description": "If Q is false and P implies Q, then P must be false. Denying the consequent."
+    },
+    {
+      "id": "LOGIC-003",
+      "name": "Hypothetical Syllogism",
+      "formal_statement": "P→Q, Q→R ⊢ P→R",
+      "domain": "logic",
+      "level1_operators": ["composition"],
+      "description": "If P implies Q and Q implies R, then P implies R. Chaining conditional statements."
+    },
+    {
+      "id": "LOGIC-004",
+      "name": "Disjunctive Syllogism",
+      "formal_statement": "P∨Q, ¬P ⊢ Q",
+      "domain": "logic",
+      "level1_operators": ["negation", "decomposition"],
+      "description": "If either P or Q is true and P is false, then Q must be true. Elimination by disjunction."
+    },
+    {
+      "id": "LOGIC-005",
+      "name": "Constructive Dilemma",
+      "formal_statement": "P→Q, R→S, P∨R ⊢ Q∨S",
+      "domain": "logic",
+      "level1_operators": ["composition", "causality"],
+      "description": "Given two conditionals and a disjunction of their antecedents, conclude a disjunction of their consequents."
+    },
+    {
+      "id": "LOGIC-006",
+      "name": "Reductio ad Absurdum",
+      "formal_statement": "Assume P, derive ⊥ ⊢ ¬P",
+      "domain": "logic",
+      "level1_operators": ["negation", "recursion"],
+      "description": "If assuming P leads to a contradiction, then P must be false. Proof by contradiction."
+    },
+    {
+      "id": "LOGIC-007",
+      "name": "Universal Instantiation",
+      "formal_statement": "∀x.P(x) ⊢ P(a)",
+      "domain": "logic",
+      "level1_operators": ["abstraction"],
+      "description": "If a property holds for all elements, it holds for any specific element. From universal to particular."
+    },
+    {
+      "id": "LOGIC-008",
+      "name": "Existential Generalization",
+      "formal_statement": "P(a) ⊢ ∃x.P(x)",
+      "domain": "logic",
+      "level1_operators": ["abstraction"],
+      "description": "If a property holds for a specific element, then there exists some element with that property."
+    },
+    {
+      "id": "LOGIC-009",
+      "name": "De Morgan's Laws",
+      "formal_statement": "¬(P∧Q) ⟺ ¬P∨¬Q; ¬(P∨Q) ⟺ ¬P∧¬Q",
+      "domain": "logic",
+      "level1_operators": ["negation", "decomposition"],
+      "description": "The negation of a conjunction is the disjunction of negations, and vice versa."
+    },
+    {
+      "id": "LOGIC-010",
+      "name": "Contraposition",
+      "formal_statement": "P→Q ⟺ ¬Q→¬P",
+      "domain": "logic",
+      "level1_operators": ["negation", "symmetry"],
+      "description": "A conditional and its contrapositive are logically equivalent. If not Q then not P."
+    },
+    {
+      "id": "LOGIC-011",
+      "name": "Transitivity",
+      "formal_statement": "a>b, b>c ⊢ a>c",
+      "domain": "logic",
+      "level1_operators": ["composition"],
+      "description": "If a relation holds from A to B and from B to C, it holds from A to C. Chaining ordered relations."
+    },
+    {
+      "id": "LOGIC-012",
+      "name": "Law of Excluded Middle",
+      "formal_statement": "P ∨ ¬P",
+      "domain": "logic",
+      "level1_operators": ["negation"],
+      "description": "Every proposition is either true or its negation is true. No middle ground exists."
+    },
+    {
+      "id": "LOGIC-013",
+      "name": "Double Negation",
+      "formal_statement": "¬¬P ⟺ P",
+      "domain": "logic",
+      "level1_operators": ["negation", "symmetry"],
+      "description": "The negation of a negation returns the original proposition."
+    },
+    {
+      "id": "LOGIC-014",
+      "name": "Material Implication",
+      "formal_statement": "P→Q ⟺ ¬P∨Q",
+      "domain": "logic",
+      "level1_operators": ["negation", "decomposition"],
+      "description": "An implication can be rewritten as the disjunction of the negated antecedent with the consequent."
+    },
+    {
+      "id": "LOGIC-015",
+      "name": "Biconditional",
+      "formal_statement": "P↔Q ⟺ (P→Q)∧(Q→P)",
+      "domain": "logic",
+      "level1_operators": ["symmetry", "causality"],
+      "description": "A biconditional holds if and only if both directions of implication hold simultaneously."
+    },
+    {
+      "id": "PHYS-001",
+      "name": "Newton's Second Law",
+      "formal_statement": "F = ma (net force equals mass times acceleration)",
+      "domain": "physics",
+      "level1_operators": ["causality"],
+      "description": "The net force on an object equals its mass times its acceleration. Force causes acceleration proportional to mass."
+    },
+    {
+      "id": "PHYS-002",
+      "name": "Conservation of Energy",
+      "formal_statement": "E_total(t₁) = E_total(t₂) in isolated systems",
+      "domain": "physics",
+      "level1_operators": ["conservation"],
+      "description": "Total energy in an isolated system remains constant. Energy transforms between forms but is never created or destroyed."
+    },
+    {
+      "id": "PHYS-003",
+      "name": "Conservation of Momentum",
+      "formal_statement": "Σp(before) = Σp(after) in isolated systems",
+      "domain": "physics",
+      "level1_operators": ["conservation"],
+      "description": "Total momentum before and after a collision or interaction remains the same in an isolated system."
+    },
+    {
+      "id": "PHYS-004",
+      "name": "Newton's Third Law",
+      "formal_statement": "F₁₂ = -F₂₁ (action equals opposite reaction)",
+      "domain": "physics",
+      "level1_operators": ["symmetry"],
+      "description": "For every action force, there is an equal and opposite reaction force. Forces always come in pairs."
+    },
+    {
+      "id": "PHYS-005",
+      "name": "Ohm's Law",
+      "formal_statement": "V = IR (voltage equals current times resistance)",
+      "domain": "physics",
+      "level1_operators": ["causality", "analogy"],
+      "description": "Voltage across a conductor equals the current flowing through it times its resistance."
+    },
+    {
+      "id": "PHYS-006",
+      "name": "Ideal Gas Law",
+      "formal_statement": "PV = nRT",
+      "domain": "physics",
+      "level1_operators": ["conservation"],
+      "description": "For an ideal gas, the product of pressure and volume equals the amount of gas times the gas constant times temperature."
+    },
+    {
+      "id": "PHYS-007",
+      "name": "Archimedes' Principle",
+      "formal_statement": "F_buoyant = ρ_fluid × V_displaced × g",
+      "domain": "physics",
+      "level1_operators": ["causality"],
+      "description": "The buoyant force on a submerged object equals the weight of the fluid it displaces."
+    },
+    {
+      "id": "PHYS-008",
+      "name": "Hooke's Law",
+      "formal_statement": "F = -kx (restoring force proportional to displacement)",
+      "domain": "physics",
+      "level1_operators": ["causality", "symmetry"],
+      "description": "The force exerted by a spring is proportional to its displacement from equilibrium and opposes the displacement."
+    },
+    {
+      "id": "PHYS-009",
+      "name": "Coulomb's Law",
+      "formal_statement": "F = kq₁q₂/r² (electrostatic force between charges)",
+      "domain": "physics",
+      "level1_operators": ["analogy"],
+      "description": "The electrostatic force between two charges is proportional to their product and inversely proportional to the square of the distance."
+    },
+    {
+      "id": "PHYS-010",
+      "name": "First Law of Thermodynamics",
+      "formal_statement": "ΔU = Q - W (internal energy change equals heat minus work)",
+      "domain": "physics",
+      "level1_operators": ["conservation"],
+      "description": "The change in internal energy of a system equals heat added minus work done by the system. Energy conservation for thermodynamic systems."
+    },
+    {
+      "id": "PHYS-011",
+      "name": "Second Law of Thermodynamics",
+      "formal_statement": "ΔS_universe ≥ 0 (entropy always increases)",
+      "domain": "physics",
+      "level1_operators": ["optimization"],
+      "description": "The total entropy of an isolated system always increases or stays the same. Natural processes tend toward maximum disorder."
+    },
+    {
+      "id": "PHYS-012",
+      "name": "Bernoulli's Equation",
+      "formal_statement": "P + ½ρv² + ρgh = constant along a streamline",
+      "domain": "physics",
+      "level1_operators": ["conservation"],
+      "description": "For steady, incompressible flow, the sum of pressure, kinetic, and potential energy per unit volume is constant along a streamline."
+    },
+    {
+      "id": "MATH-001",
+      "name": "Distributive Property",
+      "formal_statement": "a(b+c) = ab + ac",
+      "domain": "math",
+      "level1_operators": ["decomposition"],
+      "description": "Multiplication distributes over addition. A factor applied to a sum equals the sum of the factor applied to each term."
+    },
+    {
+      "id": "MATH-002",
+      "name": "Associative Property",
+      "formal_statement": "(a+b)+c = a+(b+c); (ab)c = a(bc)",
+      "domain": "math",
+      "level1_operators": ["symmetry"],
+      "description": "Grouping of operations does not affect the result. Parentheses can be rearranged for addition and multiplication."
+    },
+    {
+      "id": "MATH-003",
+      "name": "Commutative Property",
+      "formal_statement": "a+b = b+a; ab = ba",
+      "domain": "math",
+      "level1_operators": ["symmetry"],
+      "description": "The order of operands does not affect the result for addition and multiplication."
+    },
+    {
+      "id": "MATH-004",
+      "name": "Proportion and Ratio",
+      "formal_statement": "a/b = c/d → ad = bc (cross multiplication)",
+      "domain": "math",
+      "level1_operators": ["analogy"],
+      "description": "Equal ratios imply cross products are equal. Used to solve for unknowns in proportional relationships."
+    },
+    {
+      "id": "MATH-005",
+      "name": "Rate Times Time Equals Quantity",
+      "formal_statement": "Q = R × T",
+      "domain": "math",
+      "level1_operators": ["composition"],
+      "description": "Quantity equals rate multiplied by time. Fundamental relationship for speed, work rate, flow, and production problems."
+    },
+    {
+      "id": "MATH-006",
+      "name": "Percentage",
+      "formal_statement": "part = (percent/100) × whole",
+      "domain": "math",
+      "level1_operators": ["decomposition"],
+      "description": "A percentage represents a part of a whole scaled by 100. Used in discounts, taxes, growth rates."
+    },
+    {
+      "id": "MATH-007",
+      "name": "Area Formulas",
+      "formal_statement": "A = l×w (rectangle), A = πr² (circle)",
+      "domain": "math",
+      "level1_operators": ["composition"],
+      "description": "Standard formulas for computing area of geometric shapes from their dimensions."
+    },
+    {
+      "id": "MATH-008",
+      "name": "Pythagorean Theorem",
+      "formal_statement": "a² + b² = c² for right triangles",
+      "domain": "math",
+      "level1_operators": ["conservation"],
+      "description": "In a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides."
+    },
+    {
+      "id": "MATH-009",
+      "name": "Arithmetic Sequences",
+      "formal_statement": "aₙ = a₁ + (n-1)d",
+      "domain": "math",
+      "level1_operators": ["recursion"],
+      "description": "Each term in an arithmetic sequence is obtained by adding a common difference to the previous term."
+    },
+    {
+      "id": "MATH-010",
+      "name": "Geometric Sequences",
+      "formal_statement": "aₙ = a₁ × rⁿ⁻¹",
+      "domain": "math",
+      "level1_operators": ["recursion"],
+      "description": "Each term in a geometric sequence is obtained by multiplying the previous term by a common ratio."
+    },
+    {
+      "id": "MATH-011",
+      "name": "Combinatorics",
+      "formal_statement": "C(n,r) = n! / (r!(n-r)!)",
+      "domain": "math",
+      "level1_operators": ["decomposition"],
+      "description": "The number of ways to choose r items from n without regard to order. Combinations formula."
+    },
+    {
+      "id": "MATH-012",
+      "name": "Modular Arithmetic",
+      "formal_statement": "a ≡ b (mod n) iff n divides (a-b)",
+      "domain": "math",
+      "level1_operators": ["symmetry"],
+      "description": "Two numbers are congruent modulo n if they have the same remainder when divided by n."
+    },
+    {
+      "id": "ECON-001",
+      "name": "Supply and Demand",
+      "formal_statement": "Price adjusts until quantity supplied equals quantity demanded (equilibrium)",
+      "domain": "economics",
+      "level1_operators": ["optimization"],
+      "description": "Market price is determined by the intersection of supply and demand curves. Excess supply lowers prices; excess demand raises them."
+    },
+    {
+      "id": "ECON-002",
+      "name": "Opportunity Cost",
+      "formal_statement": "Cost(A) = Value(best_alternative_forgone)",
+      "domain": "economics",
+      "level1_operators": ["negation", "optimization"],
+      "description": "The true cost of choosing an option is the value of the best alternative you give up."
+    },
+    {
+      "id": "ECON-003",
+      "name": "Diminishing Returns",
+      "formal_statement": "∂²Output/∂Input² < 0 (marginal product decreases)",
+      "domain": "economics",
+      "level1_operators": ["optimization"],
+      "description": "Each additional unit of input produces progressively less additional output beyond some point."
+    },
+    {
+      "id": "ECON-004",
+      "name": "Comparative Advantage",
+      "formal_statement": "Trade when relative opportunity costs differ between parties",
+      "domain": "economics",
+      "level1_operators": ["analogy", "optimization"],
+      "description": "Parties benefit from trade when they specialize in producing goods for which they have the lowest opportunity cost."
+    },
+    {
+      "id": "ECON-005",
+      "name": "Compound Interest",
+      "formal_statement": "A = P(1+r)ⁿ",
+      "domain": "economics",
+      "level1_operators": ["recursion"],
+      "description": "Future value equals principal times one plus rate raised to the number of periods. Interest earns interest."
+    },
+    {
+      "id": "ECON-006",
+      "name": "Accounting Equation",
+      "formal_statement": "Assets = Liabilities + Equity",
+      "domain": "economics",
+      "level1_operators": ["conservation"],
+      "description": "Total assets must always equal total liabilities plus equity. The fundamental balance sheet identity."
+    },
+    {
+      "id": "ECON-007",
+      "name": "Break-Even Analysis",
+      "formal_statement": "Revenue = Total_Cost at break-even point",
+      "domain": "economics",
+      "level1_operators": ["conservation"],
+      "description": "The break-even point is where total revenue exactly equals total costs. No profit, no loss."
+    },
+    {
+      "id": "ECON-008",
+      "name": "Elasticity",
+      "formal_statement": "ε = (%ΔQuantity)/(%ΔPrice)",
+      "domain": "economics",
+      "level1_operators": ["causality"],
+      "description": "Price elasticity measures how responsive quantity demanded or supplied is to a change in price."
+    },
+    {
+      "id": "ECON-009",
+      "name": "Marginal Cost Equals Marginal Benefit",
+      "formal_statement": "Optimal at MC = MB",
+      "domain": "economics",
+      "level1_operators": ["optimization"],
+      "description": "The optimal level of an activity is where the additional cost equals the additional benefit."
+    },
+    {
+      "id": "ECON-010",
+      "name": "Nash Equilibrium",
+      "formal_statement": "No player gains from unilateral deviation",
+      "domain": "economics",
+      "level1_operators": ["symmetry", "optimization"],
+      "description": "A stable state where no player can improve their outcome by changing only their own strategy."
+    },
+    {
+      "id": "CAUSAL-001",
+      "name": "Bayes' Rule",
+      "formal_statement": "P(A|B) = P(B|A)P(A)/P(B)",
+      "domain": "causal",
+      "level1_operators": ["causality"],
+      "description": "Updates the probability of a hypothesis given new evidence. Posterior is proportional to likelihood times prior."
+    },
+    {
+      "id": "CAUSAL-002",
+      "name": "Law of Total Probability",
+      "formal_statement": "P(A) = ΣP(A|Bᵢ)P(Bᵢ) over partition {Bᵢ}",
+      "domain": "causal",
+      "level1_operators": ["decomposition"],
+      "description": "The probability of an event equals the sum of its conditional probabilities weighted by the partition probabilities."
+    },
+    {
+      "id": "CAUSAL-003",
+      "name": "Independence",
+      "formal_statement": "P(A∩B) = P(A)P(B) iff A and B are independent",
+      "domain": "causal",
+      "level1_operators": ["decomposition"],
+      "description": "Two events are independent if and only if their joint probability equals the product of their individual probabilities."
+    },
+    {
+      "id": "CAUSAL-004",
+      "name": "Conditional Probability",
+      "formal_statement": "P(A|B) = P(A∩B)/P(B)",
+      "domain": "causal",
+      "level1_operators": ["causality"],
+      "description": "The probability of A given B is the probability of both occurring divided by the probability of B."
+    },
+    {
+      "id": "CAUSAL-005",
+      "name": "Simpson's Paradox",
+      "formal_statement": "A trend in subgroups can reverse when groups are combined",
+      "domain": "causal",
+      "level1_operators": ["composition", "causality"],
+      "description": "A statistical trend that appears in several groups can reverse when the groups are combined, due to a confounding variable."
+    },
+    {
+      "id": "CAUSAL-006",
+      "name": "Regression to the Mean",
+      "formal_statement": "Extreme observations tend toward the average on retest",
+      "domain": "causal",
+      "level1_operators": ["optimization"],
+      "description": "Unusually high or low values are likely to be followed by values closer to the average due to random variation."
+    },
+    {
+      "id": "CAUSAL-007",
+      "name": "Base Rate Neglect",
+      "formal_statement": "P(H|E) depends on P(H) not just P(E|H)",
+      "domain": "causal",
+      "level1_operators": ["abstraction"],
+      "description": "Judgments should account for the base rate (prior probability) of a hypothesis, not just the likelihood of the evidence."
+    },
+    {
+      "id": "CAUSAL-008",
+      "name": "Correlation Does Not Imply Causation",
+      "formal_statement": "r(A,B) ≠> A→B (association is not causation)",
+      "domain": "causal",
+      "level1_operators": ["causality"],
+      "description": "A statistical correlation between two variables does not prove that one causes the other. Confounders or reverse causation may exist."
+    },
+    {
+      "id": "CAUSAL-009",
+      "name": "Sampling Bias",
+      "formal_statement": "Biased sample → biased conclusion",
+      "domain": "causal",
+      "level1_operators": ["abstraction"],
+      "description": "Conclusions drawn from a non-representative sample may not generalize to the full population."
+    },
+    {
+      "id": "CAUSAL-010",
+      "name": "Central Limit Theorem",
+      "formal_statement": "Sample means → Normal distribution as n→∞",
+      "domain": "causal",
+      "level1_operators": ["abstraction", "conservation"],
+      "description": "The distribution of sample means approaches a normal distribution as sample size increases, regardless of the population distribution."
+    },
+    {
+      "id": "BIO-001",
+      "name": "Natural Selection",
+      "formal_statement": "Heritable traits that increase fitness spread in populations",
+      "domain": "biology",
+      "level1_operators": ["optimization"],
+      "description": "Organisms with traits better suited to their environment reproduce more, causing those traits to become more common over generations."
+    },
+    {
+      "id": "BIO-002",
+      "name": "Homeostasis",
+      "formal_statement": "Biological systems maintain internal equilibrium via feedback loops",
+      "domain": "biology",
+      "level1_operators": ["conservation", "optimization"],
+      "description": "Living organisms regulate internal conditions like temperature, pH, and glucose to maintain a stable internal environment."
+    },
+    {
+      "id": "BIO-003",
+      "name": "Dose-Response Relationship",
+      "formal_statement": "Effect = f(dose), typically sigmoidal",
+      "domain": "biology",
+      "level1_operators": ["causality"],
+      "description": "The magnitude of a biological response is related to the amount of exposure or dosage of a substance."
+    },
+    {
+      "id": "BIO-004",
+      "name": "Mendelian Inheritance",
+      "formal_statement": "Phenotype determined by genotype combinations (dominant/recessive alleles)",
+      "domain": "biology",
+      "level1_operators": ["composition", "decomposition"],
+      "description": "Traits are inherited through discrete units (genes) that combine according to predictable rules of dominance and segregation."
+    },
+    {
+      "id": "BIO-005",
+      "name": "Differential Diagnosis",
+      "formal_statement": "Observed symptoms → ranked list of candidate causes",
+      "domain": "biology",
+      "level1_operators": ["decomposition", "causality"],
+      "description": "Given a set of symptoms, systematically narrow down possible diseases or conditions by comparing against known patterns."
+    },
+    {
+      "id": "BIO-006",
+      "name": "Triage",
+      "formal_statement": "Prioritize treatment by severity and likelihood of survival",
+      "domain": "biology",
+      "level1_operators": ["optimization"],
+      "description": "Allocate limited medical resources to patients based on urgency and expected outcome to maximize overall benefit."
+    },
+    {
+      "id": "BIO-007",
+      "name": "Epidemiological Spread (R₀)",
+      "formal_statement": "R₀ = contacts × transmission_probability × infectious_duration",
+      "domain": "biology",
+      "level1_operators": ["composition", "recursion"],
+      "description": "The basic reproduction number measures how many people one infected person will infect on average. R₀ > 1 means epidemic growth."
+    },
+    {
+      "id": "CS-001",
+      "name": "Temporal Ordering",
+      "formal_statement": "If A occurs before B, A may cause B but B cannot cause A",
+      "domain": "commonsense",
+      "level1_operators": ["causality"],
+      "description": "Causes must precede their effects in time. Something that happens later cannot be the cause of something earlier."
+    },
+    {
+      "id": "CS-002",
+      "name": "Spatial Containment",
+      "formal_statement": "If A is in B, and B is in C, then A is in C (transitivity)",
+      "domain": "commonsense",
+      "level1_operators": ["composition"],
+      "description": "Containment is transitive: if something is inside a container that is inside another container, it is also inside the outer container."
+    },
+    {
+      "id": "CS-003",
+      "name": "Object Permanence",
+      "formal_statement": "Objects continue to exist when not being observed",
+      "domain": "commonsense",
+      "level1_operators": ["conservation"],
+      "description": "Physical objects persist even when we cannot see or interact with them. Things don't disappear when unobserved."
+    },
+    {
+      "id": "CS-004",
+      "name": "Functional Affordance",
+      "formal_statement": "Objects have typical uses determined by their properties",
+      "domain": "commonsense",
+      "level1_operators": ["analogy"],
+      "description": "Objects are typically used for purposes that their physical properties enable. Cups hold liquid, chairs support sitting."
+    },
+    {
+      "id": "CS-005",
+      "name": "Social Reciprocity",
+      "formal_statement": "Positive actions tend to elicit positive responses, and vice versa",
+      "domain": "commonsense",
+      "level1_operators": ["symmetry"],
+      "description": "People tend to respond to kindness with kindness and hostility with hostility. Social interactions are reciprocal."
+    },
+    {
+      "id": "CS-006",
+      "name": "Planning and Subgoaling",
+      "formal_statement": "Complex goals are achieved by decomposing into ordered subgoals",
+      "domain": "commonsense",
+      "level1_operators": ["decomposition", "recursion"],
+      "description": "To accomplish a complex objective, break it into smaller steps and execute them in a logical order."
+    },
+    {
+      "id": "CS-007",
+      "name": "Counterfactual Reasoning",
+      "formal_statement": "If X had not happened, Y would not have happened",
+      "domain": "commonsense",
+      "level1_operators": ["negation", "causality"],
+      "description": "Reasoning about what would have been different if a past event had not occurred. Used for causal judgment and blame attribution."
+    },
+    {
+      "id": "CS-008",
+      "name": "Default Reasoning",
+      "formal_statement": "Assume typical properties unless stated otherwise",
+      "domain": "commonsense",
+      "level1_operators": ["abstraction"],
+      "description": "In the absence of specific information, assume the most common or typical case. Birds can fly unless told otherwise."
+    },
+    {
+      "id": "CS-009",
+      "name": "Numeric Estimation (Fermi)",
+      "formal_statement": "Estimate by decomposing into tractable sub-estimates and multiplying",
+      "domain": "commonsense",
+      "level1_operators": ["decomposition", "composition"],
+      "description": "Estimate unknown quantities by breaking the problem into smaller, estimable parts and combining the estimates."
+    }
+  ]
+}

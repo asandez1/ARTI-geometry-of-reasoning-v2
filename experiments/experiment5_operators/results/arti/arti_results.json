@@ -1,0 +1,46 @@
+{
+  "config": {
+    "encoder": "all-MiniLM-L6-v2",
+    "classifier": "mlp",
+    "encoder_dim": 384,
+    "manifold_dim": 10,
+    "n_params": 11342
+  },
+  "dataset": {
+    "total": 984,
+    "train": 784,
+    "val": 200
+  },
+  "heuristic_baseline": {
+    "accuracy": 0.975,
+    "per_type_accuracy": {
+      "Cause": 1.0,
+      "Deduc": 0.9868421052631579,
+      "Induc": 1.0,
+      "Analog": 1.0,
+      "Conserv": 1.0,
+      "Counter": 1.0,
+      "Abduc": 0.6666666666666666,
+      "Decomp": 0.8
+    }
+  },
+  "arti_results": {
+    "accuracy": 0.54,
+    "per_type_accuracy": {
+      "Cause": 0.5454545454545454,
+      "Deduc": 0.7894736842105263,
+      "Induc": 0.0,
+      "Analog": 0.3333333333333333,
+      "Conserv": 0.0,
+      "Counter": 0.42857142857142855,
+      "Abduc": 0.16666666666666666,
+      "Decomp": 0.0
+    }
+  },
+  "improvement_over_heuristic": -0.43499999999999994,
+  "improvement_over_chance": 0.41500000000000004,
+  "training": {
+    "epochs": 37,
+    "best_val_acc": 0.54
+  }
+}
