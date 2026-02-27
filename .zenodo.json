@@ -1,0 +1,52 @@
+{
+  "title": "ARTI: Detecting and Routing Reasoning Types from Embedding Geometry",
+  "description": "We show that different reasoning types leave distinct geometric signatures in transformer embedding spaces, detectable by a lightweight classifier with only 20K parameters. ARTI classifies 10 reasoning types at 84.2% accuracy (8.4x chance). ARTI-routed scoring achieves StrategyQA 81.0% (+32.6pp). Three-experiment falsification chain proves frozen encoder is structurally necessary. GCMC validation: R² = 0.678.",
+  "creators": [
+    {
+      "name": "Sandez, Ariel",
+      "orcid": "0009-0004-7623-6287",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "reasoning types",
+    "embedding geometry",
+    "transformer representations",
+    "type detection",
+    "ARTI",
+    "continuous operator manifold",
+    "factorized reasoning",
+    "frozen encoder",
+    "neural manifold geometry",
+    "GCMC",
+    "machine reasoning"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/asandez1/ARTI-geometry-of-reasoning-v2",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.17595736",
+      "relation": "isContinuedBy",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.17728126",
+      "relation": "isContinuedBy",
+      "scheme": "doi"
+    }
+  ],
+  "subjects": [
+    {"term": "Machine Learning", "identifier": "http://id.loc.gov/authorities/subjects/sh85079324"},
+    {"term": "Natural Language Processing", "identifier": "http://id.loc.gov/authorities/subjects/sh88002671"},
+    {"term": "Artificial Intelligence", "identifier": "http://id.loc.gov/authorities/subjects/sh85008180"}
+  ],
+  "language": "eng",
+  "notes": "Part of a broader research arc on the geometry of machine reasoning. Builds on Papers 11 (Structural Semantic Superposition) and 12 (CO-FRN)."
+}
