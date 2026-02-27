@@ -115,8 +115,8 @@ The CO-FRN (Continuous Operator Factorized Reasoning Network) pipeline:
 ```
 .
 ├── docs/
-│   ├── paper13_v2.md              # Manuscript v2.7 (final draft)
-│   ├── paper13_v2.html            # HTML version
+│   ├── manuscript.md              # Manuscript v2.7 (final draft)
+│   ├── manuscript.html            # HTML version
 │   └── figures/                   # All paper figures + generation scripts
 ├── experiments/
 │   ├── shared/                    # Core modules (~4,900 LOC)
