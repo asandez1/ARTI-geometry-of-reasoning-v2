@@ -615,5 +615,4 @@ E15: 2/4 met. E16: 1/5 met. E17: 1/5 met. E18: 0/5 met. E19: 3/5 met. The progre
 
 ---
 
-*Paper 13 v2.7 (final draft) — 20 experiments (E5–E19), 12.5/35 SC met — 2026-02-26*
-*Previous versions: v1 (docs/paper13_reasoning_rules_guide.md), v2.0, v2.1, v2.2, v2.3, v2.4, v2.5, v2.6*
+*ARTI v2.7 (final) — 20 experiments (E5–E19), 12.5/35 SC met — 2026-02-26*
